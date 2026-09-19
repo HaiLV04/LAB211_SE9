@@ -11,30 +11,26 @@ public class ArrayModel {
 
     /**
      * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý:
-     * 1. Khởi tạo đối tượng Random.
-     * 2. Khởi tạo mảng với kích thước chỉ định.
-     * 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
+     * Luồng xử lý: 1. Khởi tạo đối tượng Random. 2. Khởi tạo mảng với kích
+     * thước chỉ định. 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
      *
      * @param size số lượng phần tử trong mảng
      */
-    public void generateRandomArray(int size) {
+    public void generateRandomArray(int n) {
         Random random = new Random();
-        array = new int[size];
+        array = new int[n];
 
-        // Generate random values for each array element.
-        for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(size);
+        for (int i = 0; i < n; i++) {
+            array[i] = random.nextInt(2 * n + 1) - n;
         }
     }
 
     /**
-     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble Sort.
-     * Luồng xử lý:
-     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại.
-     * 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không cần hoán đổi.
-     * 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn sang phải.
-     * 4. Dừng sớm nếu mảng đã được sắp xếp.
+     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble
+     * Sort. Luồng xử lý: 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì
+     * dừng lại. 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không
+     * cần hoán đổi. 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn
+     * sang phải. 4. Dừng sớm nếu mảng đã được sắp xếp.
      */
     public void bubbleSort() {
         if (array == null || array.length < 2) {
@@ -64,11 +60,9 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Hoán đổi hai phần tử trong mảng.
-     * Luồng xử lý:
-     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm.
-     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
-     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
+     * Chức năng: Hoán đổi hai phần tử trong mảng. Luồng xử lý: 1. Lưu giá trị
+     * phần tử thứ nhất vào biến tạm. 2. Gán giá trị phần tử thứ hai cho phần tử
+     * thứ nhất. 3. Gán giá trị biến tạm cho phần tử thứ hai.
      *
      * @param firstIndex chỉ số của phần tử thứ nhất
      * @param secondIndex chỉ số của phần tử thứ hai

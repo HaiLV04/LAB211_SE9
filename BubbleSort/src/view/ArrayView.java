@@ -29,25 +29,24 @@ public class ArrayView {
      * @return giá trị số nguyên dương
      */
     public int inputPositiveInteger(String message) {
-        int number;
-
         while (true) {
             System.out.print(message);
+            String input = scanner.nextLine().trim();
 
-            if (!scanner.hasNextInt()) {
+            if (input.isEmpty()) {
                 System.out.println("Invalid input. Please enter a positive integer.");
-                scanner.nextLine();
                 continue;
             }
 
-            number = scanner.nextInt();
-            scanner.nextLine();
-
-            if (number > 0) {
-                return number;
+            try {
+                int number = Integer.parseInt(input);
+                if (number > 0) {
+                    return number;
+                }
+                System.out.println("Invalid input. Number must be greater than 0.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a positive integer.");
             }
-
-            System.out.println("Invalid input. Number must be greater than 0.");
         }
     }
 
