@@ -9,18 +9,19 @@ public class ArrayModel {
 
     private int[] array;
 
+    private int stepCounter;
+
     /**
      * Chức năng: Khởi tạo mặc định cho lớp ArrayModel.
      */
     public ArrayModel() {
+        stepCounter = 1;
     }
 
     /**
      * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý: 
-     * 1. Khởi tạo đối tượng Random. 
-     * 2. Khởi tạo mảng với kích thước chỉ định. 
-     * 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
+     * Luồng xử lý: 1. Khởi tạo đối tượng Random. 2. Khởi tạo mảng với kích
+     * thước chỉ định. 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
      *
      * @param n số lượng phần tử trong mảng
      */
@@ -34,24 +35,27 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Quick Sort.
-     * Luồng xử lý:
-     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử ({@code n <= 1}) thì dừng lại, mảng giữ nguyên.
-     * 2. Gọi hàm đệ quy quickSort với khoảng từ chỉ số 0 đến array.length - 1.
+     * Chức năng: Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng thuật toán
+     * Quick Sort. Luồng xử lý: 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần
+     * tử ({@code n <= 1}) thì dừng lại, mảng giữ nguyên. 2. Đặt lại biến đếm
+     * bước về 1. 3. Gọi hàm đệ quy quickSort với khoảng từ chỉ số 0 đến
+     * array.length - 1.
      */
     public void quickSort() {
         if (array == null || array.length < 2) {
             return;
         }
+        stepCounter = 1;
         quickSort(0, array.length - 1);
     }
 
     /**
-     * Chức năng: Hàm đệ quy thực hiện thuật toán Quick Sort trên đoạn [left, right].
-     * Luồng xử lý:
-     * 1. Phân chia mảng thành 2 nửa qua hàm partition(left, right) dựa vào Pivot.
-     * 2. Đệ quy (Recursion): Gọi đệ quy sắp xếp nửa bên trái [left, index - 1] nếu {@code left < index - 1}.
-     * 3. Đệ quy (Recursion): Gọi đệ quy sắp xếp nửa bên phải [index, right] nếu {@code index < right}.
+     * Chức năng: Hàm đệ quy thực hiện thuật toán Quick Sort trên đoạn [left,
+     * right]. Luồng xử lý: 1. Phân chia mảng thành 2 nửa qua hàm
+     * partition(left, right) dựa vào Pivot. 2. Đệ quy (Recursion): Gọi đệ quy
+     * sắp xếp nửa bên trái [left, index - 1] nếu {@code left < index - 1}. 3.
+     * Đệ quy (Recursion): Gọi đệ quy sắp xếp nửa bên phải [index, right] nếu
+     * {@code index < right}.
      *
      * @param left chỉ số bắt đầu đoạn cần sắp xếp
      * @param right chỉ số kết thúc đoạn cần sắp xếp
@@ -72,14 +76,15 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Phân hoạch đoạn mảng [left, right] dựa trên giá trị chốt (Pivot ở giữa).
-     * Luồng xử lý:
-     * 1. Chọn điểm chốt (Pivot): Chọn phần tử ở giữa mảng làm Pivot.
-     * 2. Thiết lập 2 con trỏ: i bắt đầu từ left (chạy sang phải), j bắt đầu từ right (chạy sang trái).
-     * 3. Con trỏ i tiến lên cho đến khi gặp phần tử &ge; Pivot.
-     * 4. Con trỏ j lùi lại cho đến khi gặp phần tử &le; Pivot.
-     * 5. Nếu {@code i <= j}, hoán đổi (swap) vị trí của hai phần tử tại i và j, sau đó tăng i và giảm j.
-     * 6. Lặp lại đến khi hai con trỏ vượt qua nhau ({@code i > j}). Trả về chỉ số i để đệ quy 2 nửa.
+     * Chức năng: Phân hoạch đoạn mảng [left, right] dựa trên giá trị chốt
+     * (Pivot ở giữa). Luồng xử lý: 1. Chọn điểm chốt (Pivot): Chọn phần tử ở
+     * giữa mảng làm Pivot. 2. Thiết lập 2 con trỏ: i bắt đầu từ left (chạy sang
+     * phải), j bắt đầu từ right (chạy sang trái). 3. Hiển thị thông tin phân
+     * vùng và giá trị Pivot. 4. Con trỏ i tiến lên cho đến khi gặp phần tử &ge;
+     * Pivot. 5. Con trỏ j lùi lại cho đến khi gặp phần tử &le; Pivot. 6. Nếu
+     * {@code i <= j}, hoán đổi (swap) vị trí của hai phần tử tại i và j, sau đó
+     * tăng i và giảm j. 7. Lặp lại đến khi hai con trỏ vượt qua nhau
+     * ({@code i > j}). Trả về chỉ số i để đệ quy 2 nửa.
      *
      * @param left chỉ số bắt đầu
      * @param right chỉ số kết thúc
@@ -92,6 +97,9 @@ public class ArrayModel {
         // 2. Phân chia (Partition): Thiết lập 2 con trỏ i (bắt đầu) và j (kết thúc)
         int i = left;
         int j = right;
+
+        System.out.printf("Bước %d [Phân vùng: từ chỉ số %d đến %d | Giá trị Pivot = %d]:\n",
+                stepCounter++, left, right, pivot);
 
         // Lặp lại đến khi hai con trỏ vượt qua nhau (i > j)
         while (i <= j) {
@@ -107,22 +115,27 @@ public class ArrayModel {
 
             // Nếu i <= j, tiến hành hoán đổi (swap) vị trí của hai phần tử tại i và j, sau đó tăng i và giảm j
             if (i <= j) {
+                if (i < j && array[i] != array[j]) {
+                    System.out.printf("   -> Swap array[%d](%d) và array[%d](%d)\n",
+                            i, array[i], j, array[j]);
+                }
                 swap(i, j);
                 i++;
                 j--;
             }
         }
 
+        System.out.println("   => Trạng thái mảng sau lần phân vùng này: " + java.util.Arrays.toString(array));
+        System.out.println("----------------------------------------------------------------");
+
         // Trả về chỉ số i (nửa trái <= Pivot, nửa phải >= Pivot)
         return i;
     }
 
     /**
-     * Chức năng: Hoán đổi hai phần tử trong mảng.
-     * Luồng xử lý:
-     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm.
-     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
-     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
+     * Chức năng: Hoán đổi hai phần tử trong mảng. Luồng xử lý: 1. Lưu giá trị
+     * phần tử thứ nhất vào biến tạm. 2. Gán giá trị phần tử thứ hai cho phần tử
+     * thứ nhất. 3. Gán giá trị biến tạm cho phần tử thứ hai.
      *
      * @param firstIndex chỉ số của phần tử thứ nhất
      * @param secondIndex chỉ số của phần tử thứ hai
