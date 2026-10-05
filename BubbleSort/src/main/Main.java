@@ -8,6 +8,12 @@ import controller.ArrayController;
 public class Main {
 
     /**
+     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     */
+    public Main() {
+    }
+
+    /**
      * Chức năng: Bắt đầu chương trình.
      * Luồng xử lý:
      * 1. Khởi tạo ArrayController.

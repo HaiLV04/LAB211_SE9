@@ -10,11 +10,17 @@ public class ArrayModel {
     private int[] array;
 
     /**
+     * Chức năng: Khởi tạo mặc định cho lớp ArrayModel.
+     */
+    public ArrayModel() {
+    }
+
+    /**
      * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
      * Luồng xử lý: 1. Khởi tạo đối tượng Random. 2. Khởi tạo mảng với kích
      * thước chỉ định. 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
      *
-     * @param size số lượng phần tử trong mảng
+     * @param n số lượng phần tử trong mảng
      */
     public void generateRandomArray(int n) {
         Random random = new Random();
