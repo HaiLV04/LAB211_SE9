@@ -1,10 +1,28 @@
 package main;
 
-import controller.Controller;
+import controller.ArrayController;
 
+/**
+ * Chức năng: Lớp chính để bắt đầu chương trình Quick Sort.
+ */
 public class Main {
+
+    /**
+     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     */
+    public Main() {
+    }
+
+    /**
+     * Chức năng: Bắt đầu chương trình.
+     * Luồng xử lý:
+     * 1. Khởi tạo ArrayController.
+     * 2. Chạy controller.
+     *
+     * @param args tham số dòng lệnh
+     */
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        controller.run();
+        ArrayController arrayController = new ArrayController();
+        arrayController.run();
     }
 }
