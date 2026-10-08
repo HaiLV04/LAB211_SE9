@@ -3,14 +3,14 @@ package view;
 import java.util.Scanner;
 
 /**
- * Chức năng: Xử lý đầu vào và đầu ra cho chương trình Merge Sort.
+ * Chức năng: Xử lý nhập và xuất dữ liệu cho chương trình Merge Sort.
  */
 public class ArrayView {
 
     private final Scanner scanner;
 
     /**
-     * Chức năng: Khởi tạo scanner để nhận dữ liệu nhập từ người dùng.
+     * Chức năng: Khởi tạo scanner để nhận dữ liệu từ người dùng.
      */
     public ArrayView() {
         scanner = new Scanner(System.in);
@@ -19,14 +19,15 @@ public class ArrayView {
     /**
      * Chức năng: Nhập một số nguyên dương từ người dùng.
      * Luồng tương tác:
-     * 1. Hiển thị thông báo yêu cầu người dùng nhập.
-     * 2. Kiểm tra nếu dữ liệu nhập không phải là số nguyên, thông báo lỗi và lặp lại.
-     * 3. Đọc số nguyên.
-     * 4. Kiểm tra nếu số lớn hơn 0 thì trả về giá trị đó.
-     * 5. Nếu không, thông báo lỗi và lặp lại.
+     * 1. Hiển thị thông báo yêu cầu nhập.
+     * 2. Bắt lỗi chuỗi rỗng: thông báo lỗi và yêu cầu nhập lại.
+     * 3. Bắt lỗi không phải số nguyên: thông báo lỗi và yêu cầu nhập lại.
+     * 4. Ép kiểu sang số nguyên.
+     * 5. Kiểm tra nếu số lớn hơn 0 thì trả về giá trị.
+     * 6. Nếu nhỏ hơn hoặc bằng 0, thông báo lỗi và yêu cầu nhập lại.
      *
      * @param message thông báo hiển thị cho người dùng
-     * @return giá trị số nguyên dương
+     * @return số nguyên dương hợp lệ
      */
     public int inputPositiveInteger(String message) {
         while (true) {
@@ -51,13 +52,13 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Hiển thị một mảng số nguyên.
+     * Chức năng: Hiển thị một mảng số nguyên ra màn hình console.
      * Luồng xử lý:
      * 1. Khởi tạo StringBuilder để tạo chuỗi kết quả.
-     * 2. Thêm thông báo và dấu ngoặc vuông mở.
+     * 2. Thêm thông báo tiền tố và dấu mở ngoặc vuông.
      * 3. Duyệt qua từng phần tử của mảng và thêm vào chuỗi.
-     * 4. Thêm dấu phẩy giữa các phần tử (nếu chưa phải phần tử cuối).
-     * 5. Thêm dấu ngoặc vuông đóng và hiển thị kết quả.
+     * 4. Thêm dấu phẩy giữa các phần tử.
+     * 5. Thêm dấu đóng ngoặc vuông và in kết quả ra màn hình.
      *
      * @param message thông báo hiển thị trước mảng
      * @param array mảng số nguyên cần hiển thị

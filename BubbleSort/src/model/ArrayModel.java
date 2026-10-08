@@ -17,8 +17,10 @@ public class ArrayModel {
 
     /**
      * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý: 1. Khởi tạo đối tượng Random. 2. Khởi tạo mảng với kích
-     * thước chỉ định. 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
+     * Luồng xử lý: 
+     * 1. Khởi tạo đối tượng Random. 
+     * 2. Khởi tạo mảng với kích thước chỉ định. 
+     * 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
      *
      * @param n số lượng phần tử trong mảng
      */
@@ -32,11 +34,12 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble
-     * Sort. Luồng xử lý: 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì
-     * dừng lại. 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không
-     * cần hoán đổi. 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn
-     * sang phải. 4. Dừng sớm nếu mảng đã được sắp xếp.
+     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble Sort. 
+     * Luồng xử lý: 
+     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại. 
+     * 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không cần hoán đổi. 
+     * 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn sang phải. 
+     * 4. Dừng sớm nếu mảng đã được sắp xếp.
      */
     public void bubbleSort() {
         if (array == null || array.length < 2) {
@@ -46,11 +49,11 @@ public class ArrayModel {
         boolean swapped;
         int length = array.length;
 
-        // Repeat comparing adjacent elements until no swap is needed.
+        // Lặp lại việc so sánh các phần tử kề nhau cho đến khi không còn hoán đổi
         for (int i = 0; i < length - 1; i++) {
             swapped = false;
 
-            // Compare adjacent elements and move larger value to the right.
+            // So sánh các phần tử kề nhau và đưa giá trị lớn hơn về bên phải
             for (int j = 0; j < length - i - 1; j++) {
                 if (array[j] > array[j + 1]) {
                     swap(j, j + 1);
@@ -58,7 +61,7 @@ public class ArrayModel {
                 }
             }
 
-            // Stop early if the array is already sorted.
+            // Dừng sớm nếu mảng đã được sắp xếp
             if (!swapped) {
                 break;
             }
@@ -66,9 +69,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Hoán đổi hai phần tử trong mảng. Luồng xử lý: 1. Lưu giá trị
-     * phần tử thứ nhất vào biến tạm. 2. Gán giá trị phần tử thứ hai cho phần tử
-     * thứ nhất. 3. Gán giá trị biến tạm cho phần tử thứ hai.
+     * Chức năng: Hoán đổi hai phần tử trong mảng. 
+     * Luồng xử lý: 
+     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm. 
+     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất. 
+     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
      *
      * @param firstIndex chỉ số của phần tử thứ nhất
      * @param secondIndex chỉ số của phần tử thứ hai

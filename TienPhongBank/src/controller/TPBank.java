@@ -11,6 +11,20 @@ import view.Validate;
  * Luồng tương tác: Hiển thị menu, nhận lựa chọn từ người dùng, thiết lập Locale tương ứng và gọi đến LoginService.
  */
 public class TPBank {
+
+    /**
+     * Chức năng: Khởi tạo mặc định cho lớp TPBank.
+     */
+    public TPBank() {
+    }
+
+    /**
+     * Chức năng: Kích hoạt chương trình TPBank qua phương thức run().
+     */
+    public void run() {
+        start();
+    }
+
     /**
      * Chức năng: Khởi động chương trình, cho phép người dùng chọn ngôn ngữ.
      * Luồng xử lý 1: Hiển thị menu lựa chọn ngôn ngữ hoặc thoát.

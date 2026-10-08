@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Chức năng: Lớp Task đại diện cho một đối tượng công việc trong hệ thống.
- * Luồng tương tác: Chứa các thông tin cơ bản của một công việc và các phương thức truy xuất/cập nhật dữ liệu (Getter/Setter).
+ * Chức năng: Đại diện cho thực thể tác vụ (Task) trong hệ thống.
+ * Luồng tương tác: Lưu trữ các thông tin cơ bản của một task cùng các phương thức getter và setter.
  */
 public class Task {
     private int id;
@@ -18,18 +18,18 @@ public class Task {
     private String reviewer;
 
     /**
-     * Chức năng: Khởi tạo một đối tượng Task với đầy đủ thông tin truyền vào.
+     * Chức năng: Khởi tạo đối tượng Task với đầy đủ các tham số.
      * Luồng xử lý:
-     * 1. Gán các giá trị tham số đầu vào cho các thuộc tính tương ứng của lớp.
+     * 1. Gán giá trị các tham số truyền vào cho các thuộc tính tương ứng của lớp.
      * 
-     * @param id ID của công việc
-     * @param taskTypeID ID loại công việc
-     * @param requirementName Tên yêu cầu
-     * @param date Ngày thực hiện
-     * @param planFrom Thời gian bắt đầu
-     * @param planTo Thời gian kết thúc
-     * @param assign Người được giao
-     * @param reviewer Người kiểm duyệt
+     * @param id mã của task
+     * @param taskTypeID mã loại task
+     * @param requirementName tên yêu cầu
+     * @param date ngày thực hiện
+     * @param planFrom thời gian bắt đầu
+     * @param planTo thời gian kết thúc
+     * @param assign người được giao
+     * @param reviewer người đánh giá
      */
     public Task(int id, int taskTypeID, String requirementName, Date date, 
             double planFrom, double planTo, String assign,
@@ -112,13 +112,13 @@ public class Task {
     }
 
     /**
-     * Chức năng: Ghi đè phương thức toString để trả về chuỗi thông tin của Task đã được định dạng.
+     * Chức năng: Ghi đè phương thức toString để trả về chuỗi định dạng của Task.
      * Luồng xử lý:
-     * 1. Khởi tạo SimpleDateFormat để định dạng đối tượng Date về dạng chuỗi "dd-MM-yyyy".
-     * 2. Sử dụng String.format để căn lề và định dạng các thông tin của Task (ID, Name, Task Type, Date, Time, Assignee, Reviewer).
-     * 3. Trả về chuỗi kết quả.
+     * 1. Khởi tạo SimpleDateFormat để định dạng ngày theo mẫu "dd-MM-yyyy".
+     * 2. Sử dụng String.format để căn chỉnh các cột thông tin của Task (ID, tên, loại task, ngày, thời lượng, người làm, người duyệt).
+     * 3. Trả về chuỗi kết quả đã định dạng.
      * 
-     * @return Chuỗi định dạng chứa đầy đủ thông tin của Task, dùng để in ra màn hình dạng bảng.
+     * @return chuỗi định dạng chứa đầy đủ thông tin Task để hiển thị bảng.
      */
     @Override
     public String toString() { 

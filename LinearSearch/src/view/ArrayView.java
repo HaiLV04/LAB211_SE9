@@ -1,16 +1,17 @@
 package view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Chức năng: Xử lý nhập và xuất dữ liệu cho chương trình Binary Search.
+ * Chức năng: Xử lý đầu vào và đầu ra cho chương trình Linear Search.
  */
 public class ArrayView {
 
     private final Scanner scanner;
 
     /**
-     * Chức năng: Khởi tạo scanner để đọc dữ liệu từ người dùng.
+     * Chức năng: Khởi tạo scanner để nhận dữ liệu nhập từ người dùng.
      */
     public ArrayView() {
         scanner = new Scanner(System.in);
@@ -19,15 +20,15 @@ public class ArrayView {
     /**
      * Chức năng: Nhập một số nguyên dương từ người dùng.
      * Luồng tương tác:
-     * 1. Hiển thị thông báo yêu cầu nhập.
-     * 2. Kiểm tra chuỗi rỗng: thông báo lỗi và yêu cầu nhập lại.
-     * 3. Bắt lỗi không phải số: thông báo lỗi và yêu cầu nhập lại.
-     * 4. Ép kiểu sang số nguyên.
-     * 5. Trả về giá trị nếu lớn hơn 0.
-     * 6. Nếu nhỏ hơn hoặc bằng 0, thông báo lỗi và yêu cầu nhập lại.
+     * 1. Hiển thị thông báo yêu cầu người dùng nhập.
+     * 2. Kiểm tra nếu dữ liệu nhập rỗng, thông báo lỗi và lặp lại.
+     * 3. Kiểm tra nếu dữ liệu nhập không phải là số nguyên, thông báo lỗi và lặp lại.
+     * 4. Đọc số nguyên.
+     * 5. Kiểm tra nếu số lớn hơn 0 thì trả về giá trị đó.
+     * 6. Nếu không, thông báo lỗi và lặp lại.
      *
      * @param message thông báo hiển thị cho người dùng
-     * @return số nguyên dương hợp lệ
+     * @return giá trị số nguyên dương
      */
     public int inputPositiveInteger(String message) {
         while (true) {
@@ -52,15 +53,15 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Nhập một số nguyên bất kỳ từ người dùng (giá trị cần tìm kiếm).
+     * Chức năng: Nhập một số nguyên bất kỳ từ người dùng (giá trị tìm kiếm).
      * Luồng tương tác:
-     * 1. Hiển thị thông báo yêu cầu nhập.
-     * 2. Kiểm tra chuỗi rỗng: thông báo lỗi và yêu cầu nhập lại.
-     * 3. Bắt lỗi không phải số: thông báo lỗi và yêu cầu nhập lại.
-     * 4. Trả về số nguyên hợp lệ.
+     * 1. Hiển thị thông báo yêu cầu người dùng nhập.
+     * 2. Kiểm tra nếu dữ liệu nhập rỗng, thông báo lỗi và lặp lại.
+     * 3. Kiểm tra nếu dữ liệu nhập không phải là số nguyên, thông báo lỗi và lặp lại.
+     * 4. Trả về giá trị số nguyên hợp lệ.
      *
      * @param message thông báo hiển thị cho người dùng
-     * @return số nguyên hợp lệ
+     * @return giá trị số nguyên hợp lệ
      */
     public int inputInteger(String message) {
         while (true) {
@@ -81,13 +82,13 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Hiển thị một mảng số nguyên ra màn hình console.
+     * Chức năng: Hiển thị một mảng số nguyên.
      * Luồng xử lý:
-     * 1. Khởi tạo StringBuilder để ghép chuỗi.
-     * 2. Thêm tiền tố thông báo và dấu mở ngoặc vuông.
-     * 3. Duyệt qua các phần tử của mảng và thêm vào chuỗi.
-     * 4. Thêm dấu phẩy giữa các phần tử (ngoại trừ phần tử cuối).
-     * 5. Thêm dấu đóng ngoặc vuông và in kết quả ra màn hình.
+     * 1. Khởi tạo StringBuilder để tạo chuỗi kết quả.
+     * 2. Thêm thông báo và dấu ngoặc vuông mở.
+     * 3. Duyệt qua từng phần tử của mảng và thêm vào chuỗi.
+     * 4. Thêm dấu phẩy giữa các phần tử (nếu chưa phải phần tử cuối).
+     * 5. Thêm dấu ngoặc vuông đóng và hiển thị kết quả.
      *
      * @param message thông báo hiển thị trước mảng
      * @param array mảng số nguyên cần hiển thị
@@ -112,19 +113,19 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Hiển thị kết quả tìm kiếm nhị phân ra màn hình console.
+     * Chức năng: Hiển thị kết quả tìm kiếm tuyến tính (danh sách các chỉ số).
      * Luồng xử lý:
-     * 1. Nếu tìm thấy (index != -1): In "Found {searchValue} at index: {foundIndex}".
-     * 2. Nếu không tìm thấy: In "Can not found".
+     * 1. Nếu không tìm thấy (mảng chỉ số rỗng): In "Can not found".
+     * 2. Nếu tìm thấy: In "Found {searchValue} at index: {Arrays.toString(foundIndices)}".
      *
      * @param searchValue giá trị cần tìm kiếm
-     * @param foundIndex chỉ số tìm thấy trong mảng (-1 nếu không tìm thấy)
+     * @param foundIndices mảng các vị trí tìm thấy trong mảng
      */
-    public void displaySearchResult(int searchValue, int foundIndex) {
-        if (foundIndex != -1) {
-            System.out.println("Found " + searchValue + " at index: " + foundIndex);
-        } else {
+    public void displaySearchResult(int searchValue, int[] foundIndices) {
+        if (foundIndices == null || foundIndices.length == 0) {
             System.out.println("Can not found");
+        } else {
+            System.out.println("Found " + searchValue + " at index: " + Arrays.toString(foundIndices));
         }
     }
 }

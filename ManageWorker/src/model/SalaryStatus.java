@@ -13,7 +13,7 @@ public enum SalaryStatus {
     /**
      * Luồng xử lý 1: Trả về trạng thái UP.
      *
-     * @return UP
+     * @return trạng thái tăng lương UP
      */
     public static SalaryStatus getUP() {
         return UP;
@@ -22,7 +22,7 @@ public enum SalaryStatus {
     /**
      * Luồng xử lý 1: Trả về trạng thái DOWN.
      *
-     * @return DOWN
+     * @return trạng thái giảm lương DOWN
      */
     public static SalaryStatus getDOWN() {
         return DOWN;

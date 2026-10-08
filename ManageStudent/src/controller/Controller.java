@@ -203,4 +203,62 @@ public class Controller {
         studentManager.add(new Student("s8", "Vu Quan", "Fall2024", Course.DOT_NET));
     }
 
+    /**
+     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng tương tác:
+     * 1. Sinh dữ liệu mẫu.
+     * 2. Hiển thị menu cho đến khi người dùng chọn Exit (5).
+     * 3. Điều hướng thực thi các chức năng 1-4.
+     */
+    public void run() {
+        try {
+            generateStudent();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        while (true) {
+            int choice = Validator.getInt("WELCOME TO STUDENT MANAGEMENT\n"
+                    + "1.\tCreate\n"
+                    + "2.\tFind and Sort\n"
+                    + "3.\tUpdate/Delete\n"
+                    + "4.\tReport\n"
+                    + "5.\tExit\n"
+                    + "Enter your choice: ", "Just be 1->5", "Invalid!", 1, 5);
+            switch (choice) {
+                case 1:
+                    try {
+                        createStudent();
+                        System.out.println("Add success!");
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 2:
+                    try {
+                        findAndSort();
+                        System.out.println("Find and sort success!");
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 3:
+                    try {
+                        updateOrDelete();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 4:
+                    try {
+                        report();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 5:
+                    return;
+            }
+        }
+    }
 }
+

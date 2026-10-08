@@ -1,12 +1,10 @@
 package model;
 
 /**
- * Chức năng: Lớp Fibonacci dùng để tính các số Fibonacci bằng phương pháp đệ quy.
+ * Chức năng: Lớp Fibonacci dùng để tính các số Fibonacci bằng phương pháp đệ quy có nhớ.
  *
  * Luồng tương tác:
  * Các giá trị Fibonacci đã tính sẽ được lưu vào mảng để tránh tính toán lặp lại nhiều lần (Memoization).
- *
- * @author win
  */
 public class Fibonacci {
 
@@ -39,16 +37,33 @@ public class Fibonacci {
      * @return giá trị Fibonacci tại vị trí index
      */
     public int getFibonacci(int index) {
-         // Trường hợp cơ sở: F(0) = 0, F(1) = 1
+        // Trường hợp cơ sở: F(0) = 0, F(1) = 1
         if (index == 0 || index == 1) {
+            fibonacci[index] = index;
             return index;
         }
-        //Kiểm tra xem F[n] đã được tính hay chưa? F[n]==0 thì là chưa được tính, != là đã tính
+        // Kiểm tra xem F[n] đã được tính hay chưa? F[n]==0 thì là chưa được tính, != 0 là đã tính
         if (fibonacci[index] != 0) {
             return fibonacci[index];
         }
-        //Nếu F[n] chưa được tính thì đi tính nó và lưu lại
+        // Nếu F[n] chưa được tính thì đi tính nó và lưu lại
         fibonacci[index] = getFibonacci(index - 1) + getFibonacci(index - 2);
         return fibonacci[index];
+    }
+
+    /**
+     * Chức năng: Lấy toàn bộ dãy Fibonacci đã được tính toán.
+     *
+     * Luồng xử lý:
+     * 1. Duyệt qua toàn bộ các vị trí từ 0 đến kích thước mảng và gọi getFibonacci(i).
+     * 2. Trả về mảng chứa toàn bộ dãy số Fibonacci.
+     *
+     * @return mảng số nguyên chứa toàn bộ dãy số Fibonacci
+     */
+    public int[] getSequence() {
+        for (int i = 0; i < fibonacci.length; i++) {
+            getFibonacci(i);
+        }
+        return fibonacci;
     }
 }

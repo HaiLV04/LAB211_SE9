@@ -162,4 +162,59 @@ public class Controller {
             System.out.println(result);
         }
     }
+
+    /**
+     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng tương tác:
+     * 1. Hiển thị menu cho đến khi người dùng chọn Exit (5).
+     * 2. Điều hướng thực thi các chức năng 1-4.
+     */
+    public void run() {
+        int choice;
+        do {
+            choice = Validator.getInt("======== Worker Management =========\n"
+                    + "1.\tAdd Worker\n"
+                    + "2.\tUp salary\n"
+                    + "3.\tDown salary\n"
+                    + "4.\tDisplay Information salary\n"
+                    + "5.\tExit\nEnter your choice: ", "Just be 1-> 5", "Invalid!", 1, 5);
+            switch (choice) {
+                case 1:
+                    try {
+                        System.out.println("--------- Add Worker ----------");
+                        Worker worker = addWorker();
+                        System.out.println("Add success: " + worker);
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 2:
+                    try {
+                        System.out.println("------- Up/Down Salary --------");
+                        Worker workerUp = upSalary();
+                        System.out.println("Up salary success:");
+                        System.out.println(workerUp);
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 3:
+                    try {
+                        System.out.println("------- Up/Down Salary --------");
+                        Worker workerDown = downSalary();
+                        System.out.println("Down salary success:");
+                        System.out.println(workerDown);
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 4:
+                    showHistorySalary();
+                    break;
+                case 5:
+                    return;
+            }
+        } while (choice != 5);
+    }
 }
+

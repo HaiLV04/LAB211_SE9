@@ -6,8 +6,8 @@ import model.Task;
 import view.Validator;
 
 /**
- * Chức năng: Lớp Controller điều phối luồng hoạt động của chương trình quản lý công việc.
- * Luồng tương tác: Nhận lệnh từ lớp Main (UI), gọi TaskInputer để lấy dữ liệu, truyền xuống ManagerTask để xử lý nghiệp vụ và trả lại kết quả cho màn hình.
+ * Chức năng: Lớp Controller điều phối luồng thực thi của chương trình quản lý tác vụ.
+ * Luồng tương tác: Nhận lệnh từ Main, gọi TaskInputer để lấy dữ liệu nhập, chuyển dữ liệu cho ManagerTask xử lý logic nghiệp vụ và hiển thị kết quả ra màn hình.
  */
 public class Controller {
 
@@ -17,7 +17,7 @@ public class Controller {
     /**
      * Chức năng: Khởi tạo đối tượng Controller.
      * Luồng xử lý:
-     * 1. Cấp phát bộ nhớ cho managerTask ngay khi Controller được tạo ra để sẵn sàng quản lý danh sách công việc.
+     * 1. Cấp phát bộ nhớ cho managerTask khi Controller được tạo để sẵn sàng quản lý danh sách task.
      */
     public Controller() {
         managerTask = new ManagerTask();
@@ -32,15 +32,15 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Xử lý thêm mới một công việc (Add Task).
+     * Chức năng: Xử lý thêm một tác vụ mới (Add Task).
      * Luồng xử lý:
      * 1. Khởi tạo đối tượng TaskInputer.
-     * 2. Gọi hàm input() để người dùng nhập toàn bộ thông tin hợp lệ, lưu vào đối tượng Task tạm thời.
-     * 3. Gọi ManagerTask truyền thông tin xuống để kiểm tra trùng lặp và thêm vào danh sách.
-     * 4. Trả về ID tự sinh từ ManagerTask.
+     * 2. Gọi phương thức input() để người dùng nhập thông tin tác vụ hợp lệ, lưu vào đối tượng Task tạm thời.
+     * 3. Gọi ManagerTask kiểm tra trùng lặp và thêm vào danh sách.
+     * 4. Trả về ID tự động tăng từ ManagerTask.
      *
-     * @return ID của Task vừa được thêm thành công.
-     * @throws Exception nếu có lỗi xảy ra (ví dụ: Task bị trùng lặp dữ liệu).
+     * @return ID của Task được thêm thành công.
+     * @throws Exception nếu xảy ra lỗi (ví dụ trùng lặp dữ liệu tác vụ).
      */
     public int add() throws Exception {
         inputer = new TaskInputer();
@@ -51,14 +51,14 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Xử lý xóa một công việc (Delete Task).
+     * Chức năng: Xử lý xóa một tác vụ (Delete Task).
      * Luồng xử lý:
-     * 1. Sử dụng Validator để yêu cầu người dùng nhập một số nguyên (ID của Task cần xóa).
-     * 2. Gọi ManagerTask truyền ID vừa nhập để tiến hành tìm và xóa Task.
-     * 3. Trả về đối tượng Task đã xóa để UI hiển thị.
+     * 1. Sử dụng Validator để yêu cầu người dùng nhập số nguyên (ID của Task cần xóa).
+     * 2. Gọi ManagerTask với ID để tìm và xóa Task.
+     * 3. Trả về đối tượng Task đã bị xóa để hiển thị ra console.
      *
-     * @return Đối tượng Task vừa bị xóa khỏi danh sách.
-     * @throws Exception nếu không tìm thấy ID trong danh sách hoặc danh sách trống.
+     * @return Đối tượng Task đã bị xóa khỏi danh sách.
+     * @throws Exception nếu không tìm thấy ID hoặc danh sách rỗng.
      */
     public Task delete() throws Exception {
         int ID = Validator.getInt("Task ID: ", "Error range!", "Invalid!",
@@ -67,13 +67,13 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Xử lý hiển thị danh sách công việc (Show Task).
+     * Chức năng: Xử lý hiển thị danh sách tác vụ (Show Task).
      * Luồng xử lý:
-     * 1. Gọi hàm toString() của ManagerTask để lấy toàn bộ chuỗi dữ liệu danh sách đã được định dạng.
-     * 2. Nếu chuỗi trả về là null (danh sách rỗng), ném ra ngoại lệ.
-     * 3. In chuỗi danh sách công việc ra màn hình Console.
+     * 1. Gọi toString() của ManagerTask để lấy chuỗi định dạng danh sách.
+     * 2. Ném ngoại lệ nếu chuỗi trả về là null (danh sách rỗng).
+     * 3. In chuỗi danh sách tác vụ ra màn hình console.
      *
-     * @throws Exception nếu danh sách hiện tại đang trống rỗng.
+     * @throws Exception nếu danh sách hiện tại rỗng.
      */
     public void show() throws Exception {
         String str = managerTask.toString();
@@ -81,5 +81,53 @@ public class Controller {
             throw new Exception("This list is empty!");
         }
         System.out.println(str);
+    }
+
+    /**
+     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng tương tác:
+     * 1. Hiển thị menu lặp lại cho đến khi người dùng chọn Thoát (4).
+     * 2. Điều phối và thực thi các chức năng 1-3 tương ứng.
+     */
+    public void run() {
+        while (true) {
+            int choice = Validator.getInt("========= Task program =========\n"
+                    + "1.\tAdd Task\n"
+                    + "2.\tDelete task\n"
+                    + "3.\tDisplay Task\n"
+                    + "4.\texit\n"
+                    + "Enter your choice: ", "Just 1-> 4", "Invalid!", 1, 4);
+            switch (choice) {
+                case 1:
+                    System.out.println("------------Add Task------------");
+                    try {
+                        int IDTask = add();
+                        System.out.println("Add success task id: " + IDTask);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 2:
+                    System.out.println("------------Del Task------------");
+                    try {
+                        Task task = delete();
+                        System.out.println("Delete success:");
+                        System.out.println(task);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 3:
+                    System.out.println("------------Show Task------------");
+                    try {
+                        show();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 4:
+                    return;
+            }
+        }
     }
 }

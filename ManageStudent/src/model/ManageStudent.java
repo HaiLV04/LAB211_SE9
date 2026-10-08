@@ -237,18 +237,6 @@ public class ManageStudent {
             return null;
         }
         // Tạo tiêu đề bảng
-        
-//neu muon hien thi ca ID
-//        String str = String.format("|%5s|%10s|%20s|%10s|%15s|\n",
-//        "No.", "ID", "Student Name", "Semester", "Course Name");
-//for (int i = 0; i < list.size(); i++) {
-//    str += String.format("|%5s|%10s|%20s|%10s|%15s|\n",
-//            i + 1,
-//            list.get(i).getId(),
-//            list.get(i).getStudentName(),
-//            list.get(i).getSemester(),
-//            list.get(i).getCourseName().getLanguage());
-//}
         String str = String.format("|%5s|%15s|%10s|%15s|\n", "No.", "Student Name",
                 "Semester", "Course Name");
 
@@ -310,12 +298,6 @@ public class ManageStudent {
         sb.append(String.format("|%-5s|%-20s|%-15s|%-10s|%-20s|\n",
                 "No.", "Student Name", "Course", "Total", "Semesters"));
         sb.append("--------------------------------------------------------------------------\n");
-        
-        //neu muon them ID
-//        sb.append(String.format("|%-5s|%-10s|%-20s|%-15s|%-10s|%-20s|\n",
-//        "No.", "ID", "Student Name", "Course", "Total", "Semesters"));
-//sb.append("--------------------------------------------------------------------------------------\n");
-
         int count = 1;
         // Để in đúng thứ tự đã sắp xếp, ta nên duyệt qua list đã sort thay vì duyệt qua Map
         // Nhưng để tránh trùng lặp dòng khi in, ta dùng một Set để đánh dấu
@@ -330,14 +312,6 @@ public class ManageStudent {
                         s.getCourseName().getLanguage(),
                         countMap.get(key),
                         semesterMap.get(key)));
-//neu muon them id
-//sb.append(String.format("|%-5d|%-10s|%-20s|%-15s|%-10d|%-20s|\n",
-//        count++,
-//        s.getId(),
-//        s.getStudentName(),
-//        s.getCourseName().getLanguage(),
-//        countMap.get(key),
-//        semesterMap.get(key)));
                 printedKeys.add(key);
             }
         }

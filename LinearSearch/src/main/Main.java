@@ -1,13 +1,28 @@
 package main;
 
-import controller.Controller;
+import controller.ArrayController;
 
 /**
- * Chức năng: Chạy chương trình chính, gọi Controller.
+ * Chức năng: Lớp chính để bắt đầu chương trình Linear Search.
  */
 public class Main {
+
+    /**
+     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     */
+    public Main() {
+    }
+
+    /**
+     * Chức năng: Bắt đầu chương trình.
+     * Luồng xử lý:
+     * 1. Khởi tạo ArrayController.
+     * 2. Chạy controller qua phương thức run().
+     *
+     * @param args tham số dòng lệnh
+     */
     public static void main(String[] args) {
-        Controller controller = new Controller();
-        controller.execute();
+        ArrayController arrayController = new ArrayController();
+        arrayController.run();
     }
 }

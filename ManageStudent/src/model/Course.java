@@ -1,8 +1,8 @@
 package model;
 
 /**
- * Chức năng: Enum lưu trữ các môn học được hỗ trợ trong chương trình.
- * Luồng tương tác: Sử dụng bởi lớp Student để gán môn học, lớp Course cung cấp các hằng số môn học tĩnh.
+ * Chức năng: Enum lưu trữ các khóa học được hỗ trợ trong chương trình.
+ * Luồng tương tác: Được sử dụng bởi lớp Student để gán khóa học; cung cấp các hằng số khóa học.
  */
 public enum Course {
     JAVA("JAVA"),
@@ -11,25 +11,25 @@ public enum Course {
     private String language;
 
     /**
-     * Chức năng: Khởi tạo môn học với tên tương ứng.
+     * Chức năng: Khởi tạo khóa học với tên tương ứng.
      * Luồng xử lý:
-     * 1. Gán giá trị tên môn học cho thuộc tính language.
+     * 1. Gán giá trị tên khóa học vào thuộc tính language.
      *
-     * @param language tên môn học
+     * @param language tên khóa học
      */
     Course(String language) {
         this.language = language;
     }
 
     /**
-     * Chức năng: Trả về đối tượng Course tương ứng với lựa chọn của người dùng.
+     * Chức năng: Trả về enum Course tương ứng với lựa chọn của người dùng.
      * Luồng xử lý:
-     * 1. Nhận giá trị type nguyên đầu vào.
+     * 1. Nhận giá trị số nguyên type.
      * 2. Kiểm tra type và trả về enum Course tương ứng (1 -> JAVA, 2 -> .NET, 3 -> C/C++).
-     * 3. Ném ngoại lệ AssertionError nếu type không hợp lệ.
+     * 3. Ném ra ngoại lệ AssertionError nếu type không hợp lệ.
      *
-     * @param type lựa chọn môn học
-     * @return môn học tương ứng
+     * @param type lựa chọn khóa học
+     * @return khóa học tương ứng
      */
     public static Course getCourse(int type) {
         switch (type) {
@@ -46,11 +46,11 @@ public enum Course {
     }
 
     /**
-     * Chức năng: Trả về tên môn học.
+     * Chức năng: Lấy tên khóa học.
      * Luồng xử lý:
      * 1. Trả về thuộc tính language của enum.
      *
-     * @return tên môn học
+     * @return tên khóa học
      */
     public String getLanguage() {
         return language;
