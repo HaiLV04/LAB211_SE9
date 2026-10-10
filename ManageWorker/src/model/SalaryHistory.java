@@ -15,8 +15,10 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
     private Date date;
 
     /**
-     * Luồng xử lý 1: Khởi tạo một bản ghi lịch sử lương với các tham số đầu vào.
-     * Luồng xử lý 2: Gọi các phương thức setter để thiết lập giá trị.
+     * Chức năng (Làm gì): Khởi tạo một bản ghi lịch sử lương với các tham số đầu vào.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Nhận các tham số worker, salaryUpdate, status, date.
+     * 2. Gọi các phương thức setter tương ứng để xác thực và thiết lập giá trị.
      *
      * @param worker công nhân được cập nhật
      * @param salaryUpdate mức lương sau khi cập nhật
@@ -31,13 +33,21 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
         setDate(date);
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy thông tin đối tượng công nhân của bản ghi.
+     * Luồng xử lý (Làm như thế nào): Trả về đối tượng worker trong bản ghi lịch sử.
+     *
+     * @return đối tượng công nhân
+     */
     public Worker getWorker() {
         return worker;
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra worker có null hay không.
-     * Luồng xử lý 2: Thiết lập công nhân cho bản ghi nếu hợp lệ, ngược lại ném ngoại lệ.
+     * Chức năng (Làm gì): Thiết lập đối tượng công nhân cho bản ghi lịch sử.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra worker có null hay không.
+     * 2. Thiết lập công nhân cho bản ghi nếu hợp lệ, ngược lại ném ngoại lệ.
      *
      * @param worker công nhân cần lưu
      * @throws Exception nếu worker bằng null
@@ -50,13 +60,21 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
         }
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy trạng thái thay đổi lương (UP hoặc DOWN).
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị enum status của bản ghi.
+     *
+     * @return trạng thái UP hoặc DOWN
+     */
     public SalaryStatus getStatus() {
         return status;
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra trạng thái có null hay không.
-     * Luồng xử lý 2: Thiết lập trạng thái thay đổi lương nếu hợp lệ, ngược lại ném ngoại lệ.
+     * Chức năng (Làm gì): Thiết lập trạng thái thay đổi lương cho bản ghi.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra trạng thái có null hay không.
+     * 2. Thiết lập trạng thái nếu hợp lệ, ngược lại ném ngoại lệ.
      *
      * @param status trạng thái UP hoặc DOWN
      * @throws Exception nếu status bằng null
@@ -69,13 +87,21 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
         }
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy ngày thực hiện thay đổi lương.
+     * Luồng xử lý (Làm như thế nào): Trả về đối tượng Date của bản ghi.
+     *
+     * @return ngày thực hiện thay đổi lương
+     */
     public Date getDate() {
         return date;
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra ngày cập nhật có null hay không.
-     * Luồng xử lý 2: Thiết lập ngày thay đổi lương nếu hợp lệ, ngược lại ném ngoại lệ.
+     * Chức năng (Làm gì): Thiết lập ngày thay đổi lương cho bản ghi.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra ngày cập nhật có null hay không.
+     * 2. Thiết lập ngày thay đổi lương nếu hợp lệ, ngược lại ném ngoại lệ.
      *
      * @param date ngày thực hiện
      * @throws Exception nếu date bằng null
@@ -88,13 +114,21 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
         }
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy mức lương sau khi cập nhật.
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị salaryUpdate của bản ghi.
+     *
+     * @return mức lương mới
+     */
     public double getSalaryUpdate() {
         return salaryUpdate;
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra mức lương mới lớn hơn hoặc bằng 0.
-     * Luồng xử lý 2: Gán mức lương nếu hợp lệ, nếu không ném ngoại lệ.
+     * Chức năng (Làm gì): Thiết lập mức lương sau khi cập nhật cho bản ghi.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra mức lương mới lớn hơn hoặc bằng 0.
+     * 2. Gán mức lương nếu hợp lệ, nếu nhỏ hơn 0 ném ngoại lệ.
      *
      * @param salaryUpdate mức lương mới
      * @throws Exception nếu lương nhỏ hơn 0
@@ -108,7 +142,8 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
     }
 
     /**
-     * Luồng xử lý 1: Trả về chuỗi đại diện cho đối tượng lịch sử lương.
+     * Chức năng (Làm gì): Trả về chuỗi biểu diễn đối tượng lịch sử lương.
+     * Luồng xử lý (Làm như thế nào): Ghép mã công nhân, mức lương cập nhật, trạng thái và ngày thành một chuỗi đại diện.
      *
      * @return thông tin bản ghi
      */
@@ -118,7 +153,8 @@ public class SalaryHistory implements Comparable<SalaryHistory>, Serializable {
     }
 
     /**
-     * Luồng xử lý 1: So sánh mã công nhân của hai bản ghi lịch sử.
+     * Chức năng (Làm gì): So sánh hai bản ghi lịch sử lương theo mã công nhân để phục vụ sắp xếp.
+     * Luồng xử lý (Làm như thế nào): Gọi phương thức compareTo trên mã ID của hai công nhân.
      *
      * @param o bản ghi lịch sử cần so sánh
      * @return giá trị so sánh theo mã công nhân

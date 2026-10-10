@@ -18,7 +18,8 @@ public class Controller {
     private ManagerWorker workers;
 
     /**
-     * Luồng xử lý 1: Khởi tạo các đối tượng quản lý (ManagerSalaryHistory, ManagerWorker).
+     * Chức năng (Làm gì): Khởi tạo đối tượng Controller.
+     * Luồng xử lý (Làm như thế nào): Khởi tạo các đối tượng quản lý (ManagerSalaryHistory, ManagerWorker).
      */
     public Controller() {
         this.salaryHistory = new ManagerSalaryHistory();
@@ -26,9 +27,11 @@ public class Controller {
     }
 
     /**
-     * Luồng xử lý 1: Nhập và kiểm tra tính duy nhất của ID công nhân (chuyển chữ hoa).
-     * Luồng xử lý 2: Nhập các thông tin còn lại như tên, tuổi, lương, nơi làm việc từ Validator.
-     * Luồng xử lý 3: Gọi ManagerWorker để thêm vào hệ thống và trả về đối tượng nếu thành công.
+     * Chức năng (Làm gì): Thêm một công nhân mới vào hệ thống.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Nhập và kiểm tra tính duy nhất của ID công nhân (chuyển chữ hoa).
+     * 2. Nhập các thông tin còn lại như tên, tuổi, lương, nơi làm việc từ Validator.
+     * 3. Gọi ManagerWorker để thêm vào hệ thống và trả về đối tượng nếu thành công.
      *
      * @return công nhân vừa được thêm
      * @throws Exception nếu thêm thất bại hoặc dữ liệu không hợp lệ
@@ -61,10 +64,12 @@ public class Controller {
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra xem danh sách công nhân có trống không.
-     * Luồng xử lý 2: Yêu cầu nhập ID công nhân và số tiền muốn tăng.
-     * Luồng xử lý 3: Thực hiện gọi ManagerWorker để tăng lương.
-     * Luồng xử lý 4: Ghi lại lịch sử (UP) bằng ManagerSalaryHistory.
+     * Chức năng (Làm gì): Tăng lương cho một công nhân và ghi lại lịch sử.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra xem danh sách công nhân có trống không.
+     * 2. Yêu cầu nhập ID công nhân và số tiền muốn tăng.
+     * 3. Thực hiện gọi ManagerWorker để tăng lương.
+     * 4. Ghi lại lịch sử (UP) bằng ManagerSalaryHistory.
      *
      * @return công nhân sau khi tăng lương
      * @throws Exception nếu danh sách rỗng, dữ liệu không hợp lệ hoặc id không tồn tại
@@ -85,11 +90,13 @@ public class Controller {
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra xem danh sách công nhân có rỗng không.
-     * Luồng xử lý 2: Yêu cầu nhập ID, tìm kiếm công nhân xem có tồn tại không.
-     * Luồng xử lý 3: Yêu cầu nhập số tiền, gọi ManagerWorker để trừ lương.
-     * Luồng xử lý 4: Bắt các ngoại lệ vi phạm giới hạn giảm và yêu cầu nhập lại nếu lượng giảm lớn hơn lương hiện tại.
-     * Luồng xử lý 5: Ghi lại lịch sử giảm lương (DOWN) bằng ManagerSalaryHistory.
+     * Chức năng (Làm gì): Giảm lương của một công nhân và lưu lịch sử.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra xem danh sách công nhân có rỗng không.
+     * 2. Yêu cầu nhập ID, tìm kiếm công nhân xem có tồn tại không.
+     * 3. Yêu cầu nhập số tiền, gọi ManagerWorker để trừ lương.
+     * 4. Bắt các ngoại lệ vi phạm giới hạn giảm và yêu cầu nhập lại nếu lượng giảm lớn hơn lương hiện tại.
+     * 5. Ghi lại lịch sử giảm lương (DOWN) bằng ManagerSalaryHistory.
      *
      * @return công nhân sau khi giảm lương
      * @throws Exception nếu danh sách rỗng hoặc dữ liệu không hợp lệ
@@ -151,8 +158,10 @@ public class Controller {
     }
 
     /**
-     * Luồng xử lý 1: Lấy kết quả chuỗi định dạng từ ManagerSalaryHistory.
-     * Luồng xử lý 2: In chuỗi ra màn hình, nếu null in thông báo lịch sử trống.
+     * Chức năng (Làm gì): Hiển thị bảng lịch sử thay đổi lương của toàn bộ công nhân.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lấy kết quả chuỗi định dạng từ ManagerSalaryHistory.
+     * 2. In chuỗi ra màn hình, nếu null thì in thông báo "History Salary is empty".
      */
     public void showHistorySalary() {
         String result = salaryHistory.toString();
@@ -164,10 +173,10 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị menu cho đến khi người dùng chọn Exit (5).
-     * 2. Điều hướng thực thi các chức năng 1-4.
+     * 2. Điều hướng thực thi các chức năng 1-4 (Add Worker, Up salary, Down salary, Display Information salary).
      */
     public void run() {
         int choice;
@@ -217,4 +226,3 @@ public class Controller {
         } while (choice != 5);
     }
 }
-

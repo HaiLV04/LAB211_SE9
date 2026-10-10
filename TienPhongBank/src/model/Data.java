@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class Data {
 
     /**
      * Chức năng: Khởi tạo danh sách tài khoản hợp lệ trong hệ thống.
-     * Luồng xử lý 1: Thêm các đối tượng Account với số tài khoản và mật khẩu định sẵn.
+     * Luồng tương tác: Thêm các đối tượng Account với số tài khoản và mật khẩu định sẵn vào danh sách tĩnh.
      */
     public static List<Account> listAccount = new ArrayList<Account>() {
         {

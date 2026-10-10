@@ -9,8 +9,15 @@ import java.util.Random;
 public class Helper {
 
     /**
-     * Chức năng: Hiển thị menu chính của chương trình.
-     * Luồng xử lý 1: In ra màn hình các lựa chọn ngôn ngữ và thoát.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp tiện ích Helper.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Helper mới.
+     */
+    public Helper() {
+    }
+
+    /**
+     * Chức năng (Làm gì): Hiển thị menu chính của chương trình.
+     * Luồng xử lý (Làm như thế nào): In ra màn hình console các lựa chọn ngôn ngữ (1. Vietnamese, 2. English) và thoát (3. Exit).
      */
     public static void menu() {
         System.out.println("\n-------Login Program--------");
@@ -20,9 +27,13 @@ public class Helper {
     }
     
     /**
-     * Chức năng: Tạo chuỗi chứa các ký tự chữ cái (A-Z, a-z) và số (0-9).
-     * Luồng xử lý 1: Nối các chữ cái in hoa từ A đến Z.
-     * Luồng xử lý 2: Nối với các chữ cái in thường và các chữ số 0-9.
+     * Chức năng (Làm gì): Tạo chuỗi chứa các ký tự chữ cái (A-Z, a-z) và số (0-9).
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Nối các chữ cái in hoa từ A đến Z bằng vòng lặp.
+     * 2. Nối với các chữ cái in thường và các chữ số 0-9 để tạo bảng ký tự hoàn chỉnh.
+     * 3. Trả về chuỗi tập hợp ký tự đã ghép.
+     *
+     * @return chuỗi gồm chữ hoa, chữ thường và chữ số
      */
     private static String genAlphaNumeric() {
         String alpha = "";
@@ -38,9 +49,14 @@ public class Helper {
     }
 
     /**
-     * Chức năng: Khởi tạo mã captcha ngẫu nhiên với độ dài cho trước.
-     * Luồng xử lý 1: Lấy chuỗi ký tự tổng hợp từ hàm genAlphaNumeric().
-     * Luồng xử lý 2: Chọn ngẫu nhiên các ký tự từ chuỗi trên để tạo captcha có độ dài tương ứng.
+     * Chức năng (Làm gì): Khởi tạo mã captcha ngẫu nhiên với độ dài cho trước.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lấy chuỗi ký tự nguồn từ hàm genAlphaNumeric().
+     * 2. Sử dụng Random để chọn ngẫu nhiên từng ký tự từ chuỗi nguồn cho đến khi đạt độ dài chỉ định.
+     * 3. Trả về chuỗi mã Captcha đã tạo.
+     *
+     * @param length độ dài của chuỗi captcha
+     * @return chuỗi captcha ngẫu nhiên
      */
     public static String generateCaptcha(int length) {
         String alphaNumeric = genAlphaNumeric();

@@ -6,26 +6,26 @@ package view;
 public class View {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp View.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp View.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng View mới.
      */
     public View() {
     }
 
     /**
-     * Chức năng: Hiển thị tiêu đề thông báo số lượng số Fibonacci cần tìm.
-     * Luồng xử lý:
-     * 1. In tiêu đề "The 45 sequence fibonacci:" ra console.
+     * Chức năng (Làm gì): Hiển thị tiêu đề thông báo số lượng số Fibonacci cần tìm.
+     * Luồng xử lý (Làm như thế nào): In tiêu đề "The 45 sequence fibonacci:" ra console.
      */
     public void displayTitle() {
         System.out.println("The 45 sequence fibonacci:");
     }
 
     /**
-     * Chức năng: Hiển thị toàn bộ dãy số Fibonacci theo đúng đặc tả đề bài.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị toàn bộ dãy số Fibonacci theo đúng đặc tả đề bài.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Duyệt qua từng phần tử trong dãy số.
      * 2. In giá trị số, ngăn cách bằng dấu phẩy và khoảng trắng.
-     * 3. Kết thúc bằng dấu chấm và xuống dòng.
+     * 3. Kết thúc bằng dấu chấm và xuống dòng khi in xong phần tử cuối.
      *
      * @param sequence mảng chứa các số Fibonacci
      */
@@ -41,11 +41,11 @@ public class View {
     }
 
     /**
-     * Chức năng: Hiển thị một số Fibonacci đơn lẻ với định dạng dấu phân cách.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị một số Fibonacci đơn lẻ với định dạng dấu phân cách.
+     * Luồng xử lý (Làm như thế nào):
      * 1. In giá trị số Fibonacci.
-     * 2. Nếu là số cuối cùng, in dấu chấm "." và xuống dòng.
-     * 3. Nếu chưa phải số cuối cùng, in dấu phẩy ", ".
+     * 2. Nếu là số cuối cùng (isLast = true), in dấu chấm "." và xuống dòng.
+     * 3. Nếu chưa phải số cuối cùng, in dấu phẩy và dấu cách ", ".
      *
      * @param value giá trị Fibonacci cần in
      * @param isLast true nếu đây là phần tử cuối cùng trong dãy
@@ -60,8 +60,8 @@ public class View {
     }
 
     /**
-     * Chức năng: Hiển thị danh sách vị trí chi tiết của từng phần tử trong dãy.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị danh sách vị trí chi tiết của từng phần tử trong dãy.
+     * Luồng xử lý (Làm như thế nào):
      * 1. In tiêu đề "Position of each element:".
      * 2. Lặp qua từng phần tử và in theo định dạng "Index i: value".
      *
@@ -75,8 +75,8 @@ public class View {
     }
 
     /**
-     * Chức năng: Hiển thị danh sách các giá trị Fibonacci theo định dạng mảng F(i).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị danh sách các giá trị Fibonacci theo định dạng mảng F(i).
+     * Luồng xử lý (Làm như thế nào):
      * 1. In dấu mở ngoặc vuông "[".
      * 2. Duyệt qua từng phần tử, in dạng "F(i)=giá_trị".
      * 3. Thêm dấu phẩy giữa các phần tử và đóng ngoặc vuông "]".
@@ -95,8 +95,8 @@ public class View {
     }
 
     /**
-     * Chức năng: Hiển thị kết quả kiểm chứng các mốc giá trị cơ sở.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị kết quả kiểm chứng các mốc giá trị cơ sở.
+     * Luồng xử lý (Làm như thế nào):
      * 1. In giá trị F(0).
      * 2. In giá trị F(1).
      * 3. In giá trị F tại vị trí cuối cùng.
@@ -113,9 +113,8 @@ public class View {
     }
 
     /**
-     * Chức năng: Hiển thị một thông điệp chuỗi ra màn hình console.
-     * Luồng xử lý:
-     * 1. In chuỗi thông điệp kèm ký tự xuống dòng.
+     * Chức năng (Làm gì): Hiển thị một thông điệp chuỗi ra màn hình console.
+     * Luồng xử lý (Làm như thế nào): In chuỗi thông điệp kèm ký tự xuống dòng bằng System.out.println.
      *
      * @param message thông điệp cần hiển thị
      */

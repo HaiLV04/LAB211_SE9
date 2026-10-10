@@ -12,14 +12,18 @@ import java.util.Scanner;
 public class Validator {
     private static final Scanner SCANNER = new Scanner(System.in);
     
+    /**
+     * Chức năng (Làm gì): Hàm khởi tạo private ngăn chặn việc tạo đối tượng của lớp tiện ích.
+     * Luồng xử lý (Làm như thế nào): Không thực hiện logic nào nhằm đảm bảo không thể khởi tạo instance của Utility class.
+     */
     private Validator(){
     }
 
     /**
-     * Chức năng: Yêu cầu người dùng nhập vào một số nguyên (int) hợp lệ nằm trong khoảng cho trước.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Yêu cầu người dùng nhập vào một số nguyên (int) hợp lệ nằm trong khoảng cho trước.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu nhập (messageInfo).
-     * 2. Đọc chuỗi đầu vào và cố gắng parse sang kiểu int.
+     * 2. Đọc chuỗi đầu vào và cố gắng parse sang kiểu int bằng Integer.parseInt.
      * 3. Kiểm tra xem số nguyên có nằm trong khoảng [min, max] hay không.
      * 4. Bắt lỗi NumberFormatException nếu nhập sai định dạng và in thông báo lỗi.
      * 5. Lặp lại quá trình nếu dữ liệu không hợp lệ.
@@ -37,9 +41,9 @@ public class Validator {
             try {
                 System.out.print(messageInfo);
                 int number = Integer.parseInt(SCANNER.nextLine());
-                if(number>=min&&number<=max){
+                if (number >= min && number <= max) {
                     return number;
-                }else{
+                } else {
                     System.out.println(messsageErrorOutOfRange);
                 }
             } catch (NumberFormatException e) {
@@ -49,10 +53,10 @@ public class Validator {
     }
 
     /**
-     * Chức năng: Yêu cầu người dùng nhập vào một số thực (double) hợp lệ nằm trong khoảng cho trước.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Yêu cầu người dùng nhập vào một số thực (double) hợp lệ nằm trong khoảng cho trước.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu nhập (messageInfo).
-     * 2. Đọc chuỗi đầu vào và cố gắng parse sang kiểu double.
+     * 2. Đọc chuỗi đầu vào và cố gắng parse sang kiểu double bằng Double.parseDouble.
      * 3. Kiểm tra xem số thực có nằm trong khoảng [min, max] hay không.
      * 4. Bắt lỗi NumberFormatException nếu nhập sai định dạng và in thông báo lỗi.
      * 5. Lặp lại quá trình nếu dữ liệu không hợp lệ.
@@ -70,9 +74,9 @@ public class Validator {
             try {
                 System.out.print(messageInfo);
                 double number = Double.parseDouble(SCANNER.nextLine());
-                if(number>=min&&number<=max){
+                if (number >= min && number <= max) {
                     return number;
-                }else{
+                } else {
                     System.out.println(messsageErrorOutOfRange);
                 }
             } catch (NumberFormatException e) {
@@ -82,11 +86,11 @@ public class Validator {
     }
 
     /**
-     * Chức năng: Yêu cầu người dùng nhập vào một chuỗi (String) thỏa mãn biểu thức chính quy (Regex).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Yêu cầu người dùng nhập vào một chuỗi (String) thỏa mãn biểu thức chính quy (Regex).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu nhập (messageInfo).
      * 2. Đọc chuỗi đầu vào.
-     * 3. So khớp chuỗi với biểu thức chính quy (REGEX).
+     * 3. So khớp chuỗi với biểu thức chính quy (REGEX) bằng String.matches.
      * 4. Trả về chuỗi nếu hợp lệ, nếu không in thông báo lỗi và yêu cầu nhập lại.
      * 
      * @param messageInfo Lời nhắc hiển thị yêu cầu nhập
@@ -98,7 +102,7 @@ public class Validator {
         do {            
             System.out.print(messageInfo);
             String str = SCANNER.nextLine();
-            if(str.matches(REGEX)){
+            if (str.matches(REGEX)) {
                 return str;
             }
             System.out.println(messageError);
@@ -106,8 +110,8 @@ public class Validator {
     }
 
     /**
-     * Chức năng: Yêu cầu người dùng nhập vào một ngày tháng (Date) theo đúng định dạng.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Yêu cầu người dùng nhập vào một ngày tháng (Date) theo đúng định dạng.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo SimpleDateFormat với định dạng REGEX và tắt tính năng lenient (setLenient(false)) để kiểm tra ngày nghiêm ngặt.
      * 2. Hiển thị thông báo yêu cầu nhập (messageInfo).
      * 3. Đọc chuỗi và parse thành đối tượng Date.

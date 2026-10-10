@@ -13,24 +13,27 @@ import view.Validate;
 public class TPBank {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp TPBank.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp TPBank.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng TPBank mới.
      */
     public TPBank() {
     }
 
     /**
-     * Chức năng: Kích hoạt chương trình TPBank qua phương thức run().
+     * Chức năng (Làm gì): Kích hoạt chương trình TPBank qua phương thức run().
+     * Luồng xử lý (Làm như thế nào): Gọi phương thức start() để bắt đầu hiển thị menu và xử lý đăng nhập.
      */
     public void run() {
         start();
     }
 
     /**
-     * Chức năng: Khởi động chương trình, cho phép người dùng chọn ngôn ngữ.
-     * Luồng xử lý 1: Hiển thị menu lựa chọn ngôn ngữ hoặc thoát.
-     * Luồng xử lý 2: Nhận lựa chọn hợp lệ từ người dùng (1-3).
-     * Luồng xử lý 3: Thiết lập Locale cho hệ thống dựa trên lựa chọn (Tiếng Việt hoặc Tiếng Anh) hoặc thoát nếu chọn 3.
-     * Luồng xử lý 4: Tải ResourceBundle theo Locale đã thiết lập và chuyển quyền điều khiển sang LoginService để đăng nhập.
+     * Chức năng (Làm gì): Khởi động chương trình, cho phép người dùng chọn ngôn ngữ và thực hiện đăng nhập.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Hiển thị menu lựa chọn ngôn ngữ (Vietnamese, English) hoặc thoát qua Helper.menu().
+     * 2. Nhận lựa chọn hợp lệ từ người dùng trong khoảng 1 đến 3 qua Validate.getInt().
+     * 3. Thiết lập Locale cho hệ thống dựa trên lựa chọn (Tiếng Việt: "vi_VN", Tiếng Anh: "en_US") hoặc thoát (chọn 3).
+     * 4. Tải ResourceBundle theo Locale đã thiết lập và chuyển quyền điều khiển sang LoginService để đăng nhập.
      */
     public static void start() {
         Helper.menu();

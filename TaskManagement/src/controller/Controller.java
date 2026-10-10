@@ -15,25 +15,36 @@ public class Controller {
     private TaskInputer inputer;
 
     /**
-     * Chức năng: Khởi tạo đối tượng Controller.
-     * Luồng xử lý:
-     * 1. Cấp phát bộ nhớ cho managerTask khi Controller được tạo để sẵn sàng quản lý danh sách task.
+     * Chức năng (Làm gì): Khởi tạo đối tượng Controller.
+     * Luồng xử lý (Làm như thế nào): Cấp phát bộ nhớ cho managerTask khi Controller được tạo để sẵn sàng quản lý danh sách task.
      */
     public Controller() {
         managerTask = new ManagerTask();
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy đối tượng quản lý tác vụ (ManagerTask).
+     * Luồng xử lý (Làm như thế nào): Trả về đối tượng managerTask hiện tại.
+     *
+     * @return đối tượng ManagerTask
+     */
     public ManagerTask getManagerTask() {
         return managerTask;
     }
 
+    /**
+     * Chức năng (Làm gì): Thiết lập đối tượng quản lý tác vụ (ManagerTask).
+     * Luồng xử lý (Làm như thế nào): Gán đối tượng managerTask mới cho thuộc tính của Controller.
+     *
+     * @param managerTask đối tượng ManagerTask cần gán
+     */
     public void setManagerTask(ManagerTask managerTask) {
         this.managerTask = managerTask;
     }
 
     /**
-     * Chức năng: Xử lý thêm một tác vụ mới (Add Task).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý thêm một tác vụ mới (Add Task).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo đối tượng TaskInputer.
      * 2. Gọi phương thức input() để người dùng nhập thông tin tác vụ hợp lệ, lưu vào đối tượng Task tạm thời.
      * 3. Gọi ManagerTask kiểm tra trùng lặp và thêm vào danh sách.
@@ -51,8 +62,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Xử lý xóa một tác vụ (Delete Task).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý xóa một tác vụ (Delete Task).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Sử dụng Validator để yêu cầu người dùng nhập số nguyên (ID của Task cần xóa).
      * 2. Gọi ManagerTask với ID để tìm và xóa Task.
      * 3. Trả về đối tượng Task đã bị xóa để hiển thị ra console.
@@ -67,8 +78,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Xử lý hiển thị danh sách tác vụ (Show Task).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý hiển thị danh sách tác vụ (Show Task).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Gọi toString() của ManagerTask để lấy chuỗi định dạng danh sách.
      * 2. Ném ngoại lệ nếu chuỗi trả về là null (danh sách rỗng).
      * 3. In chuỗi danh sách tác vụ ra màn hình console.
@@ -84,10 +95,10 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị menu lặp lại cho đến khi người dùng chọn Thoát (4).
-     * 2. Điều phối và thực thi các chức năng 1-3 tương ứng.
+     * 2. Điều phối và thực thi các chức năng 1-3 tương ứng (Add Task, Delete task, Display Task).
      */
     public void run() {
         while (true) {

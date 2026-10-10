@@ -11,7 +11,8 @@ public enum SalaryStatus {
     UP, DOWN;
 
     /**
-     * Luồng xử lý 1: Trả về trạng thái UP.
+     * Chức năng (Làm gì): Lấy trạng thái tăng lương (UP).
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị enum UP.
      *
      * @return trạng thái tăng lương UP
      */
@@ -20,7 +21,8 @@ public enum SalaryStatus {
     }
 
     /**
-     * Luồng xử lý 1: Trả về trạng thái DOWN.
+     * Chức năng (Làm gì): Lấy trạng thái giảm lương (DOWN).
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị enum DOWN.
      *
      * @return trạng thái giảm lương DOWN
      */

@@ -11,14 +11,15 @@ public class ArrayModel {
     private int[] array;
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp ArrayModel.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng ArrayModel mới với thuộc tính array chưa được cấp phát.
      */
     public ArrayModel() {
     }
 
     /**
-     * Chức năng: Khởi tạo đối tượng ArrayModel từ một mảng có sẵn.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Khởi tạo đối tượng ArrayModel từ một mảng có sẵn.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra mảng đầu vào không được null.
      * 2. Gán mảng đầu vào cho thuộc tính của lớp.
      *
@@ -33,8 +34,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo đối tượng Random.
      * 2. Khởi tạo mảng với kích thước chỉ định.
      * 3. Tạo các giá trị ngẫu nhiên từ 0 đến n - 1 cho từng phần tử của mảng.
@@ -51,8 +52,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Bubble Sort.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Bubble Sort.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại.
      * 2. Lặp lại việc so sánh các cặp phần tử kề nhau.
      * 3. Hoán đổi nếu phần tử đứng trước lớn hơn phần tử đứng sau.
@@ -81,7 +82,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Hoán đổi hai phần tử trong mảng.
+     * Chức năng (Làm gì): Hoán đổi hai phần tử trong mảng.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm thời.
+     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
+     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
      *
      * @param firstIndex chỉ số của phần tử thứ nhất
      * @param secondIndex chỉ số của phần tử thứ hai
@@ -93,8 +98,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Thực hiện tìm kiếm tuần tự (Linear Search) để tìm vị trí xuất hiện đầu tiên của giá trị cần tìm.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Thực hiện tìm kiếm tuần tự (Linear Search) để tìm vị trí xuất hiện đầu tiên của giá trị cần tìm.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra mảng null hoặc rỗng, trả về -1.
      * 2. Duyệt qua từng phần tử trong mảng bằng vòng lặp.
      * 3. So sánh phần tử hiện tại với giá trị cần tìm (key).
@@ -118,8 +123,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Tìm tất cả vị trí xuất hiện của giá trị cần tìm trong mảng bằng Linear Search.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tìm tất cả vị trí xuất hiện của giá trị cần tìm trong mảng bằng Linear Search.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo danh sách ArrayList để lưu các chỉ số tìm được.
      * 2. Duyệt qua toàn bộ phần tử của mảng.
      * 3. Nếu phần tử tại vị trí đang xét bằng với key, thêm vị trí đó vào danh sách.
@@ -149,7 +154,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Lấy mảng hiện tại.
+     * Chức năng (Làm gì): Lấy mảng số nguyên hiện tại.
+     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên hiện tại của đối tượng.
      *
      * @return mảng số nguyên hiện tại
      */

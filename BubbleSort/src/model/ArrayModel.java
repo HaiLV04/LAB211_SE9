@@ -10,17 +10,18 @@ public class ArrayModel {
     private int[] array;
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp ArrayModel.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng ArrayModel mới với thuộc tính array chưa được cấp phát.
      */
     public ArrayModel() {
     }
 
     /**
-     * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý: 
-     * 1. Khởi tạo đối tượng Random. 
-     * 2. Khởi tạo mảng với kích thước chỉ định. 
-     * 3. Tạo các giá trị ngẫu nhiên cho từng phần tử của mảng.
+     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Khởi tạo đối tượng Random.
+     * 2. Khởi tạo mảng với kích thước chỉ định n.
+     * 3. Tạo các giá trị ngẫu nhiên trong khoảng [-n, n] cho từng phần tử của mảng.
      *
      * @param n số lượng phần tử trong mảng
      */
@@ -34,12 +35,12 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble Sort. 
-     * Luồng xử lý: 
-     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại. 
-     * 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không cần hoán đổi. 
-     * 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn sang phải. 
-     * 4. Dừng sớm nếu mảng đã được sắp xếp.
+     * Chức năng (Làm gì): Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble Sort.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại.
+     * 2. Lặp qua mảng với biến cờ swapped kiểm tra hoán đổi.
+     * 3. So sánh các phần tử kề nhau và hoán đổi đưa giá trị lớn hơn về bên phải.
+     * 4. Dừng thuật toán sớm nếu trong một lượt duyệt không xảy ra bất kỳ hoán đổi nào.
      */
     public void bubbleSort() {
         if (array == null || array.length < 2) {
@@ -69,10 +70,10 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Hoán đổi hai phần tử trong mảng. 
-     * Luồng xử lý: 
-     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm. 
-     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất. 
+     * Chức năng (Làm gì): Hoán đổi hai phần tử trong mảng.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm thời.
+     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
      * 3. Gán giá trị biến tạm cho phần tử thứ hai.
      *
      * @param firstIndex chỉ số của phần tử thứ nhất
@@ -86,7 +87,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Lấy mảng hiện tại.
+     * Chức năng (Làm gì): Lấy mảng số nguyên hiện tại.
+     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên hiện tại.
      *
      * @return mảng số nguyên hiện tại
      */

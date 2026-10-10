@@ -12,8 +12,8 @@ public class ManagerTask {
     private int lastID;
 
     /**
-     * Chức năng: Khởi tạo đối tượng ManagerTask.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Khởi tạo đối tượng ManagerTask.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo danh sách ArrayList rỗng để lưu trữ Task.
      * 2. Thiết lập ID ban đầu (lastID) bằng 0.
      */
@@ -22,25 +22,49 @@ public class ManagerTask {
         lastID = 0;
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy danh sách các tác vụ hiện tại.
+     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu danh sách list.
+     *
+     * @return danh sách tác vụ
+     */
     public ArrayList<Task> getList() {
         return list;
     }
 
+    /**
+     * Chức năng (Làm gì): Thiết lập danh sách các tác vụ.
+     * Luồng xử lý (Làm như thế nào): Gán danh sách mới cho thuộc tính list.
+     *
+     * @param list danh sách tác vụ mới
+     */
     public void setList(ArrayList<Task> list) {
         this.list = list;
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy giá trị ID cuối cùng đã tạo.
+     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính lastID.
+     *
+     * @return giá trị ID cuối cùng
+     */
     public int getLastID() {
         return lastID;
     }
 
+    /**
+     * Chức năng (Làm gì): Thiết lập giá trị ID cuối cùng.
+     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính lastID.
+     *
+     * @param lastID giá trị ID cần gán
+     */
     public void setLastID(int lastID) {
         this.lastID = lastID;
     }
 
     /**
-     * Chức năng: Kiểm tra xem Task có bị trùng lặp với Task đã có trong danh sách hay không.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Kiểm tra xem Task có bị trùng lặp với Task đã có trong danh sách hay không.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Duyệt qua toàn bộ danh sách Task hiện tại.
      * 2. So sánh từng thuộc tính: loại task, tên yêu cầu, ngày thực hiện, thời gian bắt đầu, thời gian kết thúc, người được giao và người đánh giá.
      * 3. Nếu tìm thấy Task trùng khớp toàn bộ, trả về true; ngược lại trả về false.
@@ -72,8 +96,8 @@ public class ManagerTask {
     }
 
     /**
-     * Chức năng: Thêm một Task mới vào danh sách.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Thêm một Task mới vào danh sách.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Gọi isDuplicate() để kiểm tra trùng lặp. Nếu trùng, ném ngoại lệ.
      * 2. Tự động tăng lastID để tạo ID mới.
      * 3. Khởi tạo đối tượng Task mới với ID vừa sinh và các tham số truyền vào.
@@ -103,8 +127,8 @@ public class ManagerTask {
     }
 
     /**
-     * Chức năng: Tìm chỉ số của Task trong danh sách dựa theo ID.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tìm chỉ số của Task trong danh sách dựa theo ID.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Duyệt qua danh sách Task.
      * 2. So sánh ID của từng Task với ID cần tìm.
      * 3. Trả về chỉ số nếu tìm thấy, ngược lại trả về -1.
@@ -122,8 +146,8 @@ public class ManagerTask {
     }
 
     /**
-     * Chức năng: Xóa một Task dựa theo ID.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xóa một Task dựa theo ID.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Gọi getIndexByID() để tìm chỉ số của Task cần xóa.
      * 2. Nếu chỉ số là -1 (không tìm thấy), ném ngoại lệ.
      * 3. Nếu tìm thấy, xóa Task khỏi danh sách và trả về đối tượng vừa xóa.
@@ -141,8 +165,8 @@ public class ManagerTask {
     }
 
     /**
-     * Chức năng: Trả về chuỗi hiển thị toàn bộ danh sách Task có định dạng bảng.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Trả về chuỗi hiển thị toàn bộ danh sách Task có định dạng bảng.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra danh sách rỗng; trả về null nếu rỗng.
      * 2. Tạo dòng tiêu đề cho bảng hiển thị.
      * 3. Duyệt qua danh sách, gọi toString() của từng Task để ghép chuỗi.

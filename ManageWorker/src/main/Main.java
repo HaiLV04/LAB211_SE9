@@ -8,14 +8,15 @@ import controller.Controller;
 public class Main {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp Main.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Main mới.
      */
     public Main() {
     }
 
     /**
-     * Chức năng: Điểm vào (entry point) khởi chạy chương trình.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Điểm vào (entry point) khởi chạy chương trình quản lý công nhân.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo đối tượng Controller.
      * 2. Kích hoạt controller qua phương thức run().
      *

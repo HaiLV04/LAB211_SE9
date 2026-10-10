@@ -17,18 +17,16 @@ public class ManageStudent {
     private List<Student> list;
 
     /**
-     * Chức năng: Khởi tạo đối tượng ManageStudent với danh sách sinh viên rỗng.
-     * Luồng xử lý:
-     * 1. Tạo mới một ArrayList trống cho thuộc tính list.
+     * Chức năng (Làm gì): Khởi tạo đối tượng ManageStudent với danh sách sinh viên rỗng.
+     * Luồng xử lý (Làm như thế nào): Tạo mới một đối tượng ArrayList trống cho thuộc tính list.
      */
     public ManageStudent() {
         list = new ArrayList<>();
     }
 
     /**
-     * Chức năng: Trả về danh sách sinh viên hiện tại.
-     * Luồng xử lý:
-     * 1. Trả về thuộc tính list chứa thông tin các sinh viên.
+     * Chức năng (Làm gì): Trả về danh sách sinh viên hiện tại.
+     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính list chứa thông tin các sinh viên.
      *
      * @return danh sách sinh viên
      */
@@ -37,9 +35,8 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Cập nhật danh sách sinh viên.
-     * Luồng xử lý:
-     * 1. Gán mảng đầu vào thay thế cho thuộc tính list hiện tại.
+     * Chức năng (Làm gì): Cập nhật danh sách sinh viên.
+     * Luồng xử lý (Làm như thế nào): Gán danh sách đầu vào thay thế cho thuộc tính list hiện tại.
      *
      * @param list danh sách sinh viên mới
      */
@@ -48,18 +45,17 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Kiểm tra xem bản ghi sinh viên đã tồn tại trong danh sách hay chưa.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Kiểm tra xem bản ghi sinh viên đã tồn tại trong danh sách hay chưa.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Duyệt qua toàn bộ danh sách sinh viên hiện tại.
      * 2. Nếu tìm thấy sinh viên nào trùng Id, trùng Semester và trùng CourseName với đầu vào thì trả về true.
-     * 3. Nếu duyệt hết không tìm thấy thì trả về false.
+     * 3. Nếu duyệt hết mà không tìm thấy thì trả về false.
      *
      * @param student sinh viên cần kiểm tra
      * @return true nếu đã tồn tại, ngược lại false
      */
     public boolean isExisted(Student student) {
         // Duyệt toàn bộ danh sách sinh viên
-
         for (Student students : list) {
             // Kiểm tra trùng ID, Semester và Course
             if (students.getId().equals(student.getId())
@@ -69,14 +65,13 @@ public class ManageStudent {
             }
         }
         // Không tìm thấy bản ghi trùng
-
         return false;
     }
 
     /**
-     * Chức năng: Thêm một sinh viên vào danh sách.
-     * Luồng xử lý:
-     * 1. Kiểm tra xem bản ghi sinh viên đã tồn tại chưa bằng isExisted. Nếu có ném Exception.
+     * Chức năng (Làm gì): Thêm một sinh viên vào danh sách.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra xem bản ghi sinh viên đã tồn tại chưa bằng isExisted. Nếu có thì ném Exception.
      * 2. Nếu không trùng, thêm sinh viên vào danh sách list và trả về true.
      *
      * @param student sinh viên cần thêm
@@ -93,8 +88,8 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Xóa một sinh viên khỏi danh sách.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xóa một sinh viên khỏi danh sách.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra list, nếu trống thì ném Exception.
      * 2. Kiểm tra bản ghi sinh viên bằng isExisted, nếu không tồn tại thì ném Exception.
      * 3. Nếu hợp lệ, tiến hành gọi phương thức remove của ArrayList để xóa sinh viên và trả về kết quả.
@@ -117,9 +112,9 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Tìm vị trí (index) của một bản ghi trong danh sách.
-     * Luồng xử lý:
-     * 1. Duyệt qua mảng sinh viên với chỉ số i từ 0 tới size.
+     * Chức năng (Làm gì): Tìm vị trí (index) của một bản ghi trong danh sách.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Duyệt qua danh sách sinh viên với chỉ số i từ 0 tới size - 1.
      * 2. Trả về i nếu đối tượng tại vị trí i trùng khớp (equals) với đối tượng đầu vào.
      * 3. Trả về -1 nếu duyệt hết mà không tìm thấy.
      *
@@ -138,12 +133,12 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Thay thế thông tin một bản ghi sinh viên cũ bằng bản ghi sinh viên mới.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Thay thế thông tin một bản ghi sinh viên cũ bằng bản ghi sinh viên mới.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nếu danh sách rỗng, ném Exception không thể cập nhật.
      * 2. Nếu bản ghi cũ không tồn tại, ném Exception.
      * 3. Nếu bản ghi mới bị trùng lặp với một bản ghi đã có (theo Id, khóa học, học kỳ), ném Exception.
-     * 4. Gọi getIndexRecord lấy vị trí của bản ghi cũ, sau đó sử dụng list.set(index, mới) để thay đổi.
+     * 4. Gọi getIndexRecord lấy vị trí của bản ghi cũ, sau đó sử dụng list.set(index, newStudentRecord) để thay đổi.
      *
      * @param oldStudentRecord bản ghi cũ
      * @param newStudentRecord bản ghi mới
@@ -168,10 +163,10 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Tìm và lọc ra danh sách sinh viên theo một mã ID cụ thể.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tìm và lọc ra danh sách sinh viên theo một mã ID cụ thể.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo một ArrayList kết quả trống.
-     * 2. Duyệt list hiện tại, nếu Id đối tượng trùng với Id đầu vào (không phân biệt hoa thường), add vào danh sách kết quả.
+     * 2. Duyệt list hiện tại, nếu Id đối tượng trùng với Id đầu vào (không phân biệt hoa thường), thêm vào danh sách kết quả.
      * 3. Trả về danh sách kết quả tìm được.
      *
      * @param id mã sinh viên cần tìm
@@ -189,11 +184,11 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Tìm và lọc danh sách sinh viên dựa theo tên hoặc một phần của tên.
-     * Luồng xử lý:
-     * 1. Khởi tạo danh sách kết quả trống.
+     * Chức năng (Làm gì): Tìm và lọc danh sách sinh viên dựa theo tên hoặc một phần của tên.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Khởi tạo danh sách ArrayList kết quả trống.
      * 2. Duyệt qua mảng sinh viên hiện tại, dùng contains kết hợp toLowerCase để so khớp tên không phân biệt hoa thường.
-     * 3. Nếu khớp thì add vào kết quả, sau khi duyệt xong thì trả về kết quả đó.
+     * 3. Nếu khớp thì thêm vào kết quả, sau khi duyệt xong thì trả về kết quả đó.
      *
      * @param name tên hoặc một phần tên sinh viên
      * @return danh sách sinh viên phù hợp
@@ -210,8 +205,8 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Sắp xếp danh sách sinh viên theo tên với thứ tự tăng dần.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Sắp xếp danh sách sinh viên theo tên với thứ tự tăng dần.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Sử dụng thuật toán sắp xếp của Collections.sort() trên thuộc tính list. 
      * 2. Collections.sort() sẽ dựa vào phương thức compareTo() đã override trong lớp Student để sắp xếp tên.
      */
@@ -221,8 +216,8 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Tạo chuỗi biểu diễn danh sách sinh viên dưới dạng bảng theo các tiêu chí (Số thứ tự, tên, kỳ học, môn học).
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tạo chuỗi biểu diễn danh sách sinh viên dưới dạng bảng theo các tiêu chí (Số thứ tự, tên, kỳ học, môn học).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nếu list trống, trả về null.
      * 2. Tạo phần tiêu đề bảng (header).
      * 3. Duyệt mảng sinh viên và định dạng thành từng dòng (format bảng), sau đó nối tiếp vào chuỗi.
@@ -251,10 +246,10 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Báo cáo danh sách thống kê khóa học (đếm số lần học cùng một môn của một sinh viên).
-     * Luồng xử lý:
-     * 1. Trả về cảnh báo nếu danh sách rỗng.
-     * 2. Sắp xếp danh sách ưu tiên theo tên bằng hàm Collections.sort(list, comparator).
+     * Chức năng (Làm gì): Báo cáo danh sách thống kê khóa học (đếm số lần học cùng một môn của một sinh viên).
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra nếu danh sách rỗng thì trả về thông báo cảnh báo "List is empty!".
+     * 2. Sắp xếp danh sách ưu tiên theo tên bằng Collections.sort(list, comparator).
      * 3. Duyệt danh sách, gộp các khóa có cùng Id và Môn học thông qua 2 đối tượng HashMap để đếm số lần (countMap) và cộng dồn các kỳ (semesterMap).
      * 4. Khởi tạo một danh sách phụ (printedKeys) để tránh in trùng các dòng.
      * 5. Duyệt lại mảng đã sắp xếp, với mỗi sinh viên nếu khóa chưa xuất hiện trong printedKeys thì in ra và thêm vào khóa đã xử lý.
@@ -271,8 +266,6 @@ public class ManageStudent {
         Collections.sort(list, (s1, s2) -> s1.getStudentName().compareToIgnoreCase(s2.getStudentName()));
 
         // Bước 2: Dùng một Map để lưu trữ kết quả thống kê
-        // Key: ID + Course Name (để phân biệt cùng 1 người học nhiều môn khác nhau)
-        // Value: Một đối tượng hoặc chuỗi chứa thông tin tổng hợp
         HashMap<String, Integer> countMap = new HashMap<>();
         HashMap<String, String> semesterMap = new HashMap<>();
 
@@ -299,19 +292,17 @@ public class ManageStudent {
                 "No.", "Student Name", "Course", "Total", "Semesters"));
         sb.append("--------------------------------------------------------------------------\n");
         int count = 1;
-        // Để in đúng thứ tự đã sắp xếp, ta nên duyệt qua list đã sort thay vì duyệt qua Map
-        // Nhưng để tránh trùng lặp dòng khi in, ta dùng một Set để đánh dấu
         List<String> printedKeys = new ArrayList<>();
 
         for (Student s : list) {
             String key = s.getId() + "|" + s.getCourseName().getLanguage();
             if (!printedKeys.contains(key)) {
                 sb.append(String.format("|%-5d|%-20s|%-15s|%-10d|%-20s|\n",
-                        count++,
-                        s.getStudentName(),
-                        s.getCourseName().getLanguage(),
-                        countMap.get(key),
-                        semesterMap.get(key)));
+                    count++,
+                    s.getStudentName(),
+                    s.getCourseName().getLanguage(),
+                    countMap.get(key),
+                    semesterMap.get(key)));
                 printedKeys.add(key);
             }
         }

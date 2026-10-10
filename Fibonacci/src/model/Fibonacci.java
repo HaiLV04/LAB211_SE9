@@ -14,10 +14,8 @@ public class Fibonacci {
     private int[] fibonacci;
 
     /**
-     * Chức năng: Khởi tạo mảng lưu các số Fibonacci.
-     *
-     * Luồng xử lý:
-     * 1. Khởi tạo mảng số nguyên có kích thước bằng numberOfFibo để lưu các kết quả.
+     * Chức năng (Làm gì): Khởi tạo mảng lưu các số Fibonacci.
+     * Luồng xử lý (Làm như thế nào): Cấp phát mảng số nguyên có kích thước bằng numberOfFibo để lưu các kết quả tạm (Memoization).
      * 
      * @param numberOfFibo số lượng phần tử Fibonacci cần lưu
      */
@@ -26,10 +24,9 @@ public class Fibonacci {
     }
 
     /**
-     * Chức năng: Tính số Fibonacci tại vị trí index bằng đệ quy.
-     *
-     * Luồng xử lý:
-     * 1. Kiểm tra trường hợp cơ sở: Nếu index là 0 hoặc 1, trả về chính index đó.
+     * Chức năng (Làm gì): Tính số Fibonacci tại vị trí index bằng phương pháp đệ quy có nhớ.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra trường hợp cơ sở: Nếu index là 0 hoặc 1, gán vào mảng và trả về chính index đó.
      * 2. Kiểm tra bộ nhớ tạm (Memoization): Nếu fibonacci[index] khác 0 (đã được tính), trả về kết quả ngay lập tức.
      * 3. Tính toán đệ quy: Nếu chưa tính, tính F(n) = F(n-1) + F(n-2), lưu vào mảng và trả về kết quả.
      *
@@ -52,9 +49,8 @@ public class Fibonacci {
     }
 
     /**
-     * Chức năng: Lấy toàn bộ dãy Fibonacci đã được tính toán.
-     *
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Lấy toàn bộ dãy Fibonacci đã được tính toán.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Duyệt qua toàn bộ các vị trí từ 0 đến kích thước mảng và gọi getFibonacci(i).
      * 2. Trả về mảng chứa toàn bộ dãy số Fibonacci.
      *

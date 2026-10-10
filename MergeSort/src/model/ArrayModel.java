@@ -12,18 +12,19 @@ public class ArrayModel {
     private int stepCounter;
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp ArrayModel.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
+     * Luồng xử lý (Làm như thế nào): Khởi tạo bộ đếm bước (stepCounter = 1) và để mảng chưa cấp phát.
      */
     public ArrayModel() {
         stepCounter = 1;
     }
 
     /**
-     * Chức năng: Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý: 
-     * 1. Khởi tạo đối tượng Random. 
-     * 2. Cấp phát mảng với kích thước chỉ định. 
-     * 3. Sinh các giá trị ngẫu nhiên cho từng phần tử của mảng.
+     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Khởi tạo đối tượng Random.
+     * 2. Cấp phát mảng với kích thước chỉ định n.
+     * 3. Sinh các giá trị ngẫu nhiên trong khoảng [-n, n] cho từng phần tử của mảng.
      *
      * @param n số lượng phần tử trong mảng
      */
@@ -37,8 +38,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng Merge Sort.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng Merge Sort.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Trả về ngay nếu mảng null hoặc có ít hơn 2 phần tử (n <= 1).
      * 2. Thiết lập lại bộ đếm bước về 1.
      * 3. Gọi đệ quy hàm mergeSort từ chỉ số 0 đến array.length - 1.
@@ -52,8 +53,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Hàm đệ quy chia đôi mảng để sắp xếp từng nửa mảng con.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hàm đệ quy chia đôi mảng để sắp xếp từng nửa mảng con.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Trường hợp cơ sở: nếu left >= right (mảng có 1 phần tử hoặc rỗng), dừng lại.
      * 2. Phân chia (Divide): Tính chỉ số ở giữa để chia đôi mảng và in thông tin bước chia.
      * 3. Gọi đệ quy sắp xếp nửa bên trái [left, mid].
@@ -88,8 +89,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Trộn hai mảng con đã sắp xếp [left, mid] và [mid + 1, right] vào mảng gốc.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Trộn hai mảng con đã sắp xếp [left, mid] và [mid + 1, right] vào mảng gốc.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Tạo hai mảng tạm thời cho nửa bên trái và nửa bên phải.
      * 2. Sao chép dữ liệu tương ứng từ mảng gốc vào các mảng tạm.
      * 3. Hiển thị thông tin bước trộn và dữ liệu mảng con tạm thời.
@@ -156,7 +157,8 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng: Lấy mảng hiện tại.
+     * Chức năng (Làm gì): Lấy mảng hiện tại.
+     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên của đối tượng.
      *
      * @return mảng số nguyên hiện tại
      */

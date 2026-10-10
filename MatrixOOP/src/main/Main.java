@@ -8,14 +8,15 @@ import controller.MatrixController;
 public class Main {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp Main.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Main mới.
      */
     public Main() {
     }
 
     /**
-     * Chức năng: Bắt đầu chương trình máy tính ma trận.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Bắt đầu chương trình máy tính ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo đối tượng MatrixController.
      * 2. Kích hoạt controller qua phương thức run().
      *

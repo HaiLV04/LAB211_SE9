@@ -8,14 +8,15 @@ import model.Matrix;
 public class MatrixView {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp MatrixView.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp MatrixView.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng MatrixView mới.
      */
     public MatrixView() {
     }
 
     /**
-     * Chức năng: Hiển thị menu chức năng và nhận lựa chọn từ người dùng.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Hiển thị menu chức năng và nhận lựa chọn từ người dùng.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị danh sách các chức năng (Cộng, Trừ, Nhân, Thoát).
      * 2. Sử dụng Validator để nhận số nguyên hợp lệ trong khoảng 1 đến 4.
      *
@@ -31,8 +32,8 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng: Nhập số hàng hoặc số cột của ma trận.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Nhập số hàng hoặc số cột của ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu nhập kích thước.
      * 2. Sử dụng Validator để kiểm tra và nhận giá trị trong khoảng [min, max].
      *
@@ -47,11 +48,11 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng: Nhập các phần tử của một ma trận từ bàn phím.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Nhập các phần tử của một ma trận từ bàn phím.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo mảng hai chiều với số hàng và số cột tương ứng.
      * 2. Lặp qua từng vị trí [i][j] để yêu cầu người dùng nhập giá trị.
-     * 3. Khởi tạo đối tượng Matrix từ mảng hai chiều.
+     * 3. Khởi tạo và trả về đối tượng Matrix từ mảng hai chiều.
      *
      * @param matrixLabel tên nhãn ma trận (ví dụ "Enter matrix1")
      * @param rows số hàng
@@ -75,14 +76,14 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng: Hiển thị biểu thức và kết quả tính toán giữa hai ma trận.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị biểu thức và kết quả tính toán giữa hai ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. In tiêu đề kết quả.
-     * 2. In ma trận 1.
+     * 2. In chuỗi ma trận thứ nhất.
      * 3. In toán tử (+, -, *).
-     * 4. In ma trận 2.
+     * 4. In chuỗi ma trận thứ hai.
      * 5. In dấu "=".
-     * 6. In ma trận kết quả.
+     * 6. In chuỗi ma trận kết quả.
      *
      * @param matrix1 ma trận thứ nhất
      * @param operator toán tử biểu diễn phép tính ("+", "-", "*")
@@ -99,7 +100,8 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng: Hiển thị thông báo hoặc tiêu đề ra console.
+     * Chức năng (Làm gì): Hiển thị thông báo hoặc tiêu đề ra console.
+     * Luồng xử lý (Làm như thế nào): In thông điệp ra console bằng System.out.println.
      *
      * @param message thông điệp cần in
      */

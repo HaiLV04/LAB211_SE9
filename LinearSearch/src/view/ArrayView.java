@@ -11,21 +11,21 @@ public class ArrayView {
     private final Scanner scanner;
 
     /**
-     * Chức năng: Khởi tạo scanner để nhận dữ liệu nhập từ người dùng.
+     * Chức năng (Làm gì): Khởi tạo scanner để nhận dữ liệu nhập từ người dùng.
+     * Luồng xử lý (Làm như thế nào): Gán thuộc tính scanner bằng một đối tượng Scanner mới đọc từ System.in.
      */
     public ArrayView() {
         scanner = new Scanner(System.in);
     }
 
     /**
-     * Chức năng: Nhập một số nguyên dương từ người dùng.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Nhập một số nguyên dương từ người dùng.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu người dùng nhập.
      * 2. Kiểm tra nếu dữ liệu nhập rỗng, thông báo lỗi và lặp lại.
-     * 3. Kiểm tra nếu dữ liệu nhập không phải là số nguyên, thông báo lỗi và lặp lại.
-     * 4. Đọc số nguyên.
-     * 5. Kiểm tra nếu số lớn hơn 0 thì trả về giá trị đó.
-     * 6. Nếu không, thông báo lỗi và lặp lại.
+     * 3. Chuyển đổi dữ liệu sang số nguyên; nếu có NumberFormatException, thông báo lỗi và lặp lại.
+     * 4. Kiểm tra nếu số lớn hơn 0 thì trả về giá trị đó.
+     * 5. Nếu số <= 0, thông báo lỗi và tiếp tục lặp lại.
      *
      * @param message thông báo hiển thị cho người dùng
      * @return giá trị số nguyên dương
@@ -53,12 +53,13 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Nhập một số nguyên bất kỳ từ người dùng (giá trị tìm kiếm).
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Nhập một số nguyên bất kỳ từ người dùng (giá trị tìm kiếm).
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị thông báo yêu cầu người dùng nhập.
      * 2. Kiểm tra nếu dữ liệu nhập rỗng, thông báo lỗi và lặp lại.
-     * 3. Kiểm tra nếu dữ liệu nhập không phải là số nguyên, thông báo lỗi và lặp lại.
-     * 4. Trả về giá trị số nguyên hợp lệ.
+     * 3. Chuyển đổi dữ liệu nhập sang số nguyên bằng Integer.parseInt.
+     * 4. Bắt lỗi NumberFormatException nếu không phải số, thông báo lỗi và lặp lại.
+     * 5. Trả về giá trị số nguyên hợp lệ.
      *
      * @param message thông báo hiển thị cho người dùng
      * @return giá trị số nguyên hợp lệ
@@ -82,13 +83,13 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Hiển thị một mảng số nguyên.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị một mảng số nguyên.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo StringBuilder để tạo chuỗi kết quả.
      * 2. Thêm thông báo và dấu ngoặc vuông mở.
      * 3. Duyệt qua từng phần tử của mảng và thêm vào chuỗi.
      * 4. Thêm dấu phẩy giữa các phần tử (nếu chưa phải phần tử cuối).
-     * 5. Thêm dấu ngoặc vuông đóng và hiển thị kết quả.
+     * 5. Thêm dấu ngoặc vuông đóng và hiển thị kết quả ra màn hình.
      *
      * @param message thông báo hiển thị trước mảng
      * @param array mảng số nguyên cần hiển thị
@@ -113,10 +114,11 @@ public class ArrayView {
     }
 
     /**
-     * Chức năng: Hiển thị kết quả tìm kiếm tuyến tính (danh sách các chỉ số).
-     * Luồng xử lý:
-     * 1. Nếu không tìm thấy (mảng chỉ số rỗng): In "Can not found".
-     * 2. Nếu tìm thấy: In "Found {searchValue} at index: {Arrays.toString(foundIndices)}".
+     * Chức năng (Làm gì): Hiển thị kết quả tìm kiếm tuyến tính (danh sách các chỉ số).
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra mảng chỉ số kết quả foundIndices.
+     * 2. Nếu không tìm thấy (foundIndices null hoặc rỗng): In "Can not found".
+     * 3. Nếu tìm thấy: In "Found {searchValue} at index: {Arrays.toString(foundIndices)}".
      *
      * @param searchValue giá trị cần tìm kiếm
      * @param foundIndices mảng các vị trí tìm thấy trong mảng

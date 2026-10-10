@@ -12,7 +12,8 @@ public class ManagerWorker {
     private List<Worker> list;
 
     /**
-     * Luồng xử lý 1: Trả về bản sao của danh sách công nhân hiện tại.
+     * Chức năng (Làm gì): Lấy bản sao của danh sách công nhân hiện tại.
+     * Luồng xử lý (Làm như thế nào): Tạo mới và trả về một đối tượng ArrayList chứa toàn bộ công nhân trong list.
      *
      * @return danh sách công nhân
      */
@@ -21,16 +22,19 @@ public class ManagerWorker {
     }
 
     /**
-     * Luồng xử lý 1: Khởi tạo danh sách công nhân rỗng dưới dạng ArrayList.
+     * Chức năng (Làm gì): Khởi tạo đối tượng ManagerWorker.
+     * Luồng xử lý (Làm như thế nào): Khởi tạo thuộc tính list dưới dạng một ArrayList rỗng.
      */
     public ManagerWorker() {
         this.list = new ArrayList<>();
     }
 
     /**
-     * Luồng xử lý 1: Duyệt danh sách công nhân.
-     * Luồng xử lý 2: So sánh không phân biệt chữ hoa, chữ thường với mã ID.
-     * Luồng xử lý 3: Trả về Worker nếu tìm thấy, ngược lại trả về null.
+     * Chức năng (Làm gì): Tìm kiếm đối tượng công nhân theo mã ID.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Duyệt qua từng công nhân trong danh sách.
+     * 2. So sánh mã ID của công nhân với mã cần tìm (không phân biệt chữ hoa, chữ thường).
+     * 3. Trả về Worker nếu tìm thấy, ngược lại trả về null khi duyệt hết danh sách.
      *
      * @param id mã công nhân cần tìm
      * @return đối tượng Worker nếu tìm thấy, ngược lại trả về null
@@ -45,8 +49,11 @@ public class ManagerWorker {
     }
 
     /**
-     * Luồng xử lý 1: Duyệt danh sách để kiểm tra mã công nhân.
-     * Luồng xử lý 2: Trả về true nếu đã tồn tại, ngược lại false.
+     * Chức năng (Làm gì): Kiểm tra sự tồn tại của mã công nhân trong hệ thống.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Duyệt qua toàn bộ danh sách công nhân.
+     * 2. So sánh mã ID không phân biệt chữ hoa thường.
+     * 3. Trả về true nếu mã đã tồn tại, ngược lại trả về false.
      *
      * @param id mã công nhân cần kiểm tra
      * @return true nếu tồn tại, ngược lại false
@@ -61,8 +68,10 @@ public class ManagerWorker {
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra mã công nhân tồn tại hay không.
-     * Luồng xử lý 2: Nếu chưa tồn tại, thêm vào danh sách. Nếu có, ném ra ngoại lệ.
+     * Chức năng (Làm gì): Thêm một công nhân mới vào danh sách.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra mã công nhân đã tồn tại trong danh sách hay chưa bằng isExist.
+     * 2. Nếu chưa tồn tại, thêm vào danh sách và trả về true. Nếu đã có, ném ra ngoại lệ.
      *
      * @param worker công nhân cần thêm
      * @return true nếu thêm thành công
@@ -76,9 +85,15 @@ public class ManagerWorker {
     }
 
     /**
-     * Luồng xử lý 1: Kiểm tra mã công nhân có tồn tại hay không.
-     * Luồng xử lý 2: Kiểm tra số tiền lượng thay đổi phải lớn hơn 0.
-     * Luồng xử lý 3: Tuỳ vào trạng thái UP hay DOWN để thực hiện cộng thêm hoặc trừ lương.
+     * Chức năng (Làm gì): Thay đổi mức lương của một công nhân (tăng hoặc giảm).
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra mã công nhân có tồn tại trong hệ thống hay không bằng isExist.
+     * 2. Kiểm tra số tiền thay đổi phải lớn hơn 0, nếu không ném ngoại lệ.
+     * 3. Lấy đối tượng công nhân qua getWorker(code).
+     * 4. Dựa vào trạng thái:
+     *    - UP: Cộng thêm số tiền vào lương hiện tại.
+     *    - DOWN: Kiểm tra lương sau khi giảm không được âm, sau đó trừ bớt số tiền.
+     * 5. Trả về đối tượng công nhân sau khi cập nhật lương.
      *
      * @param status trạng thái thay đổi lương (UP hoặc DOWN)
      * @param code mã công nhân

@@ -11,17 +11,16 @@ public class MatrixController {
     private final MatrixView view;
 
     /**
-     * Chức năng: Khởi tạo controller cho chương trình Matrix.
-     * Luồng xử lý:
-     * 1. Khởi tạo đối tượng MatrixView.
+     * Chức năng (Làm gì): Khởi tạo controller cho chương trình Matrix.
+     * Luồng xử lý (Làm như thế nào): Khởi tạo đối tượng MatrixView.
      */
     public MatrixController() {
         this.view = new MatrixView();
     }
 
     /**
-     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng tương tác:
+     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Hiển thị menu chức năng (Cộng, Trừ, Nhân, Thoát) và nhận lựa chọn.
      * 2. Tùy theo lựa chọn để thực hiện:
      *    - Case 1: Cộng hai ma trận có cùng kích thước.
@@ -50,8 +49,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng: Xử lý chức năng cộng hai ma trận.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý chức năng cộng hai ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nhập số hàng và cột của ma trận 1.
      * 2. Nhập ma trận 1.
      * 3. Khóa số hàng và cột ma trận 2 bằng ma trận 1 và nhập ma trận 2.
@@ -77,8 +76,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng: Xử lý chức năng trừ hai ma trận.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý chức năng trừ hai ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nhập số hàng và cột của ma trận 1.
      * 2. Nhập ma trận 1.
      * 3. Khóa số hàng và cột ma trận 2 bằng ma trận 1 và nhập ma trận 2.
@@ -104,8 +103,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng: Xử lý chức năng nhân hai ma trận.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Xử lý chức năng nhân hai ma trận.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nhập số hàng và cột của ma trận 1.
      * 2. Nhập ma trận 1.
      * 3. Khóa số hàng ma trận 2 bằng số cột ma trận 1, cho phép nhập số cột ma trận 2 tự do (> 0).

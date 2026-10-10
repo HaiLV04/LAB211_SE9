@@ -12,13 +12,17 @@ import view.Validate;
  * Luồng tương tác: Yêu cầu người dùng nhập thông tin (tài khoản, mật khẩu, captcha), kiểm tra tính hợp lệ và xác thực với dữ liệu từ lớp Data.
  */
 public class LoginService {
+
     /**
-     * Chức năng: Thực hiện quy trình đăng nhập.
-     * Luồng xử lý 1: Nhập và kiểm tra định dạng của tài khoản.
-     * Luồng xử lý 2: Nhập và kiểm tra định dạng của mật khẩu.
-     * Luồng xử lý 3: Tạo và hiển thị Captcha ngẫu nhiên.
-     * Luồng xử lý 4: Nhập và xác thực mã Captcha.
-     * Luồng xử lý 5: Gọi hàm authentication để kiểm tra tài khoản và mật khẩu, sau đó in ra kết quả tương ứng.
+     * Chức năng (Làm gì): Thực hiện quy trình đăng nhập hệ thống TPBank với đa ngôn ngữ.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Nhập và kiểm tra định dạng của tài khoản qua Validate.getString theo biểu thức chính quy ACCOUNT_NUMBER.
+     * 2. Nhập và kiểm tra định dạng của mật khẩu qua Validate.getString theo biểu thức chính quy PASSWORD.
+     * 3. Tạo mã Captcha ngẫu nhiên qua Helper.generateCaptcha và hiển thị ra màn hình.
+     * 4. Nhập và xác thực mã Captcha qua Validate.verifyCaptcha.
+     * 5. Gọi hàm authentication để kiểm tra tài khoản và mật khẩu, sau đó in thông báo đăng nhập thành công hoặc thất bại theo ngôn ngữ hiện tại.
+     *
+     * @param resourceBundle gói tài nguyên đa ngôn ngữ ResourceBundle
      */
     public void login(ResourceBundle resourceBundle){
         String account = Validate.getString(
@@ -50,9 +54,15 @@ public class LoginService {
     }
     
     /**
-     * Chức năng: Xác thực thông tin đăng nhập của người dùng.
-     * Luồng xử lý 1: Duyệt qua danh sách tài khoản hợp lệ trong Data.
-     * Luồng xử lý 2: So sánh thông tin nhập vào với dữ liệu, nếu trùng khớp thì trả về true, ngược lại trả về false.
+     * Chức năng (Làm gì): Xác thực thông tin tài khoản và mật khẩu người dùng với dữ liệu hệ thống.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Duyệt qua danh sách tài khoản hợp lệ trong Data.listAccount.
+     * 2. So sánh thông tin tài khoản và mật khẩu nhập vào với từng tài khoản trong danh sách.
+     * 3. Trả về true nếu trùng khớp, ngược lại trả về false khi duyệt hết danh sách mà không khớp.
+     *
+     * @param account số tài khoản cần xác thực
+     * @param password mật khẩu cần xác thực
+     * @return true nếu xác thực thành công, ngược lại false
      */
     private boolean authentication(String account, String password){
         for(Account a : Data.listAccount){

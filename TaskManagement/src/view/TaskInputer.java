@@ -11,17 +11,16 @@ public class TaskInputer {
     private Task task;
 
     /**
-     * Chức năng: Khởi tạo đối tượng TaskInputer.
-     * Luồng xử lý:
-     * 1. Cấp phát bộ nhớ cho một đối tượng Task rỗng để sẵn sàng hứng dữ liệu.
+     * Chức năng (Làm gì): Khởi tạo đối tượng TaskInputer.
+     * Luồng xử lý (Làm như thế nào): Cấp phát bộ nhớ cho một đối tượng Task rỗng để sẵn sàng hứng dữ liệu.
      */
     public TaskInputer() {
         task = new Task();
     }
 
     /**
-     * Chức năng: Yêu cầu người dùng nhập từng trường thông tin của Task và kiểm tra tính hợp lệ.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Yêu cầu người dùng nhập từng trường thông tin của Task và kiểm tra tính hợp lệ.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nhập Requirement Name với điều kiện không chứa ký tự đặc biệt.
      * 2. Nhập Task Type với giới hạn từ 1 đến 4.
      * 3. Nhập Date với định dạng dd-MM-yyyy.

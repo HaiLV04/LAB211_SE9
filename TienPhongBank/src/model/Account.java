@@ -9,9 +9,13 @@ public class Account {
     private String password;
 
     /**
-     * Chức năng: Khởi tạo đối tượng Tài khoản với số tài khoản và mật khẩu.
-     * Luồng xử lý 1: Gán tham số account cho thuộc tính account.
-     * Luồng xử lý 2: Gán tham số password cho thuộc tính password.
+     * Chức năng (Làm gì): Khởi tạo đối tượng Tài khoản với số tài khoản và mật khẩu.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Gán tham số account cho thuộc tính account.
+     * 2. Gán tham số password cho thuộc tính password.
+     *
+     * @param account số tài khoản
+     * @param password mật khẩu
      */
     public Account(String account, String password) {
         this.account = account;
@@ -19,16 +23,20 @@ public class Account {
     }
 
     /**
-     * Chức năng: Lấy số tài khoản.
-     * Luồng xử lý 1: Trả về giá trị của thuộc tính account.
+     * Chức năng (Làm gì): Lấy số tài khoản.
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị của thuộc tính account.
+     *
+     * @return số tài khoản
      */
     public String getAccount() {
         return account;
     }
 
     /**
-     * Chức năng: Lấy mật khẩu.
-     * Luồng xử lý 1: Trả về giá trị của thuộc tính password.
+     * Chức năng (Làm gì): Lấy mật khẩu của tài khoản.
+     * Luồng xử lý (Làm như thế nào): Trả về giá trị của thuộc tính password.
+     *
+     * @return mật khẩu
      */
     public String getPassword() {
         return password;

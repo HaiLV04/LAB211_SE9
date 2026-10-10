@@ -13,14 +13,21 @@ public enum TaskType {
     private int id;
     private String name;
 
+    /**
+     * Chức năng (Làm gì): Khởi tạo hằng số enum TaskType.
+     * Luồng xử lý (Làm như thế nào): Gán id và name cho thuộc tính của hằng số enum.
+     *
+     * @param id mã loại công việc
+     * @param name tên loại công việc
+     */
     private TaskType(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     /**
-     * Chức năng: Lấy ra đối tượng TaskType dựa vào ID đầu vào.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Lấy ra đối tượng TaskType dựa vào ID đầu vào.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra ID truyền vào bằng cấu trúc switch-case.
      * 2. Trả về Enum tương ứng (1: CODE, 2: TEST, 3: DESIGN, 4: REVIEW).
      * 3. Ném lỗi AssertionError nếu ID không nằm trong khoảng 1-4.
@@ -44,10 +51,22 @@ public enum TaskType {
         }
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy mã ID của loại task.
+     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính id của loại task.
+     *
+     * @return mã ID của loại task
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Chức năng (Làm gì): Lấy tên của loại task.
+     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính name của loại task.
+     *
+     * @return tên của loại task
+     */
     public String getName() {
         return name;
     }

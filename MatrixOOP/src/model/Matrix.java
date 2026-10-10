@@ -11,10 +11,11 @@ public class Matrix {
     private int[][] data;
 
     /**
-     * Chức năng: Khởi tạo ma trận rỗng với số hàng và số cột cho trước.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Khởi tạo ma trận rỗng với số hàng và số cột cho trước.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra số hàng và số cột phải lớn hơn 0. Nếu không, ném ngoại lệ.
      * 2. Gán giá trị rows, cols và khởi tạo mảng data.
+     *
      * @param rows Số hàng của ma trận
      * @param cols Số cột của ma trận
      * @throws Exception Nếu số hàng hoặc cột không hợp lệ
@@ -30,10 +31,11 @@ public class Matrix {
     }
 
     /**
-     * Chức năng: Khởi tạo ma trận từ mảng 2 chiều có sẵn.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Khởi tạo ma trận từ mảng 2 chiều có sẵn.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra mảng đầu vào không được null, nếu null ném ngoại lệ.
      * 2. Gán giá trị rows, cols và lưu mảng data.
+     *
      * @param data Mảng 2 chiều chứa dữ liệu ma trận
      * @throws Exception Nếu mảng dữ liệu null
      */
@@ -47,12 +49,13 @@ public class Matrix {
     }
 
     /**
-     * Chức năng: Cộng ma trận hiện tại với một ma trận khác.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Cộng ma trận hiện tại với một ma trận khác.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra kích thước hai ma trận có khớp nhau hay không, nếu không ném ngoại lệ.
      * 2. Khởi tạo mảng kết quả.
      * 3. Duyệt từng phần tử để thực hiện phép cộng tương ứng.
      * 4. Trả về đối tượng Matrix mới chứa kết quả.
+     *
      * @param other Ma trận cần cộng
      * @return Đối tượng Matrix là tổng của hai ma trận
      * @throws Exception Nếu kích thước hai ma trận không hợp lệ
@@ -72,12 +75,13 @@ public class Matrix {
     }
 
     /**
-     * Chức năng: Trừ ma trận hiện tại với một ma trận khác.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Trừ ma trận hiện tại với một ma trận khác.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra kích thước hai ma trận có khớp nhau hay không, nếu không ném ngoại lệ.
      * 2. Khởi tạo mảng kết quả.
      * 3. Duyệt từng phần tử để thực hiện phép trừ tương ứng.
      * 4. Trả về đối tượng Matrix mới chứa kết quả.
+     *
      * @param other Ma trận cần trừ
      * @return Đối tượng Matrix là hiệu của hai ma trận
      * @throws Exception Nếu kích thước hai ma trận không hợp lệ
@@ -97,12 +101,13 @@ public class Matrix {
     }
 
     /**
-     * Chức năng: Nhân ma trận hiện tại với một ma trận khác.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Nhân ma trận hiện tại với một ma trận khác.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra số cột của ma trận này có bằng số hàng của ma trận kia hay không, nếu không ném ngoại lệ.
      * 2. Khởi tạo mảng kết quả với số hàng của ma trận này và số cột của ma trận kia.
      * 3. Thực hiện 3 vòng lặp để nhân các phần tử tương ứng.
      * 4. Trả về đối tượng Matrix mới chứa kết quả.
+     *
      * @param other Ma trận cần nhân
      * @return Đối tượng Matrix là tích của hai ma trận
      * @throws Exception Nếu kích thước ma trận không hợp lệ để nhân
@@ -124,12 +129,13 @@ public class Matrix {
     }
 
     /**
-     * Chức năng: Chuyển đổi ma trận thành chuỗi để hiển thị.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Chuyển đổi ma trận thành chuỗi để hiển thị.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Khởi tạo chuỗi kết quả.
      * 2. Duyệt từng phần tử và định dạng in theo mẫu [giá trị].
      * 3. Thêm ký tự xuống dòng sau mỗi hàng.
      * 4. Trả về chuỗi hiển thị.
+     *
      * @return Chuỗi đại diện cho ma trận
      */
     public String toString() {
@@ -143,4 +149,3 @@ public class Matrix {
         return str;
     }
 }
-

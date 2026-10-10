@@ -13,13 +13,19 @@ public class Validator {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    /**
+     * Chức năng (Làm gì): Hàm khởi tạo private ngăn chặn việc tạo đối tượng của lớp tiện ích.
+     * Luồng xử lý (Làm như thế nào): Không thực hiện logic nào nhằm đảm bảo không thể khởi tạo instance của Utility class.
+     */
     private Validator() {
     }
 
     /**
-     * Luồng xử lý 1: Lặp lại quá trình yêu cầu nhập số nguyên từ người dùng.
-     * Luồng xử lý 2: Kiểm tra định dạng số, nếu lỗi ném thông báo.
-     * Luồng xử lý 3: Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ.
+     * Chức năng (Làm gì): Nhập một số nguyên hợp lệ trong khoảng xác định từ người dùng.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lặp lại quá trình yêu cầu nhập số nguyên từ người dùng.
+     * 2. Ép kiểu dữ liệu chuỗi sang số nguyên; nếu có NumberFormatException, in thông báo lỗi.
+     * 3. Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ; nếu ngoài khoảng thì in thông báo lỗi và lặp lại.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi
@@ -48,9 +54,11 @@ public class Validator {
     }
 
     /**
-     * Luồng xử lý 1: Lặp lại quá trình yêu cầu nhập số thực từ người dùng.
-     * Luồng xử lý 2: Kiểm tra định dạng số, nếu lỗi ném thông báo.
-     * Luồng xử lý 3: Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ.
+     * Chức năng (Làm gì): Nhập một số thực hợp lệ trong khoảng xác định từ người dùng.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lặp lại quá trình yêu cầu nhập số thực từ người dùng.
+     * 2. Ép kiểu chuỗi sang số thực bằng Double.parseDouble; nếu lỗi in thông báo lỗi.
+     * 3. Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ; nếu ngoài khoảng thì in thông báo lỗi và lặp lại.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi
@@ -79,8 +87,11 @@ public class Validator {
     }
 
     /**
-     * Luồng xử lý 1: Lặp lại quá trình yêu cầu nhập chuỗi từ người dùng.
-     * Luồng xử lý 2: Dùng biểu thức chính quy (REGEX) để kiểm tra tính hợp lệ, trả về nếu khớp.
+     * Chức năng (Làm gì): Nhập một chuỗi hợp lệ theo định dạng biểu thức chính quy (Regex).
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lặp lại quá trình yêu cầu nhập chuỗi từ người dùng.
+     * 2. Dùng biểu thức chính quy (REGEX) để kiểm tra tính hợp lệ, trả về nếu khớp.
+     * 3. Nếu không khớp, in thông báo lỗi và yêu cầu nhập lại.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageError thông báo lỗi
@@ -100,9 +111,11 @@ public class Validator {
     }
 
     /**
-     * Luồng xử lý 1: Lặp lại quá trình yêu cầu nhập ngày tháng từ người dùng.
-     * Luồng xử lý 2: Cố gắng phân tích chuỗi nhập vào theo SimpleDateFormat xác định.
-     * Luồng xử lý 3: Kiểm tra nếu thời gian nằm trong khoảng cho phép, trả về hợp lệ.
+     * Chức năng (Làm gì): Nhập một giá trị ngày tháng hợp lệ trong khoảng thời gian cho phép.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Lặp lại quá trình yêu cầu nhập ngày tháng từ người dùng.
+     * 2. Phân tích chuỗi nhập vào theo SimpleDateFormat xác định với setLenient(false).
+     * 3. Kiểm tra nếu thời gian nằm trong khoảng [min, max], trả về ngày hợp lệ; nếu ngoài khoảng hoặc sai định dạng thì in lỗi và lặp lại.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi

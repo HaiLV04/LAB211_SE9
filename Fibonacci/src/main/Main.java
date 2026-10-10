@@ -8,16 +8,17 @@ import controller.Controller;
 public class Main {
 
     /**
-     * Chức năng: Khởi tạo mặc định cho lớp Main.
+     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp Main.
+     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Main mới.
      */
     public Main() {
     }
 
     /**
-     * Chức năng: Bắt đầu chương trình.
-     * Luồng xử lý:
-     * 1. Khởi tạo Controller.
-     * 2. Chạy controller qua phương thức run().
+     * Chức năng (Làm gì): Bắt đầu chương trình Fibonacci.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Khởi tạo đối tượng Controller.
+     * 2. Gọi phương thức run() để thực thi chương trình.
      *
      * @param args tham số dòng lệnh
      */

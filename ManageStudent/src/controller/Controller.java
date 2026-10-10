@@ -23,17 +23,16 @@ public class Controller {
     private StudentInputer inputer;
 
     /**
-     * Chức năng: Khởi tạo Controller.
-     * Luồng xử lý:
-     * 1. Khởi tạo đối tượng ManageStudent để quản lý danh sách.
+     * Chức năng (Làm gì): Khởi tạo Controller.
+     * Luồng xử lý (Làm như thế nào): Khởi tạo đối tượng ManageStudent để quản lý danh sách sinh viên.
      */
     public Controller() {
         studentManager = new ManageStudent();
     }
 
     /**
-     * Chức năng: Tạo mới sinh viên.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tạo mới sinh viên.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Lặp việc khởi tạo StudentInputer để bắt đầu nhập.
      * 2. Nhập ID sinh viên.
      * 3. Kiểm tra xem ID đã tồn tại hay chưa. Nếu chưa tồn tại, yêu cầu nhập tên mới. Nếu đã tồn tại, tự động điền tên cũ.
@@ -77,8 +76,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Tìm kiếm sinh viên theo tên (hoặc một phần) và sắp xếp kết quả.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Tìm kiếm sinh viên theo tên (hoặc một phần) và sắp xếp kết quả.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Yêu cầu người dùng nhập tên (chỉ gồm chữ cái và khoảng trắng).
      * 2. Gọi studentManager để lấy danh sách sinh viên phù hợp.
      * 3. Nếu danh sách rỗng, ném Exception.
@@ -105,8 +104,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Cập nhật hoặc xóa thông tin sinh viên theo ID.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Cập nhật hoặc xóa thông tin sinh viên theo ID.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Yêu cầu nhập ID cần tìm.
      * 2. Tìm danh sách sinh viên có cùng ID. Nếu trống ném Exception.
      * 3. Hiển thị danh sách các bản ghi tìm được và yêu cầu chọn một bản ghi cụ thể.
@@ -162,8 +161,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Hiển thị báo cáo thống kê số lần học từng môn của các sinh viên.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Hiển thị báo cáo thống kê số lần học từng môn của các sinh viên.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Gọi studentManager.report() để tạo chuỗi báo cáo.
      * 2. Nếu trả về null (hoặc không hợp lệ) thì ném Exception.
      * 3. In kết quả chuỗi thống kê ra màn hình.
@@ -181,9 +180,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Tạo dữ liệu mẫu để kiểm thử chương trình nhanh chóng.
-     * Luồng xử lý:
-     * 1. Lần lượt khởi tạo và thêm một vài sinh viên mẫu vào danh sách.
+     * Chức năng (Làm gì): Tạo dữ liệu mẫu để kiểm thử chương trình nhanh chóng.
+     * Luồng xử lý (Làm như thế nào): Lần lượt khởi tạo và thêm một vài sinh viên mẫu vào danh sách qua studentManager.
      *
      * @throws Exception nếu dữ liệu thêm bị trùng
      */
@@ -204,11 +202,11 @@ public class Controller {
     }
 
     /**
-     * Chức năng: Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng tương tác:
-     * 1. Sinh dữ liệu mẫu.
+     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Sinh dữ liệu mẫu ban đầu.
      * 2. Hiển thị menu cho đến khi người dùng chọn Exit (5).
-     * 3. Điều hướng thực thi các chức năng 1-4.
+     * 3. Điều hướng thực thi các chức năng 1-4 (Create, Find and Sort, Update/Delete, Report).
      */
     public void run() {
         try {
@@ -261,4 +259,3 @@ public class Controller {
         }
     }
 }
-

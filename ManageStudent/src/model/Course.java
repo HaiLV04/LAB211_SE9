@@ -11,9 +11,8 @@ public enum Course {
     private String language;
 
     /**
-     * Chức năng: Khởi tạo khóa học với tên tương ứng.
-     * Luồng xử lý:
-     * 1. Gán giá trị tên khóa học vào thuộc tính language.
+     * Chức năng (Làm gì): Khởi tạo khóa học với tên tương ứng.
+     * Luồng xử lý (Làm như thế nào): Gán giá trị tên khóa học vào thuộc tính language.
      *
      * @param language tên khóa học
      */
@@ -22,13 +21,13 @@ public enum Course {
     }
 
     /**
-     * Chức năng: Trả về enum Course tương ứng với lựa chọn của người dùng.
-     * Luồng xử lý:
+     * Chức năng (Làm gì): Trả về enum Course tương ứng với lựa chọn số của người dùng.
+     * Luồng xử lý (Làm như thế nào):
      * 1. Nhận giá trị số nguyên type.
-     * 2. Kiểm tra type và trả về enum Course tương ứng (1 -> JAVA, 2 -> .NET, 3 -> C/C++).
+     * 2. Kiểm tra type và trả về enum Course tương ứng (1 -> JAVA, 2 -> DOT_NET, 3 -> C_CPP).
      * 3. Ném ra ngoại lệ AssertionError nếu type không hợp lệ.
      *
-     * @param type lựa chọn khóa học
+     * @param type lựa chọn khóa học (1, 2, 3)
      * @return khóa học tương ứng
      */
     public static Course getCourse(int type) {
@@ -46,9 +45,8 @@ public enum Course {
     }
 
     /**
-     * Chức năng: Lấy tên khóa học.
-     * Luồng xử lý:
-     * 1. Trả về thuộc tính language của enum.
+     * Chức năng (Làm gì): Lấy tên hiển thị của khóa học.
+     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính language của enum.
      *
      * @return tên khóa học
      */
