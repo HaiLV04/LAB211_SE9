@@ -109,6 +109,121 @@ public class ArrayModel {
     }
 
     /**
+     * Chức năng (Làm gì): Tìm vị trí xuất hiện đầu tiên của giá trị trong mảng đã sắp xếp sử dụng Binary Search.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về -1.
+     * 2. Khởi tạo con trỏ left = 0, right = array.length - 1 và firstIndex = -1.
+     * 3. Lặp khi left <= right:
+     *    a. Tính mid = left + (right - left) / 2.
+     *    b. Nếu array[mid] == key: ghi nhận firstIndex = mid, thu hẹp tìm kiếm sang nửa bên trái (right = mid - 1).
+     *    c. Nếu key < array[mid]: thu hẹp sang nửa bên trái (right = mid - 1).
+     *    d. Nếu key > array[mid]: thu hẹp sang nửa bên phải (left = mid + 1).
+     * 4. Trả về firstIndex.
+     *
+     * @param key giá trị cần tìm kiếm
+     * @return chỉ số đầu tiên tìm thấy, hoặc -1 nếu không tìm thấy
+     */
+    public int findFirstIndex(int key) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = array.length - 1;
+        int firstIndex = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (array[mid] == key) {
+                firstIndex = mid;
+                right = mid - 1;
+            } else if (key < array[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return firstIndex;
+    }
+
+    /**
+     * Chức năng (Làm gì): Tìm vị trí xuất hiện cuối cùng của giá trị trong mảng đã sắp xếp sử dụng Binary Search.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về -1.
+     * 2. Khởi tạo con trỏ left = 0, right = array.length - 1 và lastIndex = -1.
+     * 3. Lặp khi left <= right:
+     *    a. Tính mid = left + (right - left) / 2.
+     *    b. Nếu array[mid] == key: ghi nhận lastIndex = mid, thu hẹp tìm kiếm sang nửa bên phải (left = mid + 1).
+     *    c. Nếu key < array[mid]: thu hẹp sang nửa bên trái (right = mid - 1).
+     *    d. Nếu key > array[mid]: thu hẹp sang nửa bên phải (left = mid + 1).
+     * 4. Trả về lastIndex.
+     *
+     * @param key giá trị cần tìm kiếm
+     * @return chỉ số cuối cùng tìm thấy, hoặc -1 nếu không tìm thấy
+     */
+    public int findLastIndex(int key) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = array.length - 1;
+        int lastIndex = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (array[mid] == key) {
+                lastIndex = mid;
+                left = mid + 1;
+            } else if (key < array[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return lastIndex;
+    }
+
+    /**
+     * Chức năng (Làm gì): Tìm tất cả vị trí xuất hiện của giá trị trong mảng đã sắp xếp sử dụng thuật toán Binary Search.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về mảng rỗng.
+     * 2. Tìm chỉ số xuất hiện đầu tiên (firstIndex) bằng Binary Search qua findFirstIndex(key).
+     * 3. Nếu không tìm thấy (firstIndex == -1), trả về mảng rỗng int[0].
+     * 4. Tìm chỉ số xuất hiện cuối cùng (lastIndex) bằng Binary Search qua findLastIndex(key).
+     * 5. Vì mảng đã sắp xếp tăng dần, mọi phần tử bằng key nằm liên tục từ firstIndex đến lastIndex.
+     * 6. Khởi tạo mảng int[] có kích thước (lastIndex - firstIndex + 1).
+     * 7. Điền các chỉ số từ firstIndex đến lastIndex vào mảng kết quả và trả về.
+     *
+     * @param key giá trị cần tìm kiếm
+     * @return mảng chứa tất cả các chỉ số tìm được, hoặc mảng rỗng nếu không tìm thấy
+     */
+    public int[] findAllIndex(int key) {
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int firstIndex = findFirstIndex(key);
+        if (firstIndex == -1) {
+            return new int[0];
+        }
+
+        int lastIndex = findLastIndex(key);
+        int totalElements = lastIndex - firstIndex + 1;
+        int[] foundIndices = new int[totalElements];
+
+        for (int i = 0; i < totalElements; i++) {
+            foundIndices[i] = firstIndex + i;
+        }
+
+        return foundIndices;
+    }
+
+    /**
      * Chức năng (Làm gì): Hoán đổi vị trí của hai phần tử trong mảng.
      * Luồng xử lý (Làm như thế nào):
      * 1. Lưu giá trị phần tử thứ nhất vào biến tạm.

@@ -5,8 +5,8 @@ Yêu cầu người dùng nhập vào bàn phím 2 số: số lượng phần t�
 
 Sau đó chương trình sẽ:
 - Tạo một mảng gồm `n` phần tử, các phần tử là số nguyên được sinh ngẫu nhiên.
-- Gọi hàm tìm kiếm nhị phân để tìm giá trị yêu cầu trong mảng vừa tạo.
-- In ra màn hình vị trí (index) của giá trị cần tìm nếu thấy, ngược lại thông báo không tìm thấy.
+- Gọi hàm tìm kiếm nhị phân để tìm tất cả các vị trí (index) của giá trị yêu cầu trong mảng vừa tạo.
+- In ra màn hình tất cả các vị trí (index) của giá trị cần tìm nếu thấy dạng danh sách mảng, ngược lại thông báo không tìm thấy.
 
 # Giải thích thuật toán (Algorithm Explanation)
 **Lưu ý quan trọng**: Tìm kiếm nhị phân (Binary Search) chỉ hoạt động trên mảng đã được sắp xếp (trong trường hợp này là sắp xếp tăng dần).
@@ -29,7 +29,7 @@ Quá trình này được lặp lại cho đến khi tìm thấy phần tử c�
 
 ## 2. Kiểm thử logic thuật toán (Algorithm logic)
 - Nếu trong mảng không có phần tử nào khớp với giá trị cần tìm: in ra màn hình thông báo không tìm thấy (`Can not found`).
-- Nếu trong mảng có duy nhất 1 phần tử khớp với giá trị cần tìm: in ra đúng vị trí (index) đó.
-- Nếu trong mảng có nhiều phần tử khớp với giá trị cần tìm: thuật toán có thể trả về một vị trí hoặc tất cả các vị trí khớp giá trị cần tìm tùy vào cài đặt mở rộng.
-- Nếu phần tử cần tìm nằm ở vị trí đầu mảng: in ra `0`.
-- Nếu phần tử cần tìm nằm ở vị trí cuối mảng: in ra `(số lượng phần tử - 1)`.
+- Nếu trong mảng có duy nhất 1 phần tử khớp với giá trị cần tìm: in ra danh sách chứa đúng vị trí (index) đó, ví dụ `[2]`.
+- Nếu trong mảng có nhiều phần tử khớp với giá trị cần tìm: in ra tất cả các vị trí tìm thấy theo thứ tự tăng dần, ví dụ `[2, 3, 4]`.
+- Nếu phần tử cần tìm nằm ở vị trí đầu mảng: mảng kết quả chứa vị trí `0`.
+- Nếu phần tử cần tìm nằm ở vị trí cuối mảng: mảng kết quả chứa vị trí `(số lượng phần tử - 1)`.

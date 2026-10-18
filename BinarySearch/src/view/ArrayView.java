@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -110,6 +111,24 @@ public class ArrayView {
         result.append("]");
 
         System.out.println(result);
+    }
+
+    /**
+     * Chức năng (Làm gì): Hiển thị kết quả tìm kiếm nhị phân (tất cả các chỉ số tìm được) ra màn hình console.
+     * Luồng xử lý (Làm như thế nào):
+     * 1. Kiểm tra mảng chỉ số kết quả foundIndices.
+     * 2. Nếu không tìm thấy (foundIndices null hoặc rỗng): In "Can not found".
+     * 3. Nếu tìm thấy: In "Found {searchValue} at index: {Arrays.toString(foundIndices)}".
+     *
+     * @param searchValue giá trị cần tìm kiếm
+     * @param foundIndices mảng các vị trí tìm thấy trong mảng
+     */
+    public void displaySearchResult(int searchValue, int[] foundIndices) {
+        if (foundIndices == null || foundIndices.length == 0) {
+            System.out.println("Can not found");
+        } else {
+            System.out.println("Found " + searchValue + " at index: " + Arrays.toString(foundIndices));
+        }
     }
 
     /**

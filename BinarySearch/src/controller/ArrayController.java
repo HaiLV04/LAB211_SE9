@@ -30,8 +30,8 @@ public class ArrayController {
      * 3. Hiển thị mảng chưa sắp xếp.
      * 4. Sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Bubble Sort.
      * 5. Hiển thị mảng đã sắp xếp.
-     * 6. Yêu cầu người dùng nhập giá trị cần tìm kiếm (số nguyên).
-     * 7. Thực hiện thuật toán tìm kiếm nhị phân (Binary Search).
+     * 6. Sau khi quan sát mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (số nguyên).
+     * 7. Thực hiện thuật toán tìm kiếm nhị phân (Binary Search) để tìm tất cả các vị trí xuất hiện.
      * 8. Hiển thị kết quả tìm kiếm ra màn hình console.
      */
     public void run() {
@@ -47,7 +47,7 @@ public class ArrayController {
 
         int searchValue = arrayView.inputInteger("Enter search value: ");
 
-        int foundIndex = arrayModel.binarySearch(searchValue);
-        arrayView.displaySearchResult(searchValue, foundIndex);
+        int[] foundIndices = arrayModel.findAllIndex(searchValue);
+        arrayView.displaySearchResult(searchValue, foundIndices);
     }
 }
