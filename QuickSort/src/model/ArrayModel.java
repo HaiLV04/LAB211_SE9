@@ -100,7 +100,7 @@ public class ArrayModel {
         int i = left;
         int j = right;
 
-        System.out.printf("Bước %d [Phân vùng: từ chỉ số %d đến %d | Giá trị Pivot = %d]:\n",
+        System.out.printf("Buoc %d [Phan vung: tu chi so %d den %d | Gia tri Pivot = %d]:\n",
                 stepCounter++, left, right, pivot);
 
         // Lặp lại đến khi hai con trỏ vượt qua nhau (i > j)
@@ -118,7 +118,7 @@ public class ArrayModel {
             // Nếu i <= j, tiến hành hoán đổi (swap) vị trí của hai phần tử tại i và j, sau đó tăng i và giảm j
             if (i <= j) {
                 if (i < j && array[i] != array[j]) {
-                    System.out.printf("   -> Swap array[%d](%d) và array[%d](%d)\n",
+                    System.out.printf("   -> Hoan doi array[%d](%d) va array[%d](%d)\n",
                             i, array[i], j, array[j]);
                 }
                 swap(i, j);
@@ -127,7 +127,7 @@ public class ArrayModel {
             }
         }
 
-        System.out.println("   => Trạng thái mảng sau lần phân vùng này: " + java.util.Arrays.toString(array));
+        System.out.println("   => Trang thai mang sau lan phan vung nay: " + java.util.Arrays.toString(array));
         System.out.println("----------------------------------------------------------------");
 
         // Trả về chỉ số i (nửa trái <= Pivot, nửa phải >= Pivot)

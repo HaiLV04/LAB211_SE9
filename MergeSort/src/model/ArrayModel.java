@@ -73,10 +73,10 @@ public class ArrayModel {
         // Phân chia: Chia đôi mảng tại chỉ số giữa
         int mid = left + (right - left) / 2;
 
-        System.out.printf("Bước %d [CHIA MẢNG] Phân đoạn từ chỉ số %d đến %d | Chia đôi tại vị trí giữa = %d\n",
+        System.out.printf("Buoc %d [CHIA MANG] Phan doan tu chi so %d den %d | Chia doi tai vi tri giua = %d\n",
                 stepCounter++, left, right, mid);
-        System.out.println("   -> Phân vùng con bên Trái: chỉ số " + left + " đến " + mid);
-        System.out.println("   -> Phân vùng con bên Phải: chỉ số " + (mid + 1) + " đến " + right);
+        System.out.println("   -> Phan vung con ben Trai: chi so " + left + " den " + mid);
+        System.out.println("   -> Phan vung con ben Phai: chi so " + (mid + 1) + " den " + right);
 
         // Gọi đệ quy sắp xếp nửa bên trái
         mergeSort(left, mid);
@@ -118,10 +118,10 @@ public class ArrayModel {
             rightArray[j] = array[mid + 1 + j];
         }
 
-        System.out.printf("Bước %d [TRỘN MẢNG] Đang gộp hai vùng con đã sắp xếp vào mảng gốc từ %d đến %d\n",
+        System.out.printf("Buoc %d [TRON MANG] Dang gop hai vung con da sap xep vao mang goc tu %d den %d\n",
                 stepCounter++, left, right);
-        System.out.println("   * Mảng con tạm TRÁI L[] : " + java.util.Arrays.toString(leftArray));
-        System.out.println("   * Mảng con tạm PHẢI R[] : " + java.util.Arrays.toString(rightArray));
+        System.out.println("   * Mang con tam TRAI L[] : " + java.util.Arrays.toString(leftArray));
+        System.out.println("   * Mang con tam PHAI R[] : " + java.util.Arrays.toString(rightArray));
 
         int i = 0;
         int j = 0;
@@ -152,7 +152,7 @@ public class ArrayModel {
             k++;
         }
 
-        System.out.println("   => Trạng thái mảng gốc hiện tại: " + java.util.Arrays.toString(array));
+        System.out.println("   => Trang thai mang goc hien tai: " + java.util.Arrays.toString(array));
         System.out.println("----------------------------------------------------------------");
     }
 
