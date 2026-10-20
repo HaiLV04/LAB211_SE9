@@ -3,21 +3,19 @@ package view;
 import java.util.Random;
 
 /**
- * Chức năng: Chứa các phương thức tiện ích hỗ trợ trong chương trình.
- * Luồng tương tác: Được gọi bởi các lớp khác để hiển thị menu hoặc tạo mã captcha.
+ * Chức năng: Tiện ích hỗ trợ hiển thị menu và sinh mã Captcha ngẫu nhiên.
  */
 public class Helper {
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp tiện ích Helper.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Helper mới.
+     * Hàm khởi tạo mặc định.
      */
     public Helper() {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị menu chính của chương trình.
-     * Luồng xử lý (Làm như thế nào): In ra màn hình console các lựa chọn ngôn ngữ (1. Vietnamese, 2. English) và thoát (3. Exit).
+     * Chức năng: Hiển thị menu chọn ngôn ngữ đăng nhập.
+     * Luồng xử lý: In danh sách lựa chọn ngôn ngữ (1. Tiếng Việt, 2. Tiếng Anh, 3. Thoát).
      */
     public static void menu() {
         System.out.println("\n-------Login Program--------");
@@ -27,45 +25,38 @@ public class Helper {
     }
     
     /**
-     * Chức năng (Làm gì): Tạo chuỗi chứa các ký tự chữ cái (A-Z, a-z) và số (0-9).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nối các chữ cái in hoa từ A đến Z bằng vòng lặp.
-     * 2. Nối với các chữ cái in thường và các chữ số 0-9 để tạo bảng ký tự hoàn chỉnh.
-     * 3. Trả về chuỗi tập hợp ký tự đã ghép.
+     * Chức năng: Tạo chuỗi chứa các ký tự chữ cái (A-Z, a-z) và chữ số (0-9).
+     * Luồng xử lý: Ghép bảng chữ cái hoa, thường và chữ số thành chuỗi nguồn.
      *
      * @return chuỗi gồm chữ hoa, chữ thường và chữ số
      */
     private static String genAlphaNumeric() {
         String alpha = "";
         String number = "0123456789";
-        String alphaNumeric = "";
         char c = 'A';
         while (c <= 'Z') {
             alpha += c;
             c++;
         }
-        alphaNumeric = alpha + alpha.toLowerCase() + number;
-        return alphaNumeric;
+        return alpha + alpha.toLowerCase() + number;
     }
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mã captcha ngẫu nhiên với độ dài cho trước.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lấy chuỗi ký tự nguồn từ hàm genAlphaNumeric().
-     * 2. Sử dụng Random để chọn ngẫu nhiên từng ký tự từ chuỗi nguồn cho đến khi đạt độ dài chỉ định.
-     * 3. Trả về chuỗi mã Captcha đã tạo.
+     * Chức năng: Sinh mã Captcha ngẫu nhiên theo độ dài chỉ định.
+     * Luồng xử lý: Chọn ngẫu nhiên từng ký tự từ bảng chữ-số cho đến khi đủ độ dài.
      *
-     * @param length độ dài của chuỗi captcha
+     * @param length độ dài chuỗi captcha
      * @return chuỗi captcha ngẫu nhiên
      */
     public static String generateCaptcha(int length) {
         String alphaNumeric = genAlphaNumeric();
-        String captchaGen = "";
+        StringBuilder captchaGen = new StringBuilder();
+        Random random = new Random();
 
         for (int i = 0; i < length; i++) {
-            captchaGen += alphaNumeric.charAt(new Random().nextInt(alphaNumeric.length()));
+            captchaGen.append(alphaNumeric.charAt(random.nextInt(alphaNumeric.length())));
         }
 
-        return captchaGen;
+        return captchaGen.toString();
     }
 }

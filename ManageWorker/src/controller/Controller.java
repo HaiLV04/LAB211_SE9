@@ -1,16 +1,15 @@
 package controller;
 
+import java.util.Date;
 import model.ManagerSalaryHistory;
 import model.ManagerWorker;
 import model.SalaryHistory;
 import model.SalaryStatus;
 import model.Worker;
-import java.util.Date;
 import view.Validator;
 
 /**
- * Chức năng: Lớp điều khiển chính của chương trình.
- * Luồng tương tác: Giao tiếp với Validator để lấy dữ liệu, gọi ManagerWorker và ManagerSalaryHistory để xử lý logic, hiển thị lại cho ui.Main.
+ * Chức năng: Điều khiển luồng chương trình quản lý công nhân và lịch sử lương.
  */
 public class Controller {
 
@@ -18,8 +17,7 @@ public class Controller {
     private ManagerWorker workers;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Controller.
-     * Luồng xử lý (Làm như thế nào): Khởi tạo các đối tượng quản lý (ManagerSalaryHistory, ManagerWorker).
+     * Khởi tạo Controller với các đối tượng quản lý công nhân và lịch sử lương.
      */
     public Controller() {
         this.salaryHistory = new ManagerSalaryHistory();
@@ -27,11 +25,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Thêm một công nhân mới vào hệ thống.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập và kiểm tra tính duy nhất của ID công nhân (chuyển chữ hoa).
-     * 2. Nhập các thông tin còn lại như tên, tuổi, lương, nơi làm việc từ Validator.
-     * 3. Gọi ManagerWorker để thêm vào hệ thống và trả về đối tượng nếu thành công.
+     * Chức năng: Thêm một công nhân mới vào hệ thống.
+     * Luồng xử lý: Nhập và kiểm tra trùng ID, nhập các thông tin (tên, tuổi, lương, nơi làm việc) và thêm vào danh sách quản lý.
      *
      * @return công nhân vừa được thêm
      * @throws Exception nếu thêm thất bại hoặc dữ liệu không hợp lệ
@@ -49,14 +44,14 @@ public class Controller {
             }
             System.out.println("Worker with ID " + id + " already exists. Please input again");
         } while (true);
-        
+
         String name = Validator.getString("Enter Name: ", "Invalid!", "[A-Za-z\\s]+");
         int age = Validator.getInt("Enter age: ", "age >= 18 and <=50 !", "Invalid!", 18, 50);
         double salary = Validator.getDouble("Enter Salary: ", "salary must be > 0", "Invalid!", Double.MIN_VALUE, Double.MAX_VALUE);
         String workLocation = Validator.getString("Enter work location: ", "Invalid!", "[A-Za-z0-9\\s]+");
-        
+
         Worker worker = new Worker(id, name, age, salary, workLocation);
-        
+
         if (workers.add(worker)) {
             return worker;
         }
@@ -64,15 +59,11 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Tăng lương cho một công nhân và ghi lại lịch sử.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra xem danh sách công nhân có trống không.
-     * 2. Yêu cầu nhập ID công nhân và số tiền muốn tăng.
-     * 3. Thực hiện gọi ManagerWorker để tăng lương.
-     * 4. Ghi lại lịch sử (UP) bằng ManagerSalaryHistory.
+     * Chức năng: Tăng lương cho công nhân và ghi lại lịch sử.
+     * Luồng xử lý: Nhập mã công nhân và số tiền muốn tăng, gọi model cập nhật và thêm bản ghi trạng thái UP vào lịch sử.
      *
      * @return công nhân sau khi tăng lương
-     * @throws Exception nếu danh sách rỗng, dữ liệu không hợp lệ hoặc id không tồn tại
+     * @throws Exception nếu danh sách rỗng, mã không tồn tại hoặc dữ liệu không hợp lệ
      */
     public Worker upSalary() throws Exception {
         if (workers.getList().isEmpty()) {
@@ -80,9 +71,9 @@ public class Controller {
         }
         String code = Validator.getString("Enter id: ", "Invalid!", "[Ww]\\d+");
         double amount = Validator.getDouble("Enter Salary: ", "salary must be > 0", "Invalid!", Double.MIN_VALUE, Double.MAX_VALUE);
-        
+
         Worker worker = workers.changeSalary(SalaryStatus.UP, code, amount);
-        
+
         if (salaryHistory.addSalaryHistory(new SalaryHistory(worker, worker.getSalary(), SalaryStatus.UP, new Date()))) {
             return worker;
         }
@@ -90,16 +81,11 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Giảm lương của một công nhân và lưu lịch sử.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra xem danh sách công nhân có rỗng không.
-     * 2. Yêu cầu nhập ID, tìm kiếm công nhân xem có tồn tại không.
-     * 3. Yêu cầu nhập số tiền, gọi ManagerWorker để trừ lương.
-     * 4. Bắt các ngoại lệ vi phạm giới hạn giảm và yêu cầu nhập lại nếu lượng giảm lớn hơn lương hiện tại.
-     * 5. Ghi lại lịch sử giảm lương (DOWN) bằng ManagerSalaryHistory.
+     * Chức năng: Giảm lương cho công nhân và ghi lại lịch sử.
+     * Luồng xử lý: Nhập mã công nhân và số tiền giảm (kiểm tra không vượt quá lương hiện tại), cập nhật lương và thêm bản ghi DOWN vào lịch sử.
      *
      * @return công nhân sau khi giảm lương
-     * @throws Exception nếu danh sách rỗng hoặc dữ liệu không hợp lệ
+     * @throws Exception nếu danh sách rỗng, mã không tồn tại hoặc giảm lương thất bại
      */
     public Worker downSalary() throws Exception {
         if (workers.getList().isEmpty()) {
@@ -111,7 +97,6 @@ public class Controller {
                 "[Ww]\\d+");
 
         Worker currentWorker = null;
-
         for (Worker w : workers.getList()) {
             if (w.getId().equalsIgnoreCase(code)) {
                 currentWorker = w;
@@ -124,7 +109,6 @@ public class Controller {
         }
 
         Worker worker;
-
         while (true) {
             double amount = Validator.getDouble(
                     "Enter Salary: ",
@@ -150,7 +134,7 @@ public class Controller {
                 }
             }
         }
-        
+
         if (salaryHistory.addSalaryHistory(new SalaryHistory(worker, worker.getSalary(), SalaryStatus.DOWN, new Date()))) {
             return worker;
         }
@@ -158,10 +142,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị bảng lịch sử thay đổi lương của toàn bộ công nhân.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lấy kết quả chuỗi định dạng từ ManagerSalaryHistory.
-     * 2. In chuỗi ra màn hình, nếu null thì in thông báo "History Salary is empty".
+     * Chức năng: Hiển thị bảng lịch sử thay đổi lương của toàn bộ công nhân.
+     * Luồng xử lý: Lấy chuỗi định dạng từ ManagerSalaryHistory và in ra màn hình.
      */
     public void showHistorySalary() {
         String result = salaryHistory.toString();
@@ -173,10 +155,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Hiển thị menu cho đến khi người dùng chọn Exit (5).
-     * 2. Điều hướng thực thi các chức năng 1-4 (Add Worker, Up salary, Down salary, Display Information salary).
+     * Chức năng: Điều khiển luồng thực thi chính của chương trình qua menu.
+     * Luồng xử lý: Lặp hiển thị menu và gọi xử lý các chức năng: thêm công nhân, tăng lương, giảm lương, xem lịch sử.
      */
     public void run() {
         int choice;

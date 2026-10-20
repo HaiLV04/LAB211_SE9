@@ -3,46 +3,37 @@ package model;
 import java.util.Random;
 
 /**
- * Chức năng: Xử lý dữ liệu mảng và thuật toán sắp xếp trộn (Merge Sort).
+ * Chức năng: Quản lý dữ liệu mảng và thuật toán sắp xếp trộn (Merge Sort).
  */
 public class ArrayModel {
 
     private int[] array;
-
     private int stepCounter;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
-     * Luồng xử lý (Làm như thế nào): Khởi tạo bộ đếm bước (stepCounter = 1) và để mảng chưa cấp phát.
+     * Khởi tạo đối tượng ArrayModel.
      */
     public ArrayModel() {
         stepCounter = 1;
     }
 
     /**
-     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng Random.
-     * 2. Cấp phát mảng với kích thước chỉ định n.
-     * 3. Sinh các giá trị ngẫu nhiên trong khoảng [-n, n] cho từng phần tử của mảng.
+     * Chức năng: Tạo mảng số nguyên ngẫu nhiên theo kích thước chỉ định.
+     * Luồng xử lý: Cấp phát mảng kích thước n và sinh giá trị ngẫu nhiên trong khoảng [-n, n].
      *
-     * @param n số lượng phần tử trong mảng
+     * @param n số lượng phần tử
      */
     public void generateRandomArray(int n) {
         Random random = new Random();
         array = new int[n];
-
         for (int i = 0; i < n; i++) {
             array[i] = random.nextInt(2 * n + 1) - n;
         }
     }
 
     /**
-     * Chức năng (Làm gì): Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng Merge Sort.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Trả về ngay nếu mảng null hoặc có ít hơn 2 phần tử (n <= 1).
-     * 2. Thiết lập lại bộ đếm bước về 1.
-     * 3. Gọi đệ quy hàm mergeSort từ chỉ số 0 đến array.length - 1.
+     * Chức năng: Bắt đầu sắp xếp mảng theo thứ tự tăng dần bằng Merge Sort.
+     * Luồng xử lý: Đặt lại bộ đếm bước và gọi đệ quy mergeSort trên toàn bộ phạm vi [0, length - 1].
      */
     public void mergeSort() {
         if (array == null || array.length < 2) {
@@ -53,24 +44,17 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Hàm đệ quy chia đôi mảng để sắp xếp từng nửa mảng con.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Trường hợp cơ sở: nếu left >= right (mảng có 1 phần tử hoặc rỗng), dừng lại.
-     * 2. Phân chia (Divide): Tính chỉ số ở giữa để chia đôi mảng và in thông tin bước chia.
-     * 3. Gọi đệ quy sắp xếp nửa bên trái [left, mid].
-     * 4. Gọi đệ quy sắp xếp nửa bên phải [mid + 1, right].
-     * 5. Hợp nhất (Conquer / Merge): Trộn hai nửa mảng con đã sắp xếp lại với nhau.
+     * Chức năng: Đệ quy chia đôi mảng để sắp xếp từng nửa mảng con.
+     * Luồng xử lý: Tìm điểm giữa mid, đệ quy sắp xếp nửa trái [left, mid] và nửa phải [mid + 1, right], sau đó trộn hai nửa lại bằng merge().
      *
      * @param left chỉ số bắt đầu
      * @param right chỉ số kết thúc
      */
     private void mergeSort(int left, int right) {
-        // Trường hợp cơ sở: Dừng đệ quy khi mảng con có tối đa 1 phần tử (đã có thứ tự)
         if (left >= right) {
             return;
         }
 
-        // Phân chia: Chia đôi mảng tại chỉ số giữa
         int mid = left + (right - left) / 2;
 
         System.out.printf("Buoc %d [CHIA MANG] Phan doan tu chi so %d den %d | Chia doi tai vi tri giua = %d\n",
@@ -78,39 +62,26 @@ public class ArrayModel {
         System.out.println("   -> Phan vung con ben Trai: chi so " + left + " den " + mid);
         System.out.println("   -> Phan vung con ben Phai: chi so " + (mid + 1) + " den " + right);
 
-        // Gọi đệ quy sắp xếp nửa bên trái
         mergeSort(left, mid);
-
-        // Gọi đệ quy sắp xếp nửa bên phải
         mergeSort(mid + 1, right);
-
-        // Hợp nhất: Trộn hai mảng con đã sắp xếp lại với nhau
         merge(left, mid, right);
     }
 
     /**
-     * Chức năng (Làm gì): Trộn hai mảng con đã sắp xếp [left, mid] và [mid + 1, right] vào mảng gốc.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Tạo hai mảng tạm thời cho nửa bên trái và nửa bên phải.
-     * 2. Sao chép dữ liệu tương ứng từ mảng gốc vào các mảng tạm.
-     * 3. Hiển thị thông tin bước trộn và dữ liệu mảng con tạm thời.
-     * 4. Dùng hai con trỏ i và j duyệt qua các mảng tạm, so sánh và đặt phần tử nhỏ hơn vào mảng gốc.
-     * 5. Sao chép các phần tử còn lại của mảng tạm (nếu có) vào mảng gốc.
-     * 6. Hiển thị trạng thái mảng gốc hiện tại sau khi trộn.
+     * Chức năng: Trộn hai mảng con đã sắp xếp [left, mid] và [mid + 1, right] vào mảng gốc.
+     * Luồng xử lý: Sao chép dữ liệu ra hai mảng tạm, so sánh đưa phần tử nhỏ hơn vào mảng gốc và sao chép nốt các phần tử còn lại.
      *
-     * @param left chỉ số bắt đầu của vùng phân đoạn trái
-     * @param mid chỉ số kết thúc của vùng phân đoạn trái
-     * @param right chỉ số kết thúc của vùng phân đoạn phải
+     * @param left chỉ số bắt đầu phân đoạn trái
+     * @param mid chỉ số kết thúc phân đoạn trái
+     * @param right chỉ số kết thúc phân đoạn phải
      */
     private void merge(int left, int mid, int right) {
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
-        // Tạo hai mảng tạm thời cho nửa trái và nửa phải
         int[] leftArray = new int[n1];
         int[] rightArray = new int[n2];
 
-        // Sao chép dữ liệu từ mảng gốc vào mảng tạm
         for (int i = 0; i < n1; ++i) {
             leftArray[i] = array[left + i];
         }
@@ -127,7 +98,6 @@ public class ArrayModel {
         int j = 0;
         int k = left;
 
-        // Duyệt hai mảng tạm bằng hai con trỏ, so sánh và đưa phần tử nhỏ hơn vào mảng gốc
         while (i < n1 && j < n2) {
             if (leftArray[i] <= rightArray[j]) {
                 array[k] = leftArray[i];
@@ -139,7 +109,6 @@ public class ArrayModel {
             k++;
         }
 
-        // Sao chép các phần tử còn lại từ mảng tạm nếu có
         while (i < n1) {
             array[k] = leftArray[i];
             i++;
@@ -157,10 +126,9 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mảng hiện tại.
-     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên của đối tượng.
+     * Lấy mảng số nguyên hiện tại.
      *
-     * @return mảng số nguyên hiện tại
+     * @return mảng số nguyên
      */
     public int[] getArray() {
         return array;

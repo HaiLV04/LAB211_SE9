@@ -8,17 +8,14 @@ import model.Matrix;
 public class MatrixView {
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp MatrixView.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng MatrixView mới.
+     * Khởi tạo đối tượng MatrixView.
      */
     public MatrixView() {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị menu chức năng và nhận lựa chọn từ người dùng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Hiển thị danh sách các chức năng (Cộng, Trừ, Nhân, Thoát).
-     * 2. Sử dụng Validator để nhận số nguyên hợp lệ trong khoảng 1 đến 4.
+     * Chức năng: Hiển thị menu chức năng và nhận lựa chọn từ người dùng.
+     * Luồng xử lý: Hiển thị danh sách lựa chọn và dùng Validator để nhận số nguyên từ 1 đến 4.
      *
      * @return lựa chọn từ 1 đến 4
      */
@@ -32,14 +29,12 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập số hàng hoặc số cột của ma trận.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Hiển thị thông báo yêu cầu nhập kích thước.
-     * 2. Sử dụng Validator để kiểm tra và nhận giá trị trong khoảng [min, max].
+     * Chức năng: Nhập số hàng hoặc số cột của ma trận.
+     * Luồng xử lý: Hiển thị thông báo và sử dụng Validator để kiểm tra giá trị trong khoảng [min, max].
      *
      * @param message thông báo hiển thị
-     * @param min giá trị nhỏ nhất cho phép
-     * @param max giá trị lớn nhất cho phép
+     * @param min giá trị nhỏ nhất
+     * @param max giá trị lớn nhất
      * @return kích thước hợp lệ
      */
     public int inputDimension(String message, int min, int max) {
@@ -48,13 +43,10 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập các phần tử của một ma trận từ bàn phím.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo mảng hai chiều với số hàng và số cột tương ứng.
-     * 2. Lặp qua từng vị trí [i][j] để yêu cầu người dùng nhập giá trị.
-     * 3. Khởi tạo và trả về đối tượng Matrix từ mảng hai chiều.
+     * Chức năng: Nhập các phần tử của ma trận từ bàn phím.
+     * Luồng xử lý: Khởi tạo mảng 2 chiều kích thước rows x cols, lặp qua từng phần tử để yêu cầu nhập giá trị.
      *
-     * @param matrixLabel tên nhãn ma trận (ví dụ "Enter matrix1")
+     * @param matrixLabel nhãn hiển thị ma trận
      * @param rows số hàng
      * @param cols số cột
      * @return đối tượng Matrix đã nhập đầy đủ dữ liệu
@@ -76,17 +68,11 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị biểu thức và kết quả tính toán giữa hai ma trận.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. In tiêu đề kết quả.
-     * 2. In chuỗi ma trận thứ nhất.
-     * 3. In toán tử (+, -, *).
-     * 4. In chuỗi ma trận thứ hai.
-     * 5. In dấu "=".
-     * 6. In chuỗi ma trận kết quả.
+     * Chức năng: Hiển thị biểu thức và kết quả tính toán giữa hai ma trận.
+     * Luồng xử lý: In ma trận 1, toán tử (+, -, *), ma trận 2, dấu = và ma trận kết quả.
      *
      * @param matrix1 ma trận thứ nhất
-     * @param operator toán tử biểu diễn phép tính ("+", "-", "*")
+     * @param operator toán tử phép tính
      * @param matrix2 ma trận thứ hai
      * @param result ma trận kết quả
      */
@@ -100,8 +86,8 @@ public class MatrixView {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị thông báo hoặc tiêu đề ra console.
-     * Luồng xử lý (Làm như thế nào): In thông điệp ra console bằng System.out.println.
+     * Chức năng: Hiển thị thông báo ra màn hình console.
+     * Luồng xử lý: In thông điệp bằng System.out.println.
      *
      * @param message thông điệp cần in
      */

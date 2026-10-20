@@ -6,26 +6,22 @@ package view;
 public class View {
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp View.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng View mới.
+     * Khởi tạo đối tượng View.
      */
     public View() {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị tiêu đề thông báo số lượng số Fibonacci cần tìm.
-     * Luồng xử lý (Làm như thế nào): In tiêu đề "The 45 sequence fibonacci:" ra console.
+     * Chức năng: Hiển thị tiêu đề thông báo số lượng số Fibonacci cần tìm.
+     * Luồng xử lý: In chuỗi tiêu đề ra console.
      */
     public void displayTitle() {
         System.out.println("The 45 sequence fibonacci:");
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị toàn bộ dãy số Fibonacci theo đúng đặc tả đề bài.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Duyệt qua từng phần tử trong dãy số.
-     * 2. In giá trị số, ngăn cách bằng dấu phẩy và khoảng trắng.
-     * 3. Kết thúc bằng dấu chấm và xuống dòng khi in xong phần tử cuối.
+     * Chức năng: Hiển thị toàn bộ dãy số Fibonacci theo định dạng ngăn cách bởi dấu phẩy và kết thúc bằng dấu chấm.
+     * Luồng xử lý: Duyệt mảng, in từng phần tử kèm dấu phẩy hoặc dấu chấm ở cuối.
      *
      * @param sequence mảng chứa các số Fibonacci
      */
@@ -41,14 +37,11 @@ public class View {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị một số Fibonacci đơn lẻ với định dạng dấu phân cách.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. In giá trị số Fibonacci.
-     * 2. Nếu là số cuối cùng (isLast = true), in dấu chấm "." và xuống dòng.
-     * 3. Nếu chưa phải số cuối cùng, in dấu phẩy và dấu cách ", ".
+     * Chức năng: Hiển thị một số Fibonacci kèm ký tự phân cách.
+     * Luồng xử lý: In giá trị, nếu là số cuối in dấu chấm, ngược lại in dấu phẩy.
      *
      * @param value giá trị Fibonacci cần in
-     * @param isLast true nếu đây là phần tử cuối cùng trong dãy
+     * @param isLast true nếu đây là phần tử cuối cùng
      */
     public void displayFibonacci(int value, boolean isLast) {
         System.out.print(value);
@@ -60,10 +53,8 @@ public class View {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị danh sách vị trí chi tiết của từng phần tử trong dãy.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. In tiêu đề "Position of each element:".
-     * 2. Lặp qua từng phần tử và in theo định dạng "Index i: value".
+     * Chức năng: Hiển thị danh sách vị trí chi tiết của từng phần tử trong dãy.
+     * Luồng xử lý: Lặp qua từng phần tử và in theo định dạng "Index i: value".
      *
      * @param sequence mảng chứa dãy Fibonacci
      */
@@ -75,13 +66,10 @@ public class View {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị danh sách các giá trị Fibonacci theo định dạng mảng F(i).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. In dấu mở ngoặc vuông "[".
-     * 2. Duyệt qua từng phần tử, in dạng "F(i)=giá_trị".
-     * 3. Thêm dấu phẩy giữa các phần tử và đóng ngoặc vuông "]".
+     * Chức năng: Hiển thị danh sách giá trị Fibonacci theo định dạng F(i).
+     * Luồng xử lý: Ghép và in chuỗi theo định dạng [F(0)=..., F(1)=...].
      *
-     * @param values mảng chứa các giá trị Fibonacci đã tính
+     * @param values mảng chứa các giá trị Fibonacci
      */
     public void displayArrayFormat(int[] values) {
         System.out.print("[");
@@ -95,11 +83,8 @@ public class View {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị kết quả kiểm chứng các mốc giá trị cơ sở.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. In giá trị F(0).
-     * 2. In giá trị F(1).
-     * 3. In giá trị F tại vị trí cuối cùng.
+     * Chức năng: Hiển thị kết quả kiểm chứng các mốc giá trị cơ sở.
+     * Luồng xử lý: In giá trị F(0), F(1) và F ở vị trí cuối cùng ra màn hình.
      *
      * @param f0 giá trị F(0)
      * @param f1 giá trị F(1)
@@ -113,8 +98,8 @@ public class View {
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị một thông điệp chuỗi ra màn hình console.
-     * Luồng xử lý (Làm như thế nào): In chuỗi thông điệp kèm ký tự xuống dòng bằng System.out.println.
+     * Chức năng: Hiển thị một thông điệp ra console.
+     * Luồng xử lý: In chuỗi thông điệp bằng System.out.println.
      *
      * @param message thông điệp cần hiển thị
      */

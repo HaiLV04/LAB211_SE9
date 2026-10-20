@@ -1,34 +1,30 @@
 package model;
 
 /**
- * Chức năng: Enum lưu trữ các khóa học được hỗ trợ trong chương trình.
- * Luồng tương tác: Được sử dụng bởi lớp Student để gán khóa học; cung cấp các hằng số khóa học.
+ * Chức năng: Enum định nghĩa danh sách các môn học được hỗ trợ (Java, .Net, C/C++).
  */
 public enum Course {
     JAVA("JAVA"),
     DOT_NET(".NET"),
     C_CPP("C/C++");
+
     private String language;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo khóa học với tên tương ứng.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị tên khóa học vào thuộc tính language.
+     * Khởi tạo môn học với tên tương ứng.
      *
-     * @param language tên khóa học
+     * @param language tên môn học
      */
     Course(String language) {
         this.language = language;
     }
 
     /**
-     * Chức năng (Làm gì): Trả về enum Course tương ứng với lựa chọn số của người dùng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhận giá trị số nguyên type.
-     * 2. Kiểm tra type và trả về enum Course tương ứng (1 -> JAVA, 2 -> DOT_NET, 3 -> C_CPP).
-     * 3. Ném ra ngoại lệ AssertionError nếu type không hợp lệ.
+     * Chức năng: Lấy môn học theo số thứ tự lựa chọn (1: JAVA, 2: .NET, 3: C/C++).
+     * Luồng xử lý: Sử dụng switch-case kiểm tra số thứ tự và trả về enum tương ứng.
      *
-     * @param type lựa chọn khóa học (1, 2, 3)
-     * @return khóa học tương ứng
+     * @param type số thứ tự môn học (1, 2, 3)
+     * @return đối tượng Course tương ứng
      */
     public static Course getCourse(int type) {
         switch (type) {
@@ -40,15 +36,13 @@ public enum Course {
                 return C_CPP;
             default:
                 throw new AssertionError();
-
         }
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên hiển thị của khóa học.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính language của enum.
+     * Lấy tên hiển thị của môn học.
      *
-     * @return tên khóa học
+     * @return tên môn học
      */
     public String getLanguage() {
         return language;

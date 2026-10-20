@@ -1,8 +1,7 @@
 package model;
 
 /**
- * Chức năng: Lớp Student lưu trữ thông tin của một sinh viên (ID, tên, học kỳ, khóa học).
- * Luồng tương tác: Các đối tượng của lớp này được tạo trong StudentInputer và được quản lý bởi ManageStudent để lưu trữ, hiển thị, cập nhật và thống kê báo cáo.
+ * Chức năng: Lưu trữ thông tin sinh viên (ID, tên, học kỳ, môn học).
  */
 public class Student implements Comparable<Student> {
 
@@ -12,13 +11,12 @@ public class Student implements Comparable<Student> {
     private Course courseName;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Student với đầy đủ thông tin.
-     * Luồng xử lý (Làm như thế nào): Gán các giá trị tham số truyền vào cho các thuộc tính tương ứng của sinh viên.
+     * Khởi tạo đối tượng Student với đầy đủ thông tin.
      *
      * @param id mã số sinh viên
      * @param studentName họ và tên sinh viên
      * @param semester học kỳ
-     * @param courseName khóa học
+     * @param courseName môn học
      */
     public Student(String id, String studentName, String semester, Course courseName) {
         this.id = id;
@@ -28,25 +26,22 @@ public class Student implements Comparable<Student> {
     }
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Student không tham số.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Student mới với các thuộc tính mặc định.
+     * Khởi tạo đối tượng Student mặc định.
      */
     public Student() {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mã ID của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính id của sinh viên.
+     * Lấy mã sinh viên.
      *
-     * @return mã ID của sinh viên
+     * @return mã ID sinh viên
      */
     public String getId() {
         return id;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập mã ID của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị id mới cho thuộc tính id.
+     * Thiết lập mã sinh viên.
      *
      * @param id mã ID cần gán
      */
@@ -55,8 +50,7 @@ public class Student implements Comparable<Student> {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên sinh viên.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính studentName của sinh viên.
+     * Lấy họ tên sinh viên.
      *
      * @return tên sinh viên
      */
@@ -65,63 +59,56 @@ public class Student implements Comparable<Student> {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập tên sinh viên.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị studentName mới cho thuộc tính studentName.
+     * Thiết lập họ tên sinh viên.
      *
-     * @param studentName tên sinh viên cần gán
+     * @param studentName tên sinh viên
      */
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy học kỳ của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính semester của sinh viên.
+     * Lấy học kỳ.
      *
-     * @return học kỳ của sinh viên
+     * @return học kỳ
      */
     public String getSemester() {
         return semester;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập học kỳ của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị semester mới cho thuộc tính semester.
+     * Thiết lập học kỳ.
      *
-     * @param semester học kỳ cần gán
+     * @param semester học kỳ
      */
     public void setSemester(String semester) {
         this.semester = semester;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên môn học của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính courseName của sinh viên.
+     * Lấy môn học.
      *
-     * @return enum môn học Course
+     * @return môn học
      */
     public Course getCourseName() {
         return courseName;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập môn học của sinh viên.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị courseName mới cho thuộc tính courseName.
+     * Thiết lập môn học.
      *
-     * @param courseName enum môn học Course cần gán
+     * @param courseName môn học
      */
     public void setCourseName(Course courseName) {
         this.courseName = courseName;
     }
 
     /**
-     * Chức năng (Làm gì): So sánh hai đối tượng sinh viên theo tên để sắp xếp danh sách.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Sử dụng phương thức compareTo của String trên thuộc tính studentName.
-     * 2. Trả về kết quả so sánh để phục vụ việc sắp xếp.
+     * Chức năng: So sánh hai sinh viên theo tên để sắp xếp tăng dần.
+     * Luồng xử lý: Sử dụng compareTo của String để so sánh thuộc tính studentName.
      *
      * @param t sinh viên cần so sánh
-     * @return giá trị so sánh theo tên
+     * @return giá trị âm, 0 hoặc dương theo thứ tự từ điển
      */
     @Override
     public int compareTo(Student t) {
@@ -129,8 +116,7 @@ public class Student implements Comparable<Student> {
     }
 
     /**
-     * Chức năng (Làm gì): Trả về chuỗi thông tin biểu diễn sinh viên.
-     * Luồng xử lý (Làm như thế nào): Ghép các thuộc tính của sinh viên thành một chuỗi dễ đọc và trả về.
+     * Chức năng: Trả về chuỗi thông tin biểu diễn sinh viên.
      *
      * @return chuỗi thông tin sinh viên
      */
@@ -138,5 +124,4 @@ public class Student implements Comparable<Student> {
     public String toString() {
         return "Student{" + id + ", " + studentName + ", " + semester + ", " + courseName.getLanguage() + '}';
     }
-
 }

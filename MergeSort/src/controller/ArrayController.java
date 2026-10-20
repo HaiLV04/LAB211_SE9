@@ -4,7 +4,7 @@ import model.ArrayModel;
 import view.ArrayView;
 
 /**
- * Chức năng: Điều khiển luồng của chương trình Merge Sort.
+ * Chức năng: Điều khiển luồng chương trình sắp xếp trộn (Merge Sort).
  */
 public class ArrayController {
 
@@ -12,10 +12,7 @@ public class ArrayController {
     private final ArrayView arrayView;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo controller với model và view.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng ArrayModel.
-     * 2. Khởi tạo đối tượng ArrayView.
+     * Khởi tạo controller với model và view.
      */
     public ArrayController() {
         arrayModel = new ArrayModel();
@@ -23,13 +20,8 @@ public class ArrayController {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính của Merge Sort.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Yêu cầu người dùng nhập kích thước mảng (số nguyên dương).
-     * 2. Sinh mảng số nguyên ngẫu nhiên theo kích thước.
-     * 3. Hiển thị mảng chưa sắp xếp ra màn hình console.
-     * 4. Thực hiện thuật toán sắp xếp trộn (Merge Sort).
-     * 5. Hiển thị mảng đã sắp xếp ra màn hình console.
+     * Chức năng: Chạy luồng chương trình chính của Merge Sort.
+     * Luồng xử lý: Nhập kích thước mảng, sinh mảng ngẫu nhiên, hiển thị mảng trước và sau khi sắp xếp Merge Sort.
      */
     public void run() {
         int size = arrayView.inputPositiveInteger("Enter number of array: ");

@@ -13,11 +13,7 @@ public class Controller {
     private final int sequenceLength;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho Controller với độ dài mặc định là 45 phần tử.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Gán sequenceLength = 45.
-     * 2. Khởi tạo đối tượng Fibonacci với kích thước 45.
-     * 3. Khởi tạo đối tượng View.
+     * Khởi tạo Controller với độ dài mặc định là 45 phần tử.
      */
     public Controller() {
         this.sequenceLength = 45;
@@ -26,8 +22,7 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Khởi tạo Controller với các tham số tùy chọn (hỗ trợ Dependency Injection).
-     * Luồng xử lý (Làm như thế nào): Gán model, view và sequenceLength từ các tham số truyền vào.
+     * Khởi tạo Controller với các tham số tùy chọn.
      *
      * @param model đối tượng model Fibonacci
      * @param view đối tượng view View
@@ -40,22 +35,15 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính của bài toán Fibonacci.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Gọi View hiển thị tiêu đề dãy số Fibonacci.
-     * 2. Lấy toàn bộ dãy số từ Model (Model thực hiện tính toán đệ quy có nhớ).
-     * 3. Chuyển dữ liệu dãy số sang View để hiển thị theo định dạng chuẩn đề bài.
-     * 4. Gọi View hiển thị chi tiết các ca kiểm thử phục vụ review với giảng viên.
+     * Chức năng: Chạy luồng chương trình chính của bài toán Fibonacci.
+     * Luồng xử lý: Hiển thị tiêu đề, lấy dãy số Fibonacci tính bằng đệ quy có nhớ từ model và hiển thị ra màn hình qua view.
      */
     public void run() {
         view.displayTitle();
 
         int[] sequence = model.getSequence();
 
-        // 1. Hiển thị dãy 45 số theo đúng yêu cầu đề bài
         view.displayFibonacciSequence(sequence);
-
-        // 2. Hiển thị thông tin kiểm chứng chi tiết qua View
         view.displayPositions(sequence);
         view.displayArrayFormat(sequence);
         view.displayTestCases(sequence[0], sequence[1], sequence[sequenceLength - 1], sequenceLength - 1);

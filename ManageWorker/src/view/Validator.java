@@ -6,26 +6,21 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Chức năng: Lớp hỗ trợ kiểm tra dữ liệu đầu vào.
- * Luồng tương tác: Được gọi từ Controller và Main để nhận dữ liệu từ người dùng, kiểm tra bằng RegEx hoặc giá trị min/max.
+ * Chức năng: Tiện ích nhập và kiểm tra tính hợp lệ của dữ liệu từ bàn phím.
  */
 public class Validator {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
     /**
-     * Chức năng (Làm gì): Hàm khởi tạo private ngăn chặn việc tạo đối tượng của lớp tiện ích.
-     * Luồng xử lý (Làm như thế nào): Không thực hiện logic nào nhằm đảm bảo không thể khởi tạo instance của Utility class.
+     * Ngăn chặn khởi tạo đối tượng từ lớp tiện ích.
      */
     private Validator() {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập một số nguyên hợp lệ trong khoảng xác định từ người dùng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lặp lại quá trình yêu cầu nhập số nguyên từ người dùng.
-     * 2. Ép kiểu dữ liệu chuỗi sang số nguyên; nếu có NumberFormatException, in thông báo lỗi.
-     * 3. Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ; nếu ngoài khoảng thì in thông báo lỗi và lặp lại.
+     * Chức năng: Nhập và kiểm tra một số nguyên trong khoảng [min, max].
+     * Luồng xử lý: Yêu cầu nhập, kiểm tra ép kiểu số nguyên và khoảng giá trị cho phép, lặp lại nếu không hợp lệ.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi
@@ -42,7 +37,7 @@ public class Validator {
         do {
             try {
                 System.out.print(messageInfo);
-                int number = Integer.parseInt(SCANNER.nextLine());
+                int number = Integer.parseInt(SCANNER.nextLine().trim());
                 if (number >= min && number <= max) {
                     return number;
                 }
@@ -54,11 +49,8 @@ public class Validator {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập một số thực hợp lệ trong khoảng xác định từ người dùng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lặp lại quá trình yêu cầu nhập số thực từ người dùng.
-     * 2. Ép kiểu chuỗi sang số thực bằng Double.parseDouble; nếu lỗi in thông báo lỗi.
-     * 3. Kiểm tra giá trị nằm trong khoảng [min, max], trả về nếu hợp lệ; nếu ngoài khoảng thì in thông báo lỗi và lặp lại.
+     * Chức năng: Nhập và kiểm tra một số thực trong khoảng [min, max].
+     * Luồng xử lý: Yêu cầu nhập, ép kiểu sang số thực và kiểm tra phạm vi, lặp lại nếu không hợp lệ.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi
@@ -75,7 +67,7 @@ public class Validator {
         do {
             try {
                 System.out.println(messageInfo);
-                double number = Double.parseDouble(SCANNER.nextLine());
+                double number = Double.parseDouble(SCANNER.nextLine().trim());
                 if (number >= min && number <= max) {
                     return number;
                 }
@@ -87,11 +79,8 @@ public class Validator {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập một chuỗi hợp lệ theo định dạng biểu thức chính quy (Regex).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lặp lại quá trình yêu cầu nhập chuỗi từ người dùng.
-     * 2. Dùng biểu thức chính quy (REGEX) để kiểm tra tính hợp lệ, trả về nếu khớp.
-     * 3. Nếu không khớp, in thông báo lỗi và yêu cầu nhập lại.
+     * Chức năng: Nhập và kiểm tra chuỗi theo biểu thức chính quy (Regex).
+     * Luồng xử lý: Yêu cầu nhập chuỗi và kiểm tra bằng matches(REGEX), lặp lại nếu không khớp định dạng.
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageError thông báo lỗi
@@ -102,7 +91,7 @@ public class Validator {
             final String REGEX) {
         do {
             System.out.print(messageInfo);
-            String str = SCANNER.nextLine();
+            String str = SCANNER.nextLine().trim();
             if (str.matches(REGEX)) {
                 return str;
             }
@@ -111,19 +100,16 @@ public class Validator {
     }
 
     /**
-     * Chức năng (Làm gì): Nhập một giá trị ngày tháng hợp lệ trong khoảng thời gian cho phép.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lặp lại quá trình yêu cầu nhập ngày tháng từ người dùng.
-     * 2. Phân tích chuỗi nhập vào theo SimpleDateFormat xác định với setLenient(false).
-     * 3. Kiểm tra nếu thời gian nằm trong khoảng [min, max], trả về ngày hợp lệ; nếu ngoài khoảng hoặc sai định dạng thì in lỗi và lặp lại.
+     * Chức năng: Nhập và kiểm tra ngày tháng hợp lệ trong khoảng [min, max].
+     * Luồng xử lý: Sử dụng SimpleDateFormat với setLenient(false) để parse ngày và kiểm tra nằm trong khoảng [min, max].
      *
      * @param messageInfo thông báo nhập dữ liệu
      * @param messageErrorOutOfRange thông báo khi ngoài phạm vi
      * @param messageErrorInvalidDate thông báo khi sai định dạng ngày
-     * @param REGEX định dạng ngày
+     * @param REGEX định dạng ngày (ví dụ dd/MM/yyyy)
      * @param min ngày nhỏ nhất
      * @param max ngày lớn nhất
-     * @return ngày hợp lệ
+     * @return đối tượng Date hợp lệ
      */
     public static Date getDate(
             String messageInfo,
@@ -136,7 +122,7 @@ public class Validator {
         while (true) {
             System.out.print(messageInfo);
             try {
-                Date date = dateFormat.parse(SCANNER.nextLine());
+                Date date = dateFormat.parse(SCANNER.nextLine().trim());
                 if (date.compareTo(min) >= 0 && date.compareTo(max) <= 0) {
                     return date;
                 }

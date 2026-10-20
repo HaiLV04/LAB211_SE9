@@ -1,21 +1,19 @@
 package model;
 
 /**
- * Chức năng: Enum TaskType định nghĩa các loại công việc cố định trong hệ thống (Code, Test, Design, Review).
- * Luồng tương tác: Hệ thống sử dụng Enum này để giới hạn tập giá trị hợp lệ, kiểm soát dữ liệu chặt chẽ hơn và tránh việc người dùng gán sai loại công việc.
+ * Chức năng: Enum định nghĩa các loại công việc (1: Code, 2: Test, 3: Design, 4: Review).
  */
 public enum TaskType {
     CODE(1, "Code"),
     TEST(2, "Test"),
     DESIGN(3, "Design"),
     REVIEW(4, "Review");
-    
+
     private int id;
     private String name;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo hằng số enum TaskType.
-     * Luồng xử lý (Làm như thế nào): Gán id và name cho thuộc tính của hằng số enum.
+     * Khởi tạo hằng số enum TaskType.
      *
      * @param id mã loại công việc
      * @param name tên loại công việc
@@ -26,15 +24,12 @@ public enum TaskType {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy ra đối tượng TaskType dựa vào ID đầu vào.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra ID truyền vào bằng cấu trúc switch-case.
-     * 2. Trả về Enum tương ứng (1: CODE, 2: TEST, 3: DESIGN, 4: REVIEW).
-     * 3. Ném lỗi AssertionError nếu ID không nằm trong khoảng 1-4.
+     * Chức năng: Lấy loại công việc tương ứng theo mã ID (1 đến 4).
+     * Luồng xử lý: Dùng switch-case kiểm tra mã và trả về enum tương ứng.
      * 
-     * @param ID số nguyên (từ 1 đến 4) đại diện cho loại công việc
-     * @return Đối tượng TaskType tương ứng (CODE, TEST, DESIGN, hoặc REVIEW)
-     * @throws AssertionError nếu truyền vào một ID không hợp lệ (không thuộc 1-4)
+     * @param ID số nguyên từ 1 đến 4
+     * @return đối tượng TaskType tương ứng
+     * @throws AssertionError nếu ID không nằm trong khoảng 1-4
      */
     public static TaskType getTaskTypeByID(int ID) {
         switch (ID) {
@@ -52,20 +47,18 @@ public enum TaskType {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mã ID của loại task.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính id của loại task.
+     * Lấy mã ID của loại task.
      *
-     * @return mã ID của loại task
+     * @return mã ID
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên của loại task.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính name của loại task.
+     * Lấy tên của loại task.
      *
-     * @return tên của loại task
+     * @return tên loại task
      */
     public String getName() {
         return name;

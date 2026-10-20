@@ -3,33 +3,24 @@ package view;
 import model.Task;
 
 /**
- * Chức năng: Lớp TaskInputer chịu trách nhiệm tương tác với người dùng để nhập thông tin cho một công việc.
- * Luồng tương tác: Tập hợp các dữ liệu hợp lệ thông qua lớp Validator, lưu vào đối tượng Task tạm thời trước khi trả về cho Controller.
+ * Chức năng: Thu thập thông tin nhập liệu cho một công việc (Task) từ bàn phím.
  */
 public class TaskInputer {
 
     private Task task;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng TaskInputer.
-     * Luồng xử lý (Làm như thế nào): Cấp phát bộ nhớ cho một đối tượng Task rỗng để sẵn sàng hứng dữ liệu.
+     * Khởi tạo đối tượng TaskInputer với một Task rỗng.
      */
     public TaskInputer() {
         task = new Task();
     }
 
     /**
-     * Chức năng (Làm gì): Yêu cầu người dùng nhập từng trường thông tin của Task và kiểm tra tính hợp lệ.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập Requirement Name với điều kiện không chứa ký tự đặc biệt.
-     * 2. Nhập Task Type với giới hạn từ 1 đến 4.
-     * 3. Nhập Date với định dạng dd-MM-yyyy.
-     * 4. Nhập Plan From từ 8.0 đến 17.0, kiểm tra phần thập phân bắt buộc là .0 hoặc .5.
-     * 5. Nhập Plan To lớn hơn Plan From ít nhất 0.5 giờ và tối đa 17.5, kiểm tra phần thập phân là .0 hoặc .5.
-     * 6. Nhập Assignee và Reviewer không chứa ký tự đặc biệt.
-     * 7. Trả về đối tượng Task chứa đầy đủ thông tin hợp lệ (chưa có ID).
+     * Chức năng: Hướng dẫn người dùng nhập các thông tin của Task từ bàn phím.
+     * Luồng xử lý: Lần lượt nhập và validate requirementName, taskTypeID, date, planFrom, planTo, assign, reviewer và trả về đối tượng Task.
      *
-     * @return Đối tượng Task chứa đầy đủ thông tin hợp lệ.
+     * @return đối tượng Task chứa thông tin vừa nhập
      */
     public Task input() {
         task.setRequirementName(Validator.getString("Requirement Name: ",

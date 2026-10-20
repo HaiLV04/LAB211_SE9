@@ -3,23 +3,19 @@ package main;
 import controller.TPBank;
 
 /**
- * Chức năng: Lớp chính chứa phương thức khởi chạy ứng dụng TPBank.
- * Luồng tương tác: Gọi đến lớp TPBank để bắt đầu chương trình.
+ * Chức năng: Điểm khởi chạy của chương trình mô phỏng đăng nhập TPBank.
  */
 public class Main {
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp Main.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Main mới.
+     * Hàm khởi tạo mặc định.
      */
     public Main() {
     }
 
     /**
-     * Chức năng (Làm gì): Điểm khởi chạy của chương trình TPBank.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng TPBank.
-     * 2. Gọi phương thức run() để kích hoạt ứng dụng.
+     * Chức năng: Khởi chạy chương trình TPBank.
+     * Luồng xử lý: Tạo đối tượng TPBank và gọi hàm run().
      *
      * @param args tham số dòng lệnh
      */

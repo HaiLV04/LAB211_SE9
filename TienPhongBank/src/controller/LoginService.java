@@ -1,72 +1,61 @@
 package controller;
 
-import model.Account;
 import java.util.ResourceBundle;
+import model.Account;
 import model.Data;
-import view.Helper;
 import model.IConstant;
+import view.Helper;
 import view.Validate;
 
 /**
- * Chức năng: Xử lý logic đăng nhập vào hệ thống.
- * Luồng tương tác: Yêu cầu người dùng nhập thông tin (tài khoản, mật khẩu, captcha), kiểm tra tính hợp lệ và xác thực với dữ liệu từ lớp Data.
+ * Chức năng: Xử lý logic đăng nhập và xác thực tài khoản đa ngôn ngữ.
  */
 public class LoginService {
 
     /**
-     * Chức năng (Làm gì): Thực hiện quy trình đăng nhập hệ thống TPBank với đa ngôn ngữ.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập và kiểm tra định dạng của tài khoản qua Validate.getString theo biểu thức chính quy ACCOUNT_NUMBER.
-     * 2. Nhập và kiểm tra định dạng của mật khẩu qua Validate.getString theo biểu thức chính quy PASSWORD.
-     * 3. Tạo mã Captcha ngẫu nhiên qua Helper.generateCaptcha và hiển thị ra màn hình.
-     * 4. Nhập và xác thực mã Captcha qua Validate.verifyCaptcha.
-     * 5. Gọi hàm authentication để kiểm tra tài khoản và mật khẩu, sau đó in thông báo đăng nhập thành công hoặc thất bại theo ngôn ngữ hiện tại.
+     * Chức năng: Thực hiện quy trình đăng nhập hệ thống TPBank theo ngôn ngữ được chọn.
+     * Luồng xử lý: Lần lượt nhập và kiểm tra tài khoản, mật khẩu, sinh và xác thực mã Captcha, sau đó thông báo kết quả đăng nhập.
      *
-     * @param resourceBundle gói tài nguyên đa ngôn ngữ ResourceBundle
+     * @param resourceBundle gói tài nguyên ngôn ngữ
      */
-    public void login(ResourceBundle resourceBundle){
+    public void login(ResourceBundle resourceBundle) {
         String account = Validate.getString(
                 resourceBundle.getString("account"),
                 resourceBundle.getString("accountInvalid"),
-                IConstant.ACCOUNT_NUMBER );
-        
+                IConstant.ACCOUNT_NUMBER);
+
         String password = Validate.getString(
                 resourceBundle.getString("password"),
                 resourceBundle.getString("passwordInvalid"),
-                IConstant.PASSWORD );
-        
+                IConstant.PASSWORD);
+
         String captchaGenerate = Helper.generateCaptcha(IConstant.CAPTCHA_LENGTH);
         System.out.println(resourceBundle.getString("captcha") + captchaGenerate);
-        
+
         Validate.verifyCaptcha(
-                resourceBundle.getString("inputCaptcha"), 
+                resourceBundle.getString("inputCaptcha"),
                 resourceBundle.getString("captchaInvalid"),
                 captchaGenerate
         );
 
-        
-        if(authentication(account, password)){
+        if (authentication(account, password)) {
             System.out.println(resourceBundle.getString("loginSuccess"));
         } else {
             System.out.println(resourceBundle.getString("loginFailed"));
         }
-        
     }
-    
+
     /**
-     * Chức năng (Làm gì): Xác thực thông tin tài khoản và mật khẩu người dùng với dữ liệu hệ thống.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Duyệt qua danh sách tài khoản hợp lệ trong Data.listAccount.
-     * 2. So sánh thông tin tài khoản và mật khẩu nhập vào với từng tài khoản trong danh sách.
-     * 3. Trả về true nếu trùng khớp, ngược lại trả về false khi duyệt hết danh sách mà không khớp.
+     * Chức năng: Xác thực số tài khoản và mật khẩu với dữ liệu hệ thống.
+     * Luồng xử lý: Duyệt danh sách Data.listAccount, trả về true nếu trùng cả số tài khoản và mật khẩu, ngược lại false.
      *
      * @param account số tài khoản cần xác thực
      * @param password mật khẩu cần xác thực
-     * @return true nếu xác thực thành công, ngược lại false
+     * @return true nếu thông tin chính xác, ngược lại false
      */
-    private boolean authentication(String account, String password){
-        for(Account a : Data.listAccount){
-            if(account.equals(a.getAccount()) && password.equals(a.getPassword())){
+    private boolean authentication(String account, String password) {
+        for (Account a : Data.listAccount) {
+            if (account.equals(a.getAccount()) && password.equals(a.getPassword())) {
                 return true;
             }
         }

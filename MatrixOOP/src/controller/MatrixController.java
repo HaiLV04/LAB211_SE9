@@ -11,23 +11,15 @@ public class MatrixController {
     private final MatrixView view;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo controller cho chương trình Matrix.
-     * Luồng xử lý (Làm như thế nào): Khởi tạo đối tượng MatrixView.
+     * Khởi tạo MatrixController với MatrixView.
      */
     public MatrixController() {
         this.view = new MatrixView();
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Hiển thị menu chức năng (Cộng, Trừ, Nhân, Thoát) và nhận lựa chọn.
-     * 2. Tùy theo lựa chọn để thực hiện:
-     *    - Case 1: Cộng hai ma trận có cùng kích thước.
-     *    - Case 2: Trừ hai ma trận có cùng kích thước.
-     *    - Case 3: Nhân hai ma trận (số cột ma trận 1 = số hàng ma trận 2).
-     *    - Case 4: Thoát chương trình.
-     * 3. Lặp lại cho đến khi người dùng chọn Thoát.
+     * Chức năng: Điều khiển luồng thực thi chính với vòng lặp menu.
+     * Luồng xử lý: Hiển thị menu, nhận lựa chọn từ người dùng và điều hướng thực hiện Cộng, Trừ, Nhân hoặc Thoát.
      */
     public void run() {
         while (true) {
@@ -49,13 +41,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý chức năng cộng hai ma trận.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập số hàng và cột của ma trận 1.
-     * 2. Nhập ma trận 1.
-     * 3. Khóa số hàng và cột ma trận 2 bằng ma trận 1 và nhập ma trận 2.
-     * 4. Gọi phương thức add() trên ma trận 1.
-     * 5. Hiển thị kết quả qua view.
+     * Chức năng: Xử lý chức năng cộng hai ma trận.
+     * Luồng xử lý: Nhập ma trận 1, khóa kích thước ma trận 2 bằng ma trận 1, thực hiện phép cộng và hiển thị kết quả.
      */
     private void handleAddition() {
         view.displayMessage("---------Addition---------");
@@ -76,13 +63,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý chức năng trừ hai ma trận.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập số hàng và cột của ma trận 1.
-     * 2. Nhập ma trận 1.
-     * 3. Khóa số hàng và cột ma trận 2 bằng ma trận 1 và nhập ma trận 2.
-     * 4. Gọi phương thức subtract() trên ma trận 1.
-     * 5. Hiển thị kết quả qua view.
+     * Chức năng: Xử lý chức năng trừ hai ma trận.
+     * Luồng xử lý: Nhập ma trận 1, khóa kích thước ma trận 2 bằng ma trận 1, thực hiện phép trừ và hiển thị kết quả.
      */
     private void handleSubtraction() {
         view.displayMessage("---------Subtraction---------");
@@ -103,14 +85,8 @@ public class MatrixController {
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý chức năng nhân hai ma trận.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Nhập số hàng và cột của ma trận 1.
-     * 2. Nhập ma trận 1.
-     * 3. Khóa số hàng ma trận 2 bằng số cột ma trận 1, cho phép nhập số cột ma trận 2 tự do (> 0).
-     * 4. Nhập ma trận 2.
-     * 5. Gọi phương thức multiply() trên ma trận 1.
-     * 6. Hiển thị kết quả qua view.
+     * Chức năng: Xử lý chức năng nhân hai ma trận.
+     * Luồng xử lý: Nhập ma trận 1, khóa số hàng ma trận 2 bằng số cột ma trận 1, thực hiện phép nhân và hiển thị kết quả.
      */
     private void handleMultiplication() {
         view.displayMessage("---------Multiplication---------");

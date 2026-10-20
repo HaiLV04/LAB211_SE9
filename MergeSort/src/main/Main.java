@@ -8,17 +8,14 @@ import controller.ArrayController;
 public class Main {
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp Main.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng Main mới.
+     * Hàm khởi tạo mặc định.
      */
     public Main() {
     }
 
     /**
-     * Chức năng (Làm gì): Bắt đầu chương trình sắp xếp trộn.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng ArrayController.
-     * 2. Gọi phương thức run() để thực thi chương trình.
+     * Chức năng: Khởi chạy chương trình sắp xếp trộn.
+     * Luồng xử lý: Tạo đối tượng ArrayController và gọi hàm run().
      *
      * @param args tham số dòng lệnh
      */

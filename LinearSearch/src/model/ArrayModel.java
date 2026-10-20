@@ -4,24 +4,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Chức năng: Xử lý dữ liệu mảng và thuật toán Linear Search.
+ * Chức năng: Quản lý dữ liệu mảng và thuật toán tìm kiếm tuần tự (Linear Search).
  */
 public class ArrayModel {
 
     private int[] array;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng ArrayModel mới với thuộc tính array chưa được cấp phát.
+     * Khởi tạo đối tượng ArrayModel.
      */
     public ArrayModel() {
     }
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng ArrayModel từ một mảng có sẵn.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra mảng đầu vào không được null.
-     * 2. Gán mảng đầu vào cho thuộc tính của lớp.
+     * Khởi tạo ArrayModel từ mảng có sẵn.
      *
      * @param array mảng đầu vào
      * @throws Exception nếu mảng đầu vào là null
@@ -34,34 +30,25 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng Random.
-     * 2. Khởi tạo mảng với kích thước chỉ định.
-     * 3. Tạo các giá trị ngẫu nhiên từ 0 đến n - 1 cho từng phần tử của mảng.
+     * Chức năng: Tạo mảng số nguyên ngẫu nhiên theo kích thước chỉ định.
+     * Luồng xử lý: Cấp phát mảng kích thước n và sinh giá trị ngẫu nhiên từ 0 đến n - 1.
      *
-     * @param n số lượng phần tử trong mảng
+     * @param n số lượng phần tử
      */
     public void generateRandomArray(int n) {
         Random random = new Random();
         array = new int[n];
-
         for (int i = 0; i < n; i++) {
             array[i] = random.nextInt(n);
         }
     }
 
     /**
-     * Chức năng (Làm gì): Thực hiện tìm kiếm tuần tự (Linear Search) để tìm vị trí xuất hiện đầu tiên của giá trị cần tìm.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra mảng null hoặc rỗng, trả về -1.
-     * 2. Duyệt qua từng phần tử trong mảng bằng vòng lặp.
-     * 3. So sánh phần tử hiện tại với giá trị cần tìm (key).
-     * 4. Nếu khớp, lập tức trả về chỉ số hiện tại.
-     * 5. Nếu duyệt hết mảng mà không tìm thấy, trả về -1.
+     * Chức năng: Tìm vị trí xuất hiện đầu tiên của giá trị bằng Linear Search.
+     * Luồng xử lý: Duyệt tuần tự mảng từ đầu đến cuối, nếu gặp phần tử bằng key thì trả về chỉ số, duyệt hết không thấy trả về -1.
      *
-     * @param key giá trị cần tìm kiếm
-     * @return vị trí đầu tiên chứa key, trả về -1 nếu không tìm thấy
+     * @param key giá trị cần tìm
+     * @return vị trí đầu tiên tìm thấy, hoặc -1 nếu không có
      */
     public int linearSearch(int key) {
         if (array == null || array.length == 0) {
@@ -77,16 +64,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Tìm tất cả vị trí xuất hiện của giá trị cần tìm trong mảng bằng Linear Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo danh sách ArrayList để lưu các chỉ số tìm được.
-     * 2. Duyệt qua toàn bộ phần tử của mảng.
-     * 3. Nếu phần tử tại vị trí đang xét bằng với key, thêm vị trí đó vào danh sách.
-     * 4. Chuyển đổi danh sách các chỉ số từ ArrayList sang mảng số nguyên int[].
-     * 5. Trả về mảng số nguyên chứa các chỉ số, hoặc mảng rỗng nếu không tìm thấy.
+     * Chức năng: Tìm tất cả vị trí xuất hiện của giá trị trong mảng bằng Linear Search.
+     * Luồng xử lý: Duyệt qua toàn bộ phần tử của mảng, gom các vị trí khớp key vào danh sách và trả về mảng kết quả.
      *
-     * @param key giá trị cần tìm kiếm
-     * @return mảng chứa tất cả chỉ số (index) tìm được, trả về mảng rỗng nếu không tìm thấy
+     * @param key giá trị cần tìm
+     * @return mảng chứa các chỉ số tìm được, hoặc mảng rỗng nếu không tìm thấy
      */
     public int[] findAllIndex(int key) {
         if (array == null || array.length == 0) {
@@ -108,10 +90,9 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mảng số nguyên hiện tại.
-     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên hiện tại của đối tượng.
+     * Lấy mảng số nguyên hiện tại.
      *
-     * @return mảng số nguyên hiện tại
+     * @return mảng số nguyên
      */
     public int[] getArray() {
         return array;

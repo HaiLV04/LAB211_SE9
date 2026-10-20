@@ -4,8 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Chức năng: Đại diện cho thực thể tác vụ (Task) trong hệ thống.
- * Luồng tương tác: Lưu trữ các thông tin cơ bản của một task cùng các phương thức getter và setter.
+ * Chức năng: Lưu trữ thông tin một tác vụ (Task) trong hệ thống.
  */
 public class Task {
     private int id;
@@ -18,8 +17,7 @@ public class Task {
     private String reviewer;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Task với đầy đủ các tham số.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị các tham số truyền vào cho các thuộc tính tương ứng của lớp.
+     * Khởi tạo đối tượng Task với đầy đủ thông tin.
      * 
      * @param id mã của task
      * @param taskTypeID mã loại task
@@ -44,15 +42,13 @@ public class Task {
     }
     
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Task không tham số.
-     * Luồng xử lý (Làm như thế nào): Tạo mới một đối tượng Task với các thuộc tính mặc định.
+     * Khởi tạo đối tượng Task mặc định.
      */
     public Task() {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy ID của task.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính id của task.
+     * Lấy ID của task.
      *
      * @return ID của task
      */
@@ -61,8 +57,7 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập ID của task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính id.
+     * Thiết lập ID của task.
      *
      * @param id ID cần gán
      */
@@ -71,8 +66,7 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mã loại task (taskTypeID).
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính taskTypeID của task.
+     * Lấy mã loại task.
      *
      * @return mã loại task
      */
@@ -81,38 +75,34 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập mã loại task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính taskTypeID.
+     * Thiết lập mã loại task.
      *
-     * @param taskTypeID mã loại task cần gán
+     * @param taskTypeID mã loại task
      */
     public void setTaskTypeID(int taskTypeID) {
         this.taskTypeID = taskTypeID;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên yêu cầu của task.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính requirementName của task.
+     * Lấy tên yêu cầu của task.
      *
-     * @return tên yêu cầu của task
+     * @return tên yêu cầu
      */
     public String getRequirementName() {
         return requirementName;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập tên yêu cầu của task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính requirementName.
+     * Thiết lập tên yêu cầu của task.
      *
-     * @param requirementName tên yêu cầu cần gán
+     * @param requirementName tên yêu cầu
      */
     public void setRequirementName(String requirementName) {
         this.requirementName = requirementName;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy ngày thực hiện task.
-     * Luồng xử lý (Làm như thế nào): Trả về thuộc tính date của task.
+     * Lấy ngày thực hiện task.
      *
      * @return ngày thực hiện
      */
@@ -121,18 +111,16 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập ngày thực hiện task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính date.
+     * Thiết lập ngày thực hiện task.
      *
-     * @param date ngày thực hiện cần gán
+     * @param date ngày thực hiện
      */
     public void setDate(Date date) {
         this.date = date;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy thời gian bắt đầu dự kiến của task.
-     * Luồng xử lý (Làm như thế nào): Trả về giá trị thuộc tính planFrom.
+     * Lấy thời gian bắt đầu dự kiến.
      *
      * @return thời gian bắt đầu
      */
@@ -141,18 +129,16 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập thời gian bắt đầu dự kiến của task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính planFrom.
+     * Thiết lập thời gian bắt đầu dự kiến.
      *
-     * @param planFrom thời gian bắt đầu cần gán
+     * @param planFrom thời gian bắt đầu
      */
     public void setPlanFrom(double planFrom) {
         this.planFrom = planFrom;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy thời gian kết thúc dự kiến của task.
-     * Luồng xử lý (Làm như thế nào): Trả về giá trị thuộc tính planTo.
+     * Lấy thời gian kết thúc dự kiến.
      *
      * @return thời gian kết thúc
      */
@@ -161,69 +147,60 @@ public class Task {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập thời gian kết thúc dự kiến của task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính planTo.
+     * Thiết lập thời gian kết thúc dự kiến.
      *
-     * @param planTo thời gian kết thúc cần gán
+     * @param planTo thời gian kết thúc
      */
     public void setPlanTo(double planTo) {
         this.planTo = planTo;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên người được phân công (Assignee).
-     * Luồng xử lý (Làm như thế nào): Trả về giá trị thuộc tính assign.
+     * Lấy người được phân công (Assignee).
      *
-     * @return tên người được phân công
+     * @return người được phân công
      */
     public String getAssign() {
         return assign;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập người được phân công thực hiện task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính assign.
+     * Thiết lập người được phân công thực hiện task.
      *
-     * @param assign tên người được phân công
+     * @param assign người được phân công
      */
     public void setAssign(String assign) {
         this.assign = assign;
     }
 
     /**
-     * Chức năng (Làm gì): Lấy tên người duyệt/đánh giá (Reviewer).
-     * Luồng xử lý (Làm như thế nào): Trả về giá trị thuộc tính reviewer.
+     * Lấy người đánh giá (Reviewer).
      *
-     * @return tên người đánh giá
+     * @return người đánh giá
      */
     public String getReviewer() {
         return reviewer;
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập người đánh giá task.
-     * Luồng xử lý (Làm như thế nào): Gán giá trị mới cho thuộc tính reviewer.
+     * Thiết lập người đánh giá task.
      *
-     * @param reviewer tên người đánh giá
+     * @param reviewer người đánh giá
      */
     public void setReviewer(String reviewer) {
         this.reviewer = reviewer;
     }
 
     /**
-     * Chức năng (Làm gì): Ghi đè phương thức toString để trả về chuỗi định dạng của Task.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo SimpleDateFormat để định dạng ngày theo mẫu "dd-MM-yyyy".
-     * 2. Sử dụng String.format để căn chỉnh các cột thông tin của Task (ID, tên, loại task, ngày, thời lượng, người làm, người duyệt).
-     * 3. Trả về chuỗi kết quả đã định dạng.
+     * Định dạng thông tin Task thành một dòng hiển thị trong bảng.
      * 
-     * @return chuỗi định dạng chứa đầy đủ thông tin Task để hiển thị bảng.
+     * @return chuỗi định dạng đầy đủ thông tin Task
      */
     @Override
     public String toString() { 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        return String.format("%-5d%-15s%-15s%-15s%-15.1f%-15s%-15s\n", getId(),getRequirementName(),
+        return String.format("%-5d%-15s%-15s%-15s%-15.1f%-15s%-15s\n", getId(), getRequirementName(),
                 TaskType.getTaskTypeByID(taskTypeID).getName(),
-                dateFormat.format(date),getPlanTo()-getPlanFrom(),getAssign(),getReviewer());
+                dateFormat.format(date), getPlanTo() - getPlanFrom(), getAssign(), getReviewer());
     }
 }

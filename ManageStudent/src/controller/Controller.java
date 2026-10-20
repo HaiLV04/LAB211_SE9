@@ -1,74 +1,57 @@
 package controller;
 
-import model.ManageStudent;
-import view.StudentInputer;
-import model.Course;
-import model.Student;
 import java.util.ArrayList;
-import view.Validator;
+import model.Course;
+import model.ManageStudent;
+import model.Student;
+import view.StudentView;
 
 /**
- * Chức năng: Lớp Controller điều khiển luồng thực thi của chương trình quản lý sinh viên bao gồm: tạo mới, tìm kiếm, cập nhật, xóa và thống kê.
- * Luồng tương tác: Được Main gọi để phản hồi lựa chọn menu. Giao tiếp với ManageStudent để thao tác dữ liệu, và StudentInputer để nhập thông tin từ người dùng.
+ * Chức năng: Điều khiển luồng thực thi chương trình quản lý sinh viên (tạo mới, tìm kiếm, cập nhật, xóa, thống kê).
  */
 public class Controller {
 
-    /**
-     * Đối tượng quản lý danh sách sinh viên.
-     */
     private ManageStudent studentManager;
-    /**
-     * Đối tượng hỗ trợ nhập dữ liệu sinh viên.
-     */
-    private StudentInputer inputer;
+    private StudentView view;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo Controller.
-     * Luồng xử lý (Làm như thế nào): Khởi tạo đối tượng ManageStudent để quản lý danh sách sinh viên.
+     * Khởi tạo Controller với đối tượng quản lý dữ liệu (Model) và hiển thị (View).
      */
     public Controller() {
         studentManager = new ManageStudent();
+        view = new StudentView();
     }
 
     /**
-     * Chức năng (Làm gì): Tạo mới sinh viên.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lặp việc khởi tạo StudentInputer để bắt đầu nhập.
-     * 2. Nhập ID sinh viên.
-     * 3. Kiểm tra xem ID đã tồn tại hay chưa. Nếu chưa tồn tại, yêu cầu nhập tên mới. Nếu đã tồn tại, tự động điền tên cũ.
-     * 4. Nhập học kỳ và môn học.
-     * 5. Gọi studentManager để thêm sinh viên. Nếu không thành công thì ném Exception.
-     * 6. Nếu số lượng sinh viên > 5, hỏi người dùng xem có muốn tiếp tục thêm không, nếu nhập N thì dừng lặp.
+     * Chức năng: Tạo mới sinh viên và thêm vào danh sách.
+     * Luồng xử lý: Nhập thông tin qua view (tự điền tên nếu ID đã có), kiểm tra trùng bản ghi và hỏi tiếp tục khi danh sách > 5.
      *
-     * @throws Exception nếu thêm sinh viên thất bại (trùng lặp bản ghi)
+     * @throws Exception nếu trùng lặp bản ghi
      */
     public void createStudent() throws Exception {
         while (true) {
-            // Tạo đối tượng nhập dữ liệu mới
-            inputer = new StudentInputer();
-            // Nhập ID sinh viên
-            inputer.inputID();
-            Student student = inputer.getStudent();
-            // Nếu ID chưa tồn tại thì nhập tên mới
-            if (studentManager.getListStudentById(student.getId()).isEmpty()) {
-                inputer.inputStudentName();
+            String id = view.inputId();
+            String name;
+
+            // Nếu ID đã tồn tại thì dùng lại tên cũ, ngược lại nhập tên mới
+            if (studentManager.getListStudentById(id).isEmpty()) {
+                name = view.inputStudentName();
             } else {
-                // Tự động lấy tên từ bản ghi đã có
-                String name = studentManager.getListStudentById(student.getId()).get(0).getStudentName();
-                student.setStudentName(name);
-                System.out.println("Name: " + name);
+                name = studentManager.getListStudentById(id).get(0).getStudentName();
+                view.displayName(name);
             }
-            // Nhập học kỳ và môn học 
-            inputer.inputSemester();
-            // Thêm sinh viên vào danh sách
-            inputer.inputCourseName();
-            // Khi số lượng sinh viên lớn hơn 5 thì hỏi tiếp tục hay không
+
+            String semester = view.inputSemester();
+            Course course = view.inputCourseName();
+            Student student = new Student(id, name, semester, course);
+
             if (!studentManager.add(student)) {
                 throw new Exception("Can not create Student!");
             }
+
+            // Hỏi tiếp tục nếu danh sách đã có trên 5 sinh viên
             if (studentManager.getList().size() > 5) {
-                String choice = Validator.getString("Do you continue ( Y or N)? ", "Just Y or N", "[YNyn]");
-                if (choice.equalsIgnoreCase("N")) {
+                if (!view.getContinueChoice()) {
                     break;
                 }
             }
@@ -76,114 +59,88 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Tìm kiếm sinh viên theo tên (hoặc một phần) và sắp xếp kết quả.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Yêu cầu người dùng nhập tên (chỉ gồm chữ cái và khoảng trắng).
-     * 2. Gọi studentManager để lấy danh sách sinh viên phù hợp.
-     * 3. Nếu danh sách rỗng, ném Exception.
-     * 4. Khởi tạo một đối tượng ManageStudent mới để giữ kết quả, sau đó gọi hàm sortStudentsByName() để sắp xếp.
-     * 5. In kết quả đã được sắp xếp ra màn hình.
+     * Chức năng: Tìm kiếm sinh viên theo tên và sắp xếp kết quả.
+     * Luồng xử lý: Nhập từ khóa tên qua view, lấy danh sách phù hợp từ model, sắp xếp tăng dần và hiển thị qua view.
      *
      * @throws Exception nếu không tìm thấy sinh viên
      */
     public void findAndSort() throws Exception {
-        // Nhập tên cần tìm
-        String name = Validator.getString("Enter name student: ", "Invalid!", "[A-Za-z\\s]+");
-        // Lấy danh sách sinh viên phù hợp
+        String name = view.inputSearchName();
         ArrayList<Student> list = studentManager.getListStudentByName(name);
-        // Kiểm tra kết quả tìm kiếm
+
         if (list.isEmpty()) {
             throw new Exception("Can not found name!");
         }
-        // Sắp xếp danh sách theo tên
+
         ManageStudent result = new ManageStudent();
         result.setList(list);
         result.sortStudentsByName();
-        // Hiển thị kết quả
-        System.out.println(result.toString());
+        view.displayStudentList(result);
     }
 
     /**
-     * Chức năng (Làm gì): Cập nhật hoặc xóa thông tin sinh viên theo ID.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Yêu cầu nhập ID cần tìm.
-     * 2. Tìm danh sách sinh viên có cùng ID. Nếu trống ném Exception.
-     * 3. Hiển thị danh sách các bản ghi tìm được và yêu cầu chọn một bản ghi cụ thể.
-     * 4. Hỏi người dùng muốn Update (U) hay Delete (D).
-     * 5. Nếu Update: Nhập ID mới, nếu ID mới đã tồn tại thì lấy tên cũ, nếu chưa thì nhập tên mới. Nhập kỳ học, môn học mới và tiến hành update thông qua studentManager.
-     * 6. Nếu Delete: Tiến hành xóa bản ghi đã chọn thông qua studentManager.
+     * Chức năng: Cập nhật hoặc xóa thông tin sinh viên theo ID.
+     * Luồng xử lý: Tìm các bản ghi theo ID, cho người dùng chọn bản ghi và lựa chọn Cập nhật (U) hoặc Xóa (D).
      *
-     * @throws Exception nếu không tìm thấy ID, chọn vượt khoảng hoặc thông tin cập nhật không hợp lệ
+     * @throws Exception nếu không tìm thấy ID hoặc thông tin cập nhật không hợp lệ
      */
     public void updateOrDelete() throws Exception {
-        inputer = new StudentInputer();
-        // Nhập ID cần tìm
-        String id = Validator.getString("Enter id: ", "Invalid!", "[Ss]\\d+");
-        // Tìm danh sách sinh viên có cùng ID
+        String id = view.inputSearchId();
         ArrayList<Student> list = studentManager.getListStudentById(id);
+
         if (list.isEmpty()) {
             throw new Exception("Can not found id");
         }
-        // Hiển thị các bản ghi tìm được
+
         ManageStudent result = new ManageStudent();
         result.setList(list);
-        System.out.println(result.toString());
-        // Chọn bản ghi cần xử lý
-        int choice = Validator.getInt("Enter record your choice: ", "Just be 1-> " + list.size(),
-                "Invalid!", 1, list.size());
-        Student student = list.get(choice - 1);
-        System.out.println(student);
+        view.displayStudentList(result);
 
-        // Chọn cập nhật hoặc xóa
-        String choose = Validator.getString("Do you want Update(U) or Delete(D): ",
-                "Just U or D", "[UDud]");
+        int choice = view.getRecordChoice(list.size());
+        Student student = list.get(choice - 1);
+        view.displayStudent(student);
+
+        String choose = view.getUpdateOrDeleteChoice();
         if (choose.equalsIgnoreCase("U")) {
-            // Nhập thông tin mới
-            inputer.inputID();
-            Student newStudent = inputer.getStudent();
-            // Nếu ID đã tồn tại thì sử dụng tên cũ
-            if (studentManager.getListStudentById(newStudent.getId()).isEmpty()) {
-                inputer.inputStudentName();
+            String newId = view.inputId();
+            String name;
+
+            if (studentManager.getListStudentById(newId).isEmpty()) {
+                name = view.inputStudentName();
             } else {
-                String name = studentManager.getListStudentById(newStudent.getId()).get(0).getStudentName();
-                newStudent.setStudentName(name);
-                System.out.println("Name: " + name);
+                name = studentManager.getListStudentById(newId).get(0).getStudentName();
+                view.displayName(name);
             }
-            // Nhập học kỳ và môn học mới
-            inputer.inputSemester();
-            inputer.inputCourseName();
+
+            String semester = view.inputSemester();
+            Course course = view.inputCourseName();
+            Student newStudent = new Student(newId, name, semester, course);
+
             studentManager.update(student, newStudent);
-            // Cập nhật dữ liệu
         } else {
-            // Xóa bản ghi đã chọn
             studentManager.delete(student);
         }
     }
 
     /**
-     * Chức năng (Làm gì): Hiển thị báo cáo thống kê số lần học từng môn của các sinh viên.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Gọi studentManager.report() để tạo chuỗi báo cáo.
-     * 2. Nếu trả về null (hoặc không hợp lệ) thì ném Exception.
-     * 3. In kết quả chuỗi thống kê ra màn hình.
+     * Chức năng: Hiển thị báo cáo thống kê môn học của sinh viên.
+     * Luồng xử lý: Lấy chuỗi thống kê từ model và hiển thị ra màn hình qua view.
      *
      * @throws Exception nếu danh sách sinh viên rỗng
      */
     public void report() throws Exception {
-        // Tạo báo cáo
         String result = studentManager.report();
         if (result == null) {
             throw new Exception("List is empty!");
         }
-        // Hiển thị báo cáo
-        System.out.println(result);
+        view.displayReport(result);
     }
 
     /**
-     * Chức năng (Làm gì): Tạo dữ liệu mẫu để kiểm thử chương trình nhanh chóng.
-     * Luồng xử lý (Làm như thế nào): Lần lượt khởi tạo và thêm một vài sinh viên mẫu vào danh sách qua studentManager.
+     * Chức năng: Khởi tạo dữ liệu sinh viên mẫu để kiểm thử.
+     * Luồng xử lý: Thêm một số sinh viên mẫu vào danh sách quản lý.
      *
-     * @throws Exception nếu dữ liệu thêm bị trùng
+     * @throws Exception nếu dữ liệu thêm bị trùng lặp
      */
     public void generateStudent() throws Exception {
         studentManager.add(new Student("s1", "Nguyen Quan", "Fall2023", Course.JAVA));
@@ -202,55 +159,46 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Sinh dữ liệu mẫu ban đầu.
-     * 2. Hiển thị menu cho đến khi người dùng chọn Exit (5).
-     * 3. Điều hướng thực thi các chức năng 1-4 (Create, Find and Sort, Update/Delete, Report).
+     * Chức năng: Điều khiển luồng thực thi chính của chương trình.
+     * Luồng xử lý: Sinh dữ liệu mẫu, lặp hiển thị menu và điều hướng thực thi các chức năng 1-5 theo lựa chọn.
      */
     public void run() {
         try {
             generateStudent();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            view.displayMessage(ex.getMessage());
         }
         while (true) {
-            int choice = Validator.getInt("WELCOME TO STUDENT MANAGEMENT\n"
-                    + "1.\tCreate\n"
-                    + "2.\tFind and Sort\n"
-                    + "3.\tUpdate/Delete\n"
-                    + "4.\tReport\n"
-                    + "5.\tExit\n"
-                    + "Enter your choice: ", "Just be 1->5", "Invalid!", 1, 5);
+            int choice = view.getMenuChoice();
             switch (choice) {
                 case 1:
                     try {
                         createStudent();
-                        System.out.println("Add success!");
+                        view.displayMessage("Add success!");
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        view.displayMessage(ex.getMessage());
                     }
                     break;
                 case 2:
                     try {
                         findAndSort();
-                        System.out.println("Find and sort success!");
+                        view.displayMessage("Find and sort success!");
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        view.displayMessage(ex.getMessage());
                     }
                     break;
                 case 3:
                     try {
                         updateOrDelete();
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        view.displayMessage(ex.getMessage());
                     }
                     break;
                 case 4:
                     try {
                         report();
                     } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                        view.displayMessage(ex.getMessage());
                     }
                     break;
                 case 5:

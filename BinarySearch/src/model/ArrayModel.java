@@ -3,44 +3,35 @@ package model;
 import java.util.Random;
 
 /**
- * Chức năng: Xử lý dữ liệu mảng và thuật toán tìm kiếm nhị phân (Binary Search).
+ * Chức năng: Quản lý dữ liệu mảng và thuật toán tìm kiếm nhị phân (Binary Search).
  */
 public class ArrayModel {
 
     private int[] array;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo mặc định cho lớp ArrayModel.
-     * Luồng xử lý (Làm như thế nào): Tạo một đối tượng ArrayModel mới với thuộc tính array chưa được cấp phát.
+     * Khởi tạo đối tượng ArrayModel.
      */
     public ArrayModel() {
     }
 
     /**
-     * Chức năng (Làm gì): Tạo một mảng số nguyên ngẫu nhiên dựa trên kích thước đầu vào.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng Random.
-     * 2. Cấp phát mảng với kích thước chỉ định.
-     * 3. Tạo các giá trị ngẫu nhiên trong khoảng [-n, n] cho từng phần tử của mảng.
+     * Chức năng: Tạo mảng số nguyên ngẫu nhiên theo kích thước chỉ định.
+     * Luồng xử lý: Cấp phát mảng kích thước n và sinh giá trị ngẫu nhiên trong khoảng [-n, n].
      *
-     * @param n số lượng phần tử trong mảng
+     * @param n số lượng phần tử
      */
     public void generateRandomArray(int n) {
         Random random = new Random();
         array = new int[n];
-
         for (int i = 0; i < n; i++) {
             array[i] = random.nextInt(2 * n + 1) - n;
         }
     }
 
     /**
-     * Chức năng (Làm gì): Sắp xếp mảng theo thứ tự tăng dần sử dụng thuật toán Bubble Sort.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại.
-     * 2. Lặp lại việc so sánh các phần tử kề nhau cho đến khi không cần hoán đổi.
-     * 3. So sánh các phần tử kề nhau và di chuyển giá trị lớn hơn sang phải.
-     * 4. Dừng sớm nếu mảng đã được sắp xếp.
+     * Chức năng: Sắp xếp mảng tăng dần bằng thuật toán Bubble Sort.
+     * Luồng xử lý: So sánh từng cặp phần tử liền kề và đổi chỗ nếu đứng sai thứ tự, dừng sớm nếu mảng đã sắp xếp xong.
      */
     public void bubbleSort() {
         if (array == null || array.length < 2) {
@@ -65,19 +56,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Tìm kiếm giá trị trong mảng đã sắp xếp sử dụng thuật toán Binary Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về -1.
-     * 2. Khởi tạo hai con trỏ: left = 0 và right = array.length - 1.
-     * 3. Lặp khi left <= right:
-     *    a. Tính chỉ số phần tử ở giữa: mid = left + (right - left) / 2.
-     *    b. Nếu array[mid] == key: trả về chỉ số mid.
-     *    c. Nếu key < array[mid]: tìm kiếm ở nửa bên trái (right = mid - 1).
-     *    d. Nếu key > array[mid]: tìm kiếm ở nửa bên phải (left = mid + 1).
-     * 4. Nếu left > right mà không tìm thấy: trả về -1.
+     * Chức năng: Tìm kiếm một phần tử trong mảng bằng thuật toán Binary Search.
+     * Luồng xử lý: Thu hẹp khoảng tìm kiếm [left, right] dựa vào phần tử giữa mid, trả về vị trí tìm thấy hoặc -1 nếu không có.
      *
-     * @param key giá trị cần tìm kiếm
-     * @return chỉ số của phần tử nếu tìm thấy, hoặc -1 nếu không tìm thấy
+     * @param key giá trị cần tìm
+     * @return chỉ số phần tử tìm thấy, hoặc -1 nếu không tìm thấy
      */
     public int binarySearch(int key) {
         if (array == null || array.length == 0) {
@@ -90,37 +73,23 @@ public class ArrayModel {
         while (left <= right) {
             int mid = left + (right - left) / 2;
 
-            // 1. Nếu giá trị cần tìm trùng với phần tử ở giữa, trả về chỉ số
             if (array[mid] == key) {
                 return mid;
-            }
-            // 2. Nếu giá trị cần tìm nhỏ hơn phần tử ở giữa, tiếp tục tìm ở nửa bên trái
-            else if (key < array[mid]) {
+            } else if (key < array[mid]) {
                 right = mid - 1;
-            }
-            // 3. Nếu giá trị cần tìm lớn hơn phần tử ở giữa, tiếp tục tìm ở nửa bên phải
-            else {
+            } else {
                 left = mid + 1;
             }
         }
 
-        // Không tìm thấy phần tử trong mảng (left > right)
         return -1;
     }
 
     /**
-     * Chức năng (Làm gì): Tìm vị trí xuất hiện đầu tiên của giá trị trong mảng đã sắp xếp sử dụng Binary Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về -1.
-     * 2. Khởi tạo con trỏ left = 0, right = array.length - 1 và firstIndex = -1.
-     * 3. Lặp khi left <= right:
-     *    a. Tính mid = left + (right - left) / 2.
-     *    b. Nếu array[mid] == key: ghi nhận firstIndex = mid, thu hẹp tìm kiếm sang nửa bên trái (right = mid - 1).
-     *    c. Nếu key < array[mid]: thu hẹp sang nửa bên trái (right = mid - 1).
-     *    d. Nếu key > array[mid]: thu hẹp sang nửa bên phải (left = mid + 1).
-     * 4. Trả về firstIndex.
+     * Chức năng: Tìm vị trí xuất hiện đầu tiên của giá trị trong mảng đã sắp xếp.
+     * Luồng xử lý: Dùng Binary Search, khi tìm thấy ghi nhận vị trí và tiếp tục tìm về nửa bên trái.
      *
-     * @param key giá trị cần tìm kiếm
+     * @param key giá trị cần tìm
      * @return chỉ số đầu tiên tìm thấy, hoặc -1 nếu không tìm thấy
      */
     public int findFirstIndex(int key) {
@@ -149,18 +118,10 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Tìm vị trí xuất hiện cuối cùng của giá trị trong mảng đã sắp xếp sử dụng Binary Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về -1.
-     * 2. Khởi tạo con trỏ left = 0, right = array.length - 1 và lastIndex = -1.
-     * 3. Lặp khi left <= right:
-     *    a. Tính mid = left + (right - left) / 2.
-     *    b. Nếu array[mid] == key: ghi nhận lastIndex = mid, thu hẹp tìm kiếm sang nửa bên phải (left = mid + 1).
-     *    c. Nếu key < array[mid]: thu hẹp sang nửa bên trái (right = mid - 1).
-     *    d. Nếu key > array[mid]: thu hẹp sang nửa bên phải (left = mid + 1).
-     * 4. Trả về lastIndex.
+     * Chức năng: Tìm vị trí xuất hiện cuối cùng của giá trị trong mảng đã sắp xếp.
+     * Luồng xử lý: Dùng Binary Search, khi tìm thấy ghi nhận vị trí và tiếp tục tìm về nửa bên phải.
      *
-     * @param key giá trị cần tìm kiếm
+     * @param key giá trị cần tìm
      * @return chỉ số cuối cùng tìm thấy, hoặc -1 nếu không tìm thấy
      */
     public int findLastIndex(int key) {
@@ -189,18 +150,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Tìm tất cả vị trí xuất hiện của giá trị trong mảng đã sắp xếp sử dụng thuật toán Binary Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc rỗng thì trả về mảng rỗng.
-     * 2. Tìm chỉ số xuất hiện đầu tiên (firstIndex) bằng Binary Search qua findFirstIndex(key).
-     * 3. Nếu không tìm thấy (firstIndex == -1), trả về mảng rỗng int[0].
-     * 4. Tìm chỉ số xuất hiện cuối cùng (lastIndex) bằng Binary Search qua findLastIndex(key).
-     * 5. Vì mảng đã sắp xếp tăng dần, mọi phần tử bằng key nằm liên tục từ firstIndex đến lastIndex.
-     * 6. Khởi tạo mảng int[] có kích thước (lastIndex - firstIndex + 1).
-     * 7. Điền các chỉ số từ firstIndex đến lastIndex vào mảng kết quả và trả về.
+     * Chức năng: Tìm tất cả vị trí xuất hiện của giá trị trong mảng đã sắp xếp.
+     * Luồng xử lý: Tìm chỉ số đầu tiên và cuối cùng bằng Binary Search, sau đó trích xuất toàn bộ dãy chỉ số liên tục giữa hai vị trí đó.
      *
-     * @param key giá trị cần tìm kiếm
-     * @return mảng chứa tất cả các chỉ số tìm được, hoặc mảng rỗng nếu không tìm thấy
+     * @param key giá trị cần tìm
+     * @return mảng chứa các chỉ số tìm được, hoặc mảng rỗng nếu không thấy
      */
     public int[] findAllIndex(int key) {
         if (array == null || array.length == 0) {
@@ -224,14 +178,11 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Hoán đổi vị trí của hai phần tử trong mảng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm.
-     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
-     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
+     * Chức năng: Hoán đổi giá trị hai phần tử trong mảng.
+     * Luồng xử lý: Dùng biến tạm để đổi chỗ hai phần tử tại firstIndex và secondIndex.
      *
-     * @param firstIndex chỉ số của phần tử thứ nhất
-     * @param secondIndex chỉ số của phần tử thứ hai
+     * @param firstIndex chỉ số phần tử thứ nhất
+     * @param secondIndex chỉ số phần tử thứ hai
      */
     private void swap(int firstIndex, int secondIndex) {
         int temporaryValue = array[firstIndex];
@@ -240,10 +191,9 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Lấy mảng số nguyên hiện tại.
-     * Luồng xử lý (Làm như thế nào): Trả về tham chiếu đến mảng số nguyên của đối tượng.
+     * Lấy mảng số nguyên hiện tại.
      *
-     * @return mảng số nguyên hiện tại
+     * @return mảng số nguyên
      */
     public int[] getArray() {
         return array;

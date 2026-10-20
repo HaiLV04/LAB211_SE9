@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Chức năng: Lớp quản lý danh sách công nhân.
- * Luồng tương tác: Nhận dữ liệu từ Controller, xử lý thêm, tìm kiếm công nhân và thay đổi mức lương.
+ * Chức năng: Quản lý danh sách công nhân, xử lý thêm mới, tìm kiếm và thay đổi lương.
  */
 public class ManagerWorker {
 
     private List<Worker> list;
 
     /**
-     * Chức năng (Làm gì): Lấy bản sao của danh sách công nhân hiện tại.
-     * Luồng xử lý (Làm như thế nào): Tạo mới và trả về một đối tượng ArrayList chứa toàn bộ công nhân trong list.
+     * Khởi tạo đối tượng ManagerWorker với danh sách rỗng.
+     */
+    public ManagerWorker() {
+        this.list = new ArrayList<>();
+    }
+
+    /**
+     * Lấy bản sao danh sách công nhân hiện tại.
      *
      * @return danh sách công nhân
      */
@@ -22,22 +27,11 @@ public class ManagerWorker {
     }
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng ManagerWorker.
-     * Luồng xử lý (Làm như thế nào): Khởi tạo thuộc tính list dưới dạng một ArrayList rỗng.
-     */
-    public ManagerWorker() {
-        this.list = new ArrayList<>();
-    }
-
-    /**
-     * Chức năng (Làm gì): Tìm kiếm đối tượng công nhân theo mã ID.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Duyệt qua từng công nhân trong danh sách.
-     * 2. So sánh mã ID của công nhân với mã cần tìm (không phân biệt chữ hoa, chữ thường).
-     * 3. Trả về Worker nếu tìm thấy, ngược lại trả về null khi duyệt hết danh sách.
+     * Chức năng: Tìm kiếm công nhân theo mã ID.
+     * Luồng xử lý: Duyệt danh sách và trả về Worker có mã ID khớp (không phân biệt hoa thường).
      *
      * @param id mã công nhân cần tìm
-     * @return đối tượng Worker nếu tìm thấy, ngược lại trả về null
+     * @return đối tượng Worker nếu tìm thấy, ngược lại null
      */
     private Worker getWorker(String id) {
         for (Worker workers : list) {
@@ -49,14 +43,11 @@ public class ManagerWorker {
     }
 
     /**
-     * Chức năng (Làm gì): Kiểm tra sự tồn tại của mã công nhân trong hệ thống.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Duyệt qua toàn bộ danh sách công nhân.
-     * 2. So sánh mã ID không phân biệt chữ hoa thường.
-     * 3. Trả về true nếu mã đã tồn tại, ngược lại trả về false.
+     * Chức năng: Kiểm tra sự tồn tại của mã công nhân trong hệ thống.
+     * Luồng xử lý: Duyệt danh sách và kiểm tra trùng mã ID (không phân biệt hoa thường).
      *
      * @param id mã công nhân cần kiểm tra
-     * @return true nếu tồn tại, ngược lại false
+     * @return true nếu đã tồn tại, ngược lại false
      */
     public boolean isExist(String id) {
         for (Worker workers : list) {
@@ -68,10 +59,8 @@ public class ManagerWorker {
     }
 
     /**
-     * Chức năng (Làm gì): Thêm một công nhân mới vào danh sách.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra mã công nhân đã tồn tại trong danh sách hay chưa bằng isExist.
-     * 2. Nếu chưa tồn tại, thêm vào danh sách và trả về true. Nếu đã có, ném ra ngoại lệ.
+     * Chức năng: Thêm một công nhân mới vào danh sách.
+     * Luồng xử lý: Kiểm tra trùng ID qua isExist(), nếu trùng ném Exception, ngược lại thêm vào danh sách.
      *
      * @param worker công nhân cần thêm
      * @return true nếu thêm thành công
@@ -85,28 +74,21 @@ public class ManagerWorker {
     }
 
     /**
-     * Chức năng (Làm gì): Thay đổi mức lương của một công nhân (tăng hoặc giảm).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra mã công nhân có tồn tại trong hệ thống hay không bằng isExist.
-     * 2. Kiểm tra số tiền thay đổi phải lớn hơn 0, nếu không ném ngoại lệ.
-     * 3. Lấy đối tượng công nhân qua getWorker(code).
-     * 4. Dựa vào trạng thái:
-     *    - UP: Cộng thêm số tiền vào lương hiện tại.
-     *    - DOWN: Kiểm tra lương sau khi giảm không được âm, sau đó trừ bớt số tiền.
-     * 5. Trả về đối tượng công nhân sau khi cập nhật lương.
+     * Chức năng: Điều chỉnh tăng hoặc giảm lương của công nhân.
+     * Luồng xử lý: Kiểm tra mã tồn tại và số tiền > 0, tăng lương nếu status UP hoặc giảm lương (kiểm tra không âm) nếu DOWN.
      *
-     * @param status trạng thái thay đổi lương (UP hoặc DOWN)
+     * @param status trạng thái tăng (UP) hoặc giảm (DOWN)
      * @param code mã công nhân
      * @param amount số tiền thay đổi
      * @return công nhân sau khi cập nhật lương
-     * @throws Exception nếu không tìm thấy công nhân, số tiền không hợp lệ hoặc lương sau khi giảm < 0
+     * @throws Exception nếu không tìm thấy mã, số tiền <= 0 hoặc lương sau giảm < 0
      */
     public Worker changeSalary(SalaryStatus status, String code, double amount) throws Exception {
         if (!isExist(code)) {
             throw new Exception("Can not found code!");
         }
         if (amount <= 0) {
-            throw new Exception("§Amount of money must be > 0 ");
+            throw new Exception("Amount of money must be > 0");
         }
         Worker worker = getWorker(code);
         switch (status) {
@@ -122,5 +104,4 @@ public class ManagerWorker {
         }
         return worker;
     }
-
 }

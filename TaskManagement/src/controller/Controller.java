@@ -1,13 +1,12 @@
 package controller;
 
 import model.ManagerTask;
-import view.TaskInputer;
 import model.Task;
+import view.TaskInputer;
 import view.Validator;
 
 /**
- * Chức năng: Lớp Controller điều phối luồng thực thi của chương trình quản lý tác vụ.
- * Luồng tương tác: Nhận lệnh từ Main, gọi TaskInputer để lấy dữ liệu nhập, chuyển dữ liệu cho ManagerTask xử lý logic nghiệp vụ và hiển thị kết quả ra màn hình.
+ * Chức năng: Điều khiển luồng chương trình quản lý tác vụ (thêm, xóa, hiển thị task).
  */
 public class Controller {
 
@@ -15,16 +14,14 @@ public class Controller {
     private TaskInputer inputer;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo đối tượng Controller.
-     * Luồng xử lý (Làm như thế nào): Cấp phát bộ nhớ cho managerTask khi Controller được tạo để sẵn sàng quản lý danh sách task.
+     * Khởi tạo Controller với đối tượng quản lý tác vụ ManagerTask.
      */
     public Controller() {
         managerTask = new ManagerTask();
     }
 
     /**
-     * Chức năng (Làm gì): Lấy đối tượng quản lý tác vụ (ManagerTask).
-     * Luồng xử lý (Làm như thế nào): Trả về đối tượng managerTask hiện tại.
+     * Lấy đối tượng quản lý tác vụ.
      *
      * @return đối tượng ManagerTask
      */
@@ -33,25 +30,20 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Thiết lập đối tượng quản lý tác vụ (ManagerTask).
-     * Luồng xử lý (Làm như thế nào): Gán đối tượng managerTask mới cho thuộc tính của Controller.
+     * Thiết lập đối tượng quản lý tác vụ.
      *
-     * @param managerTask đối tượng ManagerTask cần gán
+     * @param managerTask đối tượng ManagerTask mới
      */
     public void setManagerTask(ManagerTask managerTask) {
         this.managerTask = managerTask;
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý thêm một tác vụ mới (Add Task).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng TaskInputer.
-     * 2. Gọi phương thức input() để người dùng nhập thông tin tác vụ hợp lệ, lưu vào đối tượng Task tạm thời.
-     * 3. Gọi ManagerTask kiểm tra trùng lặp và thêm vào danh sách.
-     * 4. Trả về ID tự động tăng từ ManagerTask.
+     * Chức năng: Xử lý thêm một tác vụ mới vào hệ thống.
+     * Luồng xử lý: Sử dụng TaskInputer để nhập thông tin, gọi ManagerTask kiểm tra trùng và thêm vào danh sách, trả về ID mới tạo.
      *
-     * @return ID của Task được thêm thành công.
-     * @throws Exception nếu xảy ra lỗi (ví dụ trùng lặp dữ liệu tác vụ).
+     * @return ID của Task được thêm thành công
+     * @throws Exception nếu xảy ra lỗi hoặc trùng lặp dữ liệu
      */
     public int add() throws Exception {
         inputer = new TaskInputer();
@@ -62,14 +54,11 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý xóa một tác vụ (Delete Task).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Sử dụng Validator để yêu cầu người dùng nhập số nguyên (ID của Task cần xóa).
-     * 2. Gọi ManagerTask với ID để tìm và xóa Task.
-     * 3. Trả về đối tượng Task đã bị xóa để hiển thị ra console.
+     * Chức năng: Xử lý xóa một tác vụ theo ID.
+     * Luồng xử lý: Yêu cầu người dùng nhập ID qua Validator, gọi ManagerTask xóa và trả về Task đã bị xóa.
      *
-     * @return Đối tượng Task đã bị xóa khỏi danh sách.
-     * @throws Exception nếu không tìm thấy ID hoặc danh sách rỗng.
+     * @return đối tượng Task vừa bị xóa
+     * @throws Exception nếu không tìm thấy ID hoặc danh sách rỗng
      */
     public Task delete() throws Exception {
         int ID = Validator.getInt("Task ID: ", "Error range!", "Invalid!",
@@ -78,13 +67,10 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Xử lý hiển thị danh sách tác vụ (Show Task).
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Gọi toString() của ManagerTask để lấy chuỗi định dạng danh sách.
-     * 2. Ném ngoại lệ nếu chuỗi trả về là null (danh sách rỗng).
-     * 3. In chuỗi danh sách tác vụ ra màn hình console.
+     * Chức năng: Xử lý hiển thị danh sách tác vụ ra màn hình console.
+     * Luồng xử lý: Lấy chuỗi định dạng từ ManagerTask, nếu null thì ném Exception, ngược lại in ra console.
      *
-     * @throws Exception nếu danh sách hiện tại rỗng.
+     * @throws Exception nếu danh sách tác vụ rỗng
      */
     public void show() throws Exception {
         String str = managerTask.toString();
@@ -95,10 +81,8 @@ public class Controller {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính với vòng lặp menu.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Hiển thị menu lặp lại cho đến khi người dùng chọn Thoát (4).
-     * 2. Điều phối và thực thi các chức năng 1-3 tương ứng (Add Task, Delete task, Display Task).
+     * Chức năng: Điều khiển luồng thực thi chính qua menu chương trình.
+     * Luồng xử lý: Lặp hiển thị menu cho đến khi chọn Exit (4), điều hướng thực thi Thêm, Xóa hoặc Hiển thị task.
      */
     public void run() {
         while (true) {

@@ -4,7 +4,7 @@ import model.ArrayModel;
 import view.ArrayView;
 
 /**
- * Chức năng: Điều khiển luồng của chương trình Binary Search.
+ * Chức năng: Điều khiển luồng chương trình tìm kiếm nhị phân (Binary Search).
  */
 public class ArrayController {
 
@@ -12,10 +12,7 @@ public class ArrayController {
     private final ArrayView arrayView;
 
     /**
-     * Chức năng (Làm gì): Khởi tạo controller với model và view.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Khởi tạo đối tượng ArrayModel.
-     * 2. Khởi tạo đối tượng ArrayView.
+     * Khởi tạo controller với model và view.
      */
     public ArrayController() {
         arrayModel = new ArrayModel();
@@ -23,16 +20,8 @@ public class ArrayController {
     }
 
     /**
-     * Chức năng (Làm gì): Chạy luồng chương trình chính của Binary Search.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Yêu cầu người dùng nhập kích thước mảng (số nguyên dương).
-     * 2. Sinh mảng ngẫu nhiên theo kích thước.
-     * 3. Hiển thị mảng chưa sắp xếp.
-     * 4. Sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Bubble Sort.
-     * 5. Hiển thị mảng đã sắp xếp.
-     * 6. Sau khi quan sát mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (số nguyên).
-     * 7. Thực hiện thuật toán tìm kiếm nhị phân (Binary Search) để tìm tất cả các vị trí xuất hiện.
-     * 8. Hiển thị kết quả tìm kiếm ra màn hình console.
+     * Chức năng: Chạy luồng chương trình chính của Binary Search.
+     * Luồng xử lý: Nhập kích thước mảng, sinh mảng ngẫu nhiên, sắp xếp Bubble Sort, hiển thị mảng trước/sau khi sắp xếp, nhập giá trị cần tìm và hiển thị các vị trí tìm thấy.
      */
     public void run() {
         int size = arrayView.inputPositiveInteger("Enter number of array: ");
