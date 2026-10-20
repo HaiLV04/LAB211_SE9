@@ -7,12 +7,12 @@
 - **Mục tiêu:**
   1. Người dùng nhập số lượng phần tử của mảng $n$ ($n > 0$).
   2. Chương trình tự động sinh ngẫu nhiên mảng gồm $n$ số nguyên từ $0$ đến $n - 1$.
-  3. Hiển thị toàn bộ mảng ban đầu (Unsorted array).
-  4. Sắp xếp mảng theo thứ tự tăng dần và hiển thị mảng đã sắp xếp (Sorted array).
-  5. Sau khi người dùng đã quan sát các phần tử trong mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (`searchValue`).
-  6. Áp dụng thuật toán **tìm kiếm tuần tự (Linear Search)** để tìm và trả về **tất cả các chỉ số (indexes)** xuất hiện giá trị cần tìm trong mảng.
-  7. Nếu không tìm thấy, thông báo `Can not found`. Nếu tìm thấy, in ra danh sách chỉ số dạng mảng.
-- **Kiến trúc áp dụng:** **MVC (Model - View - Controller)** chuẩn mực, đồng bộ hoàn toàn với các bài Sort và Binary Search.
+  3. **Hiển thị mảng ngẫu nhiên ban đầu:** `The array: [v1, v2, ...]`.
+     *(Linear Search tìm kiếm trực tiếp trên mảng gốc chưa sắp xếp, **hoàn toàn không cần và không được sort mảng**).*
+  4. Sau khi người dùng đã quan sát các phần tử trong mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (`searchValue`).
+  5. Áp dụng thuật toán **tìm kiếm tuần tự (Linear Search)** để tìm và trả về **tất cả các chỉ số (indexes)** xuất hiện giá trị cần tìm trong mảng.
+  6. Nếu không tìm thấy, thông báo `Can not found`. Nếu tìm thấy, in ra danh sách chỉ số dạng mảng `Found {searchValue} at index: [index1, index2, ...]`.
+- **Kiến trúc áp dụng:** **MVC (Model - View - Controller)** chuẩn mực, đồng bộ với toàn bộ các dự án trong LAB211.
 
 ---
 
@@ -25,18 +25,16 @@
 [ArrayController]
   ├──> Gọi [ArrayView] để nhập kích thước mảng n (> 0)
   ├──> Gọi [ArrayModel] để generateRandomArray(n)
-  ├──> Gọi [ArrayView] để displayArray ("Unsorted array: ")
-  ├──> Gọi [ArrayModel] để bubbleSort()
-  ├──> Gọi [ArrayView] để displayArray ("Sorted array: ")
+  ├──> Gọi [ArrayView] để displayArray ("The array: ", array)
   ├──> Gọi [ArrayView] để nhập giá trị cần tìm searchValue
   ├──> Gọi [ArrayModel] để findAllIndex(searchValue) -> trả về int[] foundIndices
   └──> Gọi [ArrayView] để displaySearchResult(searchValue, foundIndices)
 ```
 
-- **Model (`model.ArrayModel`):** Quản lý mảng dữ liệu `private int[] array;`, các hàm khởi tạo sinh số ngẫu nhiên, phương thức `bubbleSort()` sắp xếp mảng, phương thức `linearSearch(int key)`, và phương thức `findAllIndex(int key)`. Hoàn toàn không chứa câu lệnh in ấn giao diện.
+- **Model (`model.ArrayModel`):** Quản lý mảng dữ liệu `private int[] array;`, các hàm khởi tạo sinh số ngẫu nhiên, phương thức `linearSearch(int key)`, và phương thức `findAllIndex(int key)`. Hoàn toàn tách biệt khỏi việc in ấn console. Không chứa các phương thức sắp xếp (Bubble Sort) để giữ đúng nguyên lý Single Responsibility và bản chất bài toán.
 - **View (`view.ArrayView`):** Giao diện Console chuyên trách: nhập số nguyên dương, nhập số nguyên tìm kiếm (bắt `NumberFormatException`, rỗng, số $\le 0$), định dạng hiển thị mảng `displayArray()` và hiển thị kết quả tìm kiếm `displaySearchResult()`.
 - **Controller (`controller.ArrayController`):** Điều khiển luồng chương trình qua phương thức `run()`, kết nối chặt chẽ giữa Model và View.
-- **Main (`main.Main`):** Khởi tạo `ArrayController` và kích hoạt `run()`.
+- **Main (`main.Main`):** Điểm khởi động chương trình tối giản (Entry point).
 
 ---
 
@@ -65,13 +63,10 @@
 - **`generateRandomArray(int n)`:**
   - Cấp phát mảng: `array = new int[n];`
   - Sinh số ngẫu nhiên từ $0$ đến $n - 1$: `array[i] = random.nextInt(n);`
-- **`bubbleSort()` & `swap(int i, int j)`:**
-  - Sắp xếp mảng theo thứ tự tăng dần.
-  - Sau khi sắp xếp, các phần tử trùng lặp sẽ nằm liền kề nhau và người dùng dễ dàng đối chiếu kết quả tìm kiếm trên mảng có trật tự.
 - **`linearSearch(int key)`:**
   - Duyệt tuần tự từ đầu mảng đến cuối mảng: `for (int i = 0; i < array.length; i++)`.
   - Nếu `array[i] == key` $\rightarrow$ trả về chỉ số `i` đầu tiên tìm thấy. Duyệt hết mà không thấy $\rightarrow$ trả về `-1`.
-- **`findAllIndex(int key)` (Phương thức nâng cao theo yêu cầu đề bài):**
+- **`findAllIndex(int key)` (Phương thức tìm tất cả vị trí):**
   - Khởi tạo danh sách động `ArrayList<Integer> indexList = new ArrayList<>();` vì ta chưa biết trước có bao nhiêu phần tử trùng khớp với `key`.
   - Duyệt qua từng phần tử của mảng:
     ```java
@@ -92,14 +87,12 @@
 - **`getArray()`:** Trả về mảng số nguyên hiện tại.
 
 ### 3.4. `controller.ArrayController`
-- **`run()`:**
+- **`run()`:** Luồng thực thi chuẩn theo đúng đề bài:
   ```java
   int size = arrayView.inputPositiveInteger("Enter number of array: ");
   arrayModel.generateRandomArray(size);
 
-  arrayView.displayArray("Unsorted array: ", arrayModel.getArray());
-  arrayModel.bubbleSort();
-  arrayView.displayArray("Sorted array: ", arrayModel.getArray());
+  arrayView.displayArray("The array: ", arrayModel.getArray());
 
   int searchValue = arrayView.inputInteger("Enter search value: ");
   int[] foundIndices = arrayModel.findAllIndex(searchValue);
@@ -122,15 +115,16 @@
 
 ## 5. BỘ CÂU HỎI VẤN ĐÁP VỚI GIẢNG VIÊN (REVIEW DEFENSE)
 
-### Q1: Tại sao chương trình lại in mảng chưa sắp xếp và đã sắp xếp rồi mới cho người dùng nhập giá trị tìm kiếm?
+### Q1: Tại sao bài Linear Search lại KHÔNG cần sắp xếp mảng trước khi tìm kiếm?
 > **Trả lời:**
-> - Thứ nhất, về mặt trải nghiệm người dùng (UX): mảng được sinh hoàn toàn ngẫu nhiên, nếu yêu cầu người dùng nhập giá trị cần tìm trước khi nhìn thấy mảng thì người dùng sẽ phải "đoán mò". Việc in mảng ra trước (cả mảng gốc và mảng đã sắp xếp) giúp người dùng quan sát được các số hiện có trong mảng để chủ động test cả trường hợp tìm thấy (các số có trong mảng) và trường hợp không tìm thấy.
-> - Thứ hai, sau khi sắp xếp, các phần tử giống nhau nằm kề nhau, người dùng và giảng viên dễ dàng kiểm chứng kết quả các chỉ số (`index`) được trả về từ `findAllIndex`.
+> 1. **Bản chất thuật toán:** Linear Search duyệt tuần tự từng phần tử từ đầu đến cuối mảng ($O(n)$), nên nó hoạt động chính xác trên **mọi tập dữ liệu bất kỳ mà không đòi hỏi mảng phải có thứ tự**.
+> 2. **Chi phí thuật toán:** Nếu ta sắp xếp mảng trước, ta phải tốn thêm chi phí $O(n^2)$ (Bubble Sort) hoặc $O(n \log n)$, làm mất đi ý nghĩa của Linear Search. Hơn nữa, nếu mảng đã được sắp xếp thì ta nên dùng Binary Search ($O(\log n)$) chứ không ai dùng Linear Search ($O(n)$) trên mảng đã có thứ tự.
+> 3. **Tính chính xác của vị trí (Index):** Khi sắp xếp mảng, các phần tử sẽ bị đổi chỗ, khiến các chỉ số `index` tìm được không còn phản ánh đúng vị trí thực tế ban đầu trong mảng ngẫu nhiên mà chương trình đã sinh ra.
 
 ### Q2: So sánh ưu điểm và nhược điểm của Linear Search so với Binary Search?
 > **Trả lời:**
 > - **Ưu điểm của Linear Search:** Thuật toán rất đơn giản, cài đặt dễ dàng, và **hoạt động tốt trên cả dữ liệu chưa sắp xếp**.
-> - **Nhược điểm:** Tốc độ chậm với mảng lớn vì độ phức tạp thời gian là $O(n)$. Binary Search đạt $O(\log n)$ nhanh hơn rất nhiều, nhưng bắt buộc mảng phải có thứ tự đã sắp xếp.
+> - **Nhược điểm:** Tốc độ chậm với mảng lớn vì độ phức tạp thời gian là $O(n)$. Binary Search đạt $O(\log n)$ nhanh hơn rất nhiều, nhưng bắt buộc mảng phải có thứ tự đã sắp xếp trước.
 
 ### Q3: Tại sao trong hàm `findAllIndex` em lại dùng `ArrayList` trung gian rồi mới đổi sang `int[]`?
 > **Trả lời:** Mảng thông thường (`int[]`) trong Java có kích thước cố định khi khởi tạo. Tại thời điểm bắt đầu tìm kiếm, ta không thể biết trước có bao nhiêu phần tử bằng `key` (có thể là 0, 1 hoặc nhiều). Vì vậy, em dùng `ArrayList<Integer>` là danh sách động tự co giãn kích thước để lưu các index tìm được, sau đó mới convert sang mảng `int[]` đúng kích thước thực tế để trả về.
@@ -140,7 +134,7 @@
 
 ### Q5: Mô hình MVC được áp dụng như thế nào trong bài này?
 > **Trả lời:**
-> - `Model (ArrayModel)`: Chỉ chứa mảng dữ liệu và các logic xử lý (sinh số ngẫu nhiên, sắp xếp Bubble Sort, Linear Search), không in ấn ra console.
+> - `Model (ArrayModel)`: Chỉ chứa mảng dữ liệu và các logic xử lý (sinh số ngẫu nhiên, tìm kiếm tuần tự Linear Search), không in ấn ra console.
 > - `View (ArrayView)`: Chuyên trách tương tác console, nhập liệu an toàn và định dạng hiển thị.
 > - `Controller (ArrayController)`: Điều phối kết nối giữa Model và View qua phương thức `run()`.
 > - `Main`: Điểm vào tối giản kích hoạt Controller.

@@ -27,23 +27,17 @@ public class ArrayController {
      * Luồng xử lý (Làm như thế nào):
      * 1. Yêu cầu người dùng nhập kích thước mảng (số nguyên dương).
      * 2. Sinh mảng ngẫu nhiên theo kích thước đã nhập.
-     * 3. Hiển thị mảng chưa sắp xếp ra màn hình console.
-     * 4. Sắp xếp mảng theo thứ tự tăng dần bằng Bubble Sort.
-     * 5. Hiển thị mảng đã sắp xếp ra màn hình console.
-     * 6. Sau khi đã quan sát mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (số nguyên).
-     * 7. Thực hiện thuật toán tìm kiếm tuần tự (Linear Search) tìm tất cả vị trí xuất hiện.
-     * 8. Hiển thị kết quả tìm kiếm ra màn hình console.
+     * 3. Hiển thị mảng ngẫu nhiên ra màn hình console (The array: [...]).
+     * 4. Sau khi đã quan sát mảng, yêu cầu người dùng nhập giá trị cần tìm kiếm (số nguyên).
+     * 5. Thực hiện thuật toán tìm kiếm tuần tự (Linear Search) tìm tất cả vị trí xuất hiện.
+     * 6. Hiển thị kết quả tìm kiếm ra màn hình console.
      */
     public void run() {
         int size = arrayView.inputPositiveInteger("Enter number of array: ");
 
         arrayModel.generateRandomArray(size);
 
-        arrayView.displayArray("Unsorted array: ", arrayModel.getArray());
-
-        arrayModel.bubbleSort();
-
-        arrayView.displayArray("Sorted array: ", arrayModel.getArray());
+        arrayView.displayArray("The array: ", arrayModel.getArray());
 
         int searchValue = arrayView.inputInteger("Enter search value: ");
 

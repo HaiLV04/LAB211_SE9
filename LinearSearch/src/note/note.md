@@ -1,18 +1,21 @@
 # Yêu Cầu Bài Toán
-Yêu cầu người dùng nhập vào bàn phím 2 số: số lượng phần tử của mảng và giá trị cần tìm kiếm.
-- **Input 1**: Số lượng phần tử mảng n (n > 0).
-- **Input 2**: Giá trị cần tìm kiếm (search number).
-
-Sau khi nhận input, hệ thống sẽ tự động khởi tạo một mảng gồm n phần tử, với các phần tử là số nguyên ngẫu nhiên từ 0 đến n.
-Tiếp theo, gọi hàm tìm kiếm giá trị cần tìm trong mảng vừa tạo và in ra màn hình tất cả các chỉ số (index) của giá trị đó nếu tìm thấy.
+1. **Input 1**: Số lượng phần tử của mảng $n$ ($n > 0$).
+2. Hệ thống tự động sinh ngẫu nhiên một mảng gồm $n$ số nguyên từ $0$ đến $n - 1$.
+3. Hiển thị mảng vừa tạo ra màn hình console: `The array: [v1, v2, ...]`.
+   *(Lưu ý: Thuật toán Linear Search tìm kiếm tuần tự trên mảng ngẫu nhiên gốc, **hoàn toàn không cần sắp xếp** mảng trước khi tìm).*
+4. **Input 2**: Giá trị cần tìm kiếm (`Enter search value:`).
+5. Gọi hàm tìm kiếm tuần tự để tìm và in ra màn hình tất cả các vị trí (index) của giá trị đó nếu tìm thấy, ngược lại in thông báo `Can not found`.
 
 # Giải Thích Thuật Toán
 **Tìm kiếm tuần tự (Linear Search):**
-Thuật toán duyệt bắt đầu từ phần tử đầu tiên của mảng đến phần tử cuối cùng. Ở mỗi bước, so sánh phần tử hiện tại với giá trị cần tìm kiếm. 
-- Nếu khớp, ghi lại vị trí (index) của phần tử đó.
-- Nếu không khớp, tiếp tục kiểm tra phần tử tiếp theo.
+Thuật toán duyệt bắt đầu từ phần tử đầu tiên của mảng ($i = 0$) đến phần tử cuối cùng ($i = n - 1$). Ở mỗi bước, so sánh phần tử hiện tại với giá trị cần tìm kiếm:
+- Nếu khớp: ghi nhận chỉ số $i$ vào danh sách kết quả.
+- Nếu không khớp: tiếp tục duyệt phần tử tiếp theo.
 
-Quá trình lặp lại cho đến khi duyệt qua toàn bộ mảng. Kết quả trả về là một mảng ghi lại tất cả các vị trí tìm thấy, hoặc một mảng rỗng nếu giá trị không xuất hiện.
+Quá trình lặp lại cho đến khi duyệt hết toàn bộ mảng. Kết quả trả về là một mảng ghi lại tất cả các vị trí xuất hiện của giá trị cần tìm, hoặc mảng rỗng nếu không tìm thấy.
+
+**Độ phức tạp thời gian:** $O(n)$ vì luôn duyệt qua từng phần tử để tìm tất cả các vị trí trùng lặp.
+**Độ phức tạp không gian:** $O(k)$ với $k$ là số lượng phần tử tìm thấy ($k \le n$).
 
 # Test Cases
 ## 1. Input Validation (Kiểm tra đầu vào)
@@ -25,7 +28,7 @@ Quá trình lặp lại cho đến khi duyệt qua toàn bộ mảng. Kết qu�
 
 ## 2. Algorithm Logic (Logic thuật toán tìm kiếm)
 - **Không tìm thấy:** Nếu trong mảng không có phần tử nào khớp với giá trị cần tìm -> In ra thông báo `Can not found`.
-- **Tìm thấy 1 phần tử:** Nếu mảng chỉ có đúng một phần tử khớp -> In ra duy nhất 1 vị trí đó.
-- **Tìm thấy nhiều phần tử:** Nếu mảng chứa nhiều phần tử khớp -> In ra tất cả các vị trí tìm thấy.
-- **Biên đầu mảng:** Nếu phần tử cần tìm nằm ở vị trí đầu tiên -> In ra vị trí `0`.
-- **Biên cuối mảng:** Nếu phần tử cần tìm nằm ở vị trí cuối cùng -> In ra vị trí `n - 1`.
+- **Tìm thấy 1 phần tử:** Nếu mảng chỉ có đúng một phần tử khớp -> In ra `Found {searchValue} at index: [index]`.
+- **Tìm thấy nhiều phần tử:** Nếu mảng chứa nhiều phần tử khớp -> In ra tất cả các vị trí tìm thấy `Found {searchValue} at index: [index1, index2, ...]`.
+- **Biên đầu mảng:** Nếu phần tử cần tìm nằm ở vị trí đầu tiên -> Mảng kết quả chứa vị trí `0`.
+- **Biên cuối mảng:** Nếu phần tử cần tìm nằm ở vị trí cuối cùng -> Mảng kết quả chứa vị trí `n - 1`.

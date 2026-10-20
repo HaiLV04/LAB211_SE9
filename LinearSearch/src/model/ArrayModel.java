@@ -52,52 +52,6 @@ public class ArrayModel {
     }
 
     /**
-     * Chức năng (Làm gì): Sắp xếp mảng theo thứ tự tăng dần bằng thuật toán Bubble Sort.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Kiểm tra nếu mảng null hoặc có ít hơn 2 phần tử thì dừng lại.
-     * 2. Lặp lại việc so sánh các cặp phần tử kề nhau.
-     * 3. Hoán đổi nếu phần tử đứng trước lớn hơn phần tử đứng sau.
-     * 4. Dừng sớm nếu không còn cặp nào cần hoán đổi (cờ swapped).
-     */
-    public void bubbleSort() {
-        if (array == null || array.length < 2) {
-            return;
-        }
-
-        boolean swapped;
-        int length = array.length;
-
-        for (int i = 0; i < length - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < length - i - 1; j++) {
-                if (array[j] > array[j + 1]) {
-                    swap(j, j + 1);
-                    swapped = true;
-                }
-            }
-            if (!swapped) {
-                break;
-            }
-        }
-    }
-
-    /**
-     * Chức năng (Làm gì): Hoán đổi hai phần tử trong mảng.
-     * Luồng xử lý (Làm như thế nào):
-     * 1. Lưu giá trị phần tử thứ nhất vào biến tạm thời.
-     * 2. Gán giá trị phần tử thứ hai cho phần tử thứ nhất.
-     * 3. Gán giá trị biến tạm cho phần tử thứ hai.
-     *
-     * @param firstIndex chỉ số của phần tử thứ nhất
-     * @param secondIndex chỉ số của phần tử thứ hai
-     */
-    private void swap(int firstIndex, int secondIndex) {
-        int temporaryValue = array[firstIndex];
-        array[firstIndex] = array[secondIndex];
-        array[secondIndex] = temporaryValue;
-    }
-
-    /**
      * Chức năng (Làm gì): Thực hiện tìm kiếm tuần tự (Linear Search) để tìm vị trí xuất hiện đầu tiên của giá trị cần tìm.
      * Luồng xử lý (Làm như thế nào):
      * 1. Kiểm tra mảng null hoặc rỗng, trả về -1.
