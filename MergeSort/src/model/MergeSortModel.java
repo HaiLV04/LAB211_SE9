@@ -1,34 +1,18 @@
 package model;
 
-import java.util.Random;
-
 /**
- * Chức năng: Quản lý dữ liệu mảng và thuật toán sắp xếp trộn (Merge Sort).
+ * Chức năng: Kế thừa ArrayModel từ thư viện BubbleSort và cài đặt thuật toán Merge Sort.
  */
-public class ArrayModel {
+public class MergeSortModel extends ArrayModel {
 
-    private int[] array;
     private int stepCounter;
 
     /**
-     * Khởi tạo đối tượng ArrayModel.
+     * Khởi tạo đối tượng MergeSortModel.
      */
-    public ArrayModel() {
+    public MergeSortModel() {
+        super();
         stepCounter = 1;
-    }
-
-    /**
-     * Chức năng: Tạo mảng số nguyên ngẫu nhiên theo kích thước chỉ định.
-     * Luồng xử lý: Cấp phát mảng kích thước n và sinh giá trị ngẫu nhiên trong khoảng [-n, n].
-     *
-     * @param n số lượng phần tử
-     */
-    public void generateRandomArray(int n) {
-        Random random = new Random();
-        array = new int[n];
-        for (int i = 0; i < n; i++) {
-            array[i] = random.nextInt(2 * n + 1) - n;
-        }
     }
 
     /**
@@ -123,14 +107,5 @@ public class ArrayModel {
 
         System.out.println("   => Trang thai mang goc hien tai: " + java.util.Arrays.toString(array));
         System.out.println("----------------------------------------------------------------");
-    }
-
-    /**
-     * Lấy mảng số nguyên hiện tại.
-     *
-     * @return mảng số nguyên
-     */
-    public int[] getArray() {
-        return array;
     }
 }

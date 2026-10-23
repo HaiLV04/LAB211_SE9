@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Chức năng: Quản lý dữ liệu mảng và thuật toán tìm kiếm tuần tự (Linear Search).
+ * Chức năng: Kế thừa ArrayModel từ thư viện BubbleSort và cài đặt thuật toán tìm kiếm tuần tự (Linear Search).
  */
-public class ArrayModel {
-
-    private int[] array;
+public class LinearSearchModel extends ArrayModel {
 
     /**
-     * Khởi tạo đối tượng ArrayModel.
+     * Khởi tạo đối tượng LinearSearchModel.
      */
-    public ArrayModel() {
+    public LinearSearchModel() {
+        super();
     }
 
     /**
-     * Khởi tạo ArrayModel từ mảng có sẵn.
+     * Khởi tạo LinearSearchModel từ mảng có sẵn.
      *
      * @param array mảng đầu vào
      * @throws Exception nếu mảng đầu vào là null
      */
-    public ArrayModel(int[] array) throws Exception {
+    public LinearSearchModel(int[] array) throws Exception {
         if (array == null) {
             throw new Exception("Array can not null!");
         }
@@ -35,6 +34,7 @@ public class ArrayModel {
      *
      * @param n số lượng phần tử
      */
+    @Override
     public void generateRandomArray(int n) {
         Random random = new Random();
         array = new int[n];
@@ -87,14 +87,5 @@ public class ArrayModel {
             indices[i] = indexList.get(i);
         }
         return indices;
-    }
-
-    /**
-     * Lấy mảng số nguyên hiện tại.
-     *
-     * @return mảng số nguyên
-     */
-    public int[] getArray() {
-        return array;
     }
 }

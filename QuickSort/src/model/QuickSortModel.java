@@ -1,34 +1,18 @@
 package model;
 
-import java.util.Random;
-
 /**
- * Chức năng: Quản lý dữ liệu mảng và thuật toán sắp xếp nhanh (Quick Sort).
+ * Chức năng: Kế thừa ArrayModel từ thư viện BubbleSort và cài đặt thuật toán Quick Sort.
  */
-public class ArrayModel {
+public class QuickSortModel extends ArrayModel {
 
-    private int[] array;
     private int stepCounter;
 
     /**
-     * Khởi tạo đối tượng ArrayModel.
+     * Khởi tạo đối tượng QuickSortModel.
      */
-    public ArrayModel() {
+    public QuickSortModel() {
+        super();
         stepCounter = 1;
-    }
-
-    /**
-     * Chức năng: Tạo mảng số nguyên ngẫu nhiên theo kích thước chỉ định.
-     * Luồng xử lý: Cấp phát mảng kích thước n và sinh giá trị ngẫu nhiên trong khoảng [-n, n].
-     *
-     * @param n số lượng phần tử
-     */
-    public void generateRandomArray(int n) {
-        Random random = new Random();
-        array = new int[n];
-        for (int i = 0; i < n; i++) {
-            array[i] = random.nextInt(2 * n + 1) - n;
-        }
     }
 
     /**
@@ -90,7 +74,7 @@ public class ArrayModel {
                     System.out.printf("   -> Hoan doi array[%d](%d) va array[%d](%d)\n",
                             i, array[i], j, array[j]);
                 }
-                swap(i, j);
+                swap(i, j); // Tái sử dụng hàm swap kế thừa từ ArrayModel (BubbleSort)
                 i++;
                 j--;
             }
@@ -100,27 +84,5 @@ public class ArrayModel {
         System.out.println("----------------------------------------------------------------");
 
         return i;
-    }
-
-    /**
-     * Chức năng: Hoán đổi giá trị hai phần tử trong mảng.
-     * Luồng xử lý: Dùng biến tạm để đổi chỗ hai phần tử tại firstIndex và secondIndex.
-     *
-     * @param firstIndex chỉ số phần tử thứ nhất
-     * @param secondIndex chỉ số phần tử thứ hai
-     */
-    private void swap(int firstIndex, int secondIndex) {
-        int temporaryValue = array[firstIndex];
-        array[firstIndex] = array[secondIndex];
-        array[secondIndex] = temporaryValue;
-    }
-
-    /**
-     * Lấy mảng số nguyên hiện tại.
-     *
-     * @return mảng số nguyên
-     */
-    public int[] getArray() {
-        return array;
     }
 }

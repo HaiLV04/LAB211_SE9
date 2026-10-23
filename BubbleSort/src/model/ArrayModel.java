@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class ArrayModel {
 
-    private int[] array;
+    protected int[] array;
 
     /**
      * Khởi tạo đối tượng ArrayModel.
@@ -63,7 +63,7 @@ public class ArrayModel {
      * @param firstIndex chỉ số phần tử thứ nhất
      * @param secondIndex chỉ số phần tử thứ hai
      */
-    private void swap(int firstIndex, int secondIndex) {
+    protected void swap(int firstIndex, int secondIndex) {
         int temporaryValue = array[firstIndex];
         array[firstIndex] = array[secondIndex];
         array[secondIndex] = temporaryValue;

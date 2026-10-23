@@ -1,4 +1,4 @@
-﻿# NetBeans specific
+# NetBeans specific
 **/build/
 **/dist/
 **/nbproject/private/
@@ -10,6 +10,7 @@ nb-configuration.xml
 # Java
 *.class
 *.jar
+!**/lib/*.jar
 *.war
 *.ear
 *.nar

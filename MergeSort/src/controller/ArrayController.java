@@ -1,6 +1,6 @@
 package controller;
 
-import model.ArrayModel;
+import model.MergeSortModel;
 import view.ArrayView;
 
 /**
@@ -8,14 +8,14 @@ import view.ArrayView;
  */
 public class ArrayController {
 
-    private final ArrayModel arrayModel;
+    private final MergeSortModel arrayModel;
     private final ArrayView arrayView;
 
     /**
      * Khởi tạo controller với model và view.
      */
     public ArrayController() {
-        arrayModel = new ArrayModel();
+        arrayModel = new MergeSortModel();
         arrayView = new ArrayView();
     }
 

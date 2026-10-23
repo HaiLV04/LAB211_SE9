@@ -1,22 +1,22 @@
 package controller;
 
-import model.ArrayModel;
-import view.ArrayView;
+import model.LinearSearchModel;
+import view.LinearSearchView;
 
 /**
  * Chức năng: Điều khiển luồng chương trình tìm kiếm tuần tự (Linear Search).
  */
 public class ArrayController {
 
-    private final ArrayModel arrayModel;
-    private final ArrayView arrayView;
+    private final LinearSearchModel arrayModel;
+    private final LinearSearchView arrayView;
 
     /**
      * Khởi tạo controller với model và view.
      */
     public ArrayController() {
-        arrayModel = new ArrayModel();
-        arrayView = new ArrayView();
+        arrayModel = new LinearSearchModel();
+        arrayView = new LinearSearchView();
     }
 
     /**

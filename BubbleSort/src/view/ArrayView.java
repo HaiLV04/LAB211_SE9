@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class ArrayView {
 
-    private final Scanner scanner;
+    protected final Scanner scanner;
 
     /**
      * Khởi tạo Scanner để đọc dữ liệu từ bàn phím.
