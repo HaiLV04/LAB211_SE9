@@ -54,12 +54,13 @@ public class QuickSortModel extends ArrayModel {
      * @return chỉ số phân chia hai phân vùng
      */
     private int partition(int left, int right) {
-        int pivot = array[left + (right - left) / 2];
+        int mid = left + (right - left) / 2;
+        int pivot = array[mid];
         int i = left;
         int j = right;
 
-        System.out.printf("Buoc %d [Phan vung: tu chi so %d den %d | Gia tri Pivot = %d]:\n",
-                stepCounter++, left, right, pivot);
+        System.out.printf("Buoc %d [Phan vung: tu chi so %d den %d | Gia tri Pivot tai index %d = %d]:\n",
+                stepCounter++, left, right, mid, pivot);
 
         while (i <= j) {
             while (array[i] < pivot) {
