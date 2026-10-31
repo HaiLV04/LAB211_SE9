@@ -8,8 +8,8 @@ I. Yêu cầu chương trình (Requirement)
 
 II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
 - Function 1: Đổi ngôn ngữ (Change language):
-  + Hiển thị menu cho người dùng chọn ngôn ngữ (Tiếng Việt hoặc Tiếng Anh).
-  + Tải gói tài nguyên tương ứng (Language_vi.properties hoặc Language_en.properties) để toàn bộ nhãn nhập liệu và câu thông báo lỗi được hiển thị linh hoạt theo đúng ngôn ngữ người dùng đã chọn.
+  + Hiển thị menu cho người dùng chọn Tiếng Việt, Tiếng Anh hoặc Thoát.
+  + Người dùng chọn tiếng nào thì chương trình mở đúng file ngôn ngữ đó để toàn bộ câu nhắc nhập và câu báo lỗi hiển thị theo tiếng đó.
 - Function 2: Kiểm tra số tài khoản (Checking account number):
   + Yêu cầu người dùng nhập số tài khoản và dùng mẫu định dạng (Regex) để kiểm tra.
   + Số tài khoản bắt buộc phải đủ 10 chữ số. Nếu nhập sai (nhập chữ, ký tự lạ, thiếu hoặc thừa số), hệ thống chặn lại, hiển thị câu báo lỗi theo ngôn ngữ đã chọn và yêu cầu nhập lại cho đến khi đúng.
