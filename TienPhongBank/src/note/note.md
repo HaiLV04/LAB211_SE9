@@ -4,11 +4,12 @@ I. Yêu cầu chương trình (Requirement)
 - Số tài khoản (Account Number): Chuỗi đúng 10 chữ số, không để trống.
 - Mật khẩu (Password): Độ dài từ 8 đến 31 ký tự, bắt buộc chứa cả chữ cái và chữ số.
 - Mã Captcha: Sinh ngẫu nhiên 5 ký tự (chữ hoa, chữ thường, số). Người dùng nhập ký tự hoặc cụm ký tự con tồn tại trong Captcha (dùng hàm contains()).
-- Xác thực đăng nhập: Đối chiếu thông tin tài khoản và mật khẩu với danh sách tài khoản hệ thống lưu trữ sẵn (Data.listAccount).
+- Xác thực đăng nhập: Duyệt danh sách tài khoản lưu sẵn (Data.listAccount), dùng hàm equals() so sánh bằng cả số tài khoản và mật khẩu vừa nhập để kiểm tra trùng khớp.
 
 II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
 - Function 1: Đổi ngôn ngữ (Change language):
   + Hiển thị menu cho người dùng chọn Tiếng Việt, Tiếng Anh hoặc Thoát.
+  + Người dùng chọn tiếng nào thì chương trình mở đúng file ngôn ngữ đó để toàn bộ câu nhắc nhập và câu báo lỗi hiển thị theo tiếng đó.
 - Function 2: Kiểm tra số tài khoản (Checking account number):
   + Yêu cầu người dùng nhập số tài khoản và dùng mẫu định dạng (Regex) để kiểm tra.
   + Số tài khoản bắt buộc phải đủ 10 chữ số. Nếu nhập sai (nhập chữ, ký tự lạ, thiếu hoặc thừa số), hệ thống chặn lại, hiển thị câu báo lỗi theo ngôn ngữ đã chọn và yêu cầu nhập lại cho đến khi đúng.
@@ -24,7 +25,7 @@ II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
     1. Yêu cầu nhập và kiểm tra Số tài khoản (đúng chuẩn 10 số mới cho đi tiếp).
     2. Yêu cầu nhập và kiểm tra Mật khẩu (đủ chữ và số mới cho đi tiếp).
     3. Sinh mã Captcha ngẫu nhiên và yêu cầu xác thực.
-    4. Khi cả 3 lớp bảo vệ đều hợp lệ, hệ thống mới tiến hành đối chiếu tài khoản và mật khẩu với dữ liệu lưu trữ để thông báo đăng nhập thành công hay thất bại.
+    4. Khi cả 3 thông tin đều hợp lệ, hệ thống duyệt danh sách Data.listAccount, dùng hàm equals() so sánh bằng xem có tài khoản nào trùng khớp cả số tài khoản và mật khẩu hay không để thông báo đăng nhập thành công hay thất bại.
 
 III. Test Cases
 
