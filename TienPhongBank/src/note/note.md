@@ -4,7 +4,7 @@ I. Yêu cầu chương trình (Requirement)
 - Số tài khoản (Account Number): Chuỗi đúng 10 chữ số, không để trống.
 - Mật khẩu (Password): Độ dài từ 8 đến 31 ký tự, bắt buộc chứa cả chữ cái và chữ số.
 - Mã Captcha: Sinh ngẫu nhiên 5 ký tự (chữ hoa, chữ thường, số). Người dùng nhập ký tự hoặc cụm ký tự con tồn tại trong Captcha (dùng hàm contains()).
-- Xác thực đăng nhập: Duyệt danh sách tài khoản lưu sẵn (Data.listAccount), dùng hàm equals() kiểm tra xem tài khoản và mật khẩu vừa nhập có bằng với một tài khoản nào trong danh sách hay không.
+- Xác thực đăng nhập: Duyệt danh sách (Data.listAccount), dùng hàm equals() so sánh: nếu bằng thì báo thành công, không có thì ngược lại.
 
 II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
 - Function 1: Đổi ngôn ngữ (Change language):
@@ -25,7 +25,7 @@ II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
     1. Yêu cầu nhập và kiểm tra Số tài khoản (đúng chuẩn 10 số mới cho đi tiếp).
     2. Yêu cầu nhập và kiểm tra Mật khẩu (đủ chữ và số mới cho đi tiếp).
     3. Sinh mã Captcha ngẫu nhiên và yêu cầu xác thực.
-    4. Khi cả 3 thông tin đều hợp lệ, hệ thống duyệt danh sách Data.listAccount, dùng hàm equals() kiểm tra xem tài khoản và mật khẩu vừa nhập có bằng với một tài khoản nào trong danh sách hay không để thông báo đăng nhập thành công hoặc thất bại.
+    4. Khi cả 3 thông tin đều hợp lệ, hệ thống duyệt danh sách Data.listAccount và dùng hàm equals() so sánh: nếu bằng thì báo thành công, không có thì ngược lại (báo thất bại).
 
 III. Test Cases
 
@@ -44,5 +44,5 @@ III. Test Cases
 - Chọn 1 (Vietnamese): Giao diện và thông báo chuyển sang Tiếng Việt ("So tai khoan:", "Mat khau:", "Nhap captcha:").
 - Chọn 2 (English): Giao diện và thông báo chuyển sang Tiếng Anh ("Account number:", "Password:", "Enter captcha character:").
 - Chọn 3 (Exit): Dừng và thoát chương trình an toàn.
-- Đăng nhập thành công: Nhập tài khoản và mật khẩu bằng với một tài khoản có sẵn trong hệ thống (Ví dụ: Account 1029817261, Password tuan26062002), xác thực đúng Captcha -> Hiển thị "Dang nhap thanh cong!" (hoặc "Login successfully!").
-- Đăng nhập thất bại: Nhập tài khoản hoặc mật khẩu không bằng với bất kỳ tài khoản nào trong hệ thống (Ví dụ: Account 0123456789, Password password123), xác thực đúng Captcha -> Hiển thị "Dang nhap that bai!" (hoặc "Login failed!").
+- Đăng nhập thành công: Nhập tài khoản và mật khẩu bằng với dữ liệu trong hệ thống (Ví dụ: Account 1029817261, Password tuan26062002), xác thực đúng Captcha -> Hiển thị "Dang nhap thanh cong!" (hoặc "Login successfully!").
+- Đăng nhập thất bại: Nhập tài khoản hoặc mật khẩu không có trong hệ thống (Ví dụ: Account 0123456789, Password password123), xác thực đúng Captcha -> Hiển thị "Dang nhap that bai!" (hoặc "Login failed!").
