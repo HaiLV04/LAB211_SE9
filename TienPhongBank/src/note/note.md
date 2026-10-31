@@ -1,20 +1,33 @@
 # I. Yêu cầu chương trình (Requirement)
-- Xây dựng hệ thống đăng nhập điện tử (Ebank - TPBank) hỗ trợ đa ngôn ngữ (Tiếng Việt và Tiếng Anh) qua `Locale` và `ResourceBundle`.
+- Xây dựng hệ thống đăng nhập điện tử (Ebank - TPBank) hỗ trợ đa ngôn ngữ (Tiếng Việt và Tiếng Anh).
 - **Lựa chọn ngôn ngữ:** 1. Vietnamese, 2. English, 3. Exit.
-- **Số tài khoản (Account Number):** Chuỗi 10 chữ số (`^[0-9]{10}$`), không để trống.
-- **Mật khẩu (Password):** Độ dài 8 - 31 ký tự, bắt buộc chứa cả chữ cái và chữ số (`^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,31}$`).
-- **Mã Captcha:** Chuỗi 5 ký tự ngẫu nhiên (chữ và số). Người dùng nhập ký tự hoặc chuỗi con tồn tại trong Captcha đã sinh (`contains()`).
-- **Xác thực tài khoản:** So khớp Account và Password với danh sách tài khoản lưu trữ (`Data.listAccount`).
+- **Số tài khoản (Account Number):** Chuỗi đúng 10 chữ số, không để trống.
+- **Mật khẩu (Password):** Độ dài từ 8 đến 31 ký tự, bắt buộc phải có cả chữ cái và chữ số.
+- **Mã Captcha:** Chuỗi 5 ký tự ngẫu nhiên (chữ và số). Người dùng nhập ký tự hoặc cụm ký tự con nằm trong mã Captcha đã sinh (`contains()`).
+- **Xác thực tài khoản:** Đối chiếu tài khoản và mật khẩu vừa nhập với dữ liệu lưu trữ để thông báo đăng nhập thành công hay thất bại.
 
-# II. Giải thích các Function (Functions Explanation)
-- `TPBank.start()`: Điểm khởi chạy, nhận lựa chọn từ menu để thiết lập `Locale` và nạp gói ngôn ngữ `ResourceBundle` tương ứng.
-- `Helper.menu()`: Hiển thị giao diện menu 3 lựa chọn (1. Vietnamese, 2. English, 3. Exit).
-- `Helper.generateCaptcha()`: Sinh chuỗi ngẫu nhiên 5 ký tự gồm chữ hoa, chữ thường và chữ số.
-- `Validate.getInt()`: Kiểm tra và nhận giá trị số nguyên hợp lệ trong phạm vi menu (từ 1 đến 3).
-- `Validate.getString()`: Kiểm tra chuỗi nhập khớp với biểu thức chính quy (Regex) cho Account (10 số) và Password (8-31 ký tự gồm chữ và số).
-- `Validate.verifyCaptcha()`: Xác thực chuỗi người dùng nhập không rỗng và tồn tại trong mã Captcha gốc bằng hàm `contains()`.
-- `LoginService.login()`: Điều phối luồng đăng nhập tuần tự: nhập Account -> nhập Password -> sinh Captcha -> verify Captcha -> xác thực thông tin.
-- `LoginService.authentication()`: So sánh tài khoản và mật khẩu vừa nhập với `Data.listAccount` để thông báo đăng nhập thành công hoặc thất bại.
+# II. Giải thích các Function theo nghiệp vụ (Function Explanation)
+- **Function 1: Đổi ngôn ngữ (Change language):**
+  - Giúp chương trình giao tiếp linh hoạt bằng cả Tiếng Việt và Tiếng Anh.
+  - Toàn bộ câu chữ, nhãn nhập liệu và thông báo lỗi được tách riêng vào 2 file cấu hình ngôn ngữ (`Vi.properties` và `En.properties`). Khi người dùng chọn ngôn ngữ nào, hệ thống tự động tra cứu các câu từ trong file tương ứng để hiển thị, không cần viết cứng câu chữ vào code.
+- **Function 2: Kiểm tra số tài khoản (Checking account number):**
+  - Đảm bảo số tài khoản nhập vào đúng chuẩn ngân hàng: bắt buộc đủ 10 chữ số, không chứa chữ cái hay ký tự đặc biệt.
+  - Dùng mẫu quy tắc (Regex) để kiểm tra. Nếu nhập sai, hệ thống lập tức chặn lại, in thông báo lỗi bằng ngôn ngữ đã chọn và yêu cầu nhập lại cho đến khi đúng.
+- **Function 3: Kiểm tra mật khẩu (Check the password):**
+  - Đảm bảo tính an toàn bảo mật, yêu cầu mật khẩu phải đủ mạnh: độ dài từ 8 đến 31 ký tự và bắt buộc phải chứa cả chữ cái lẫn chữ số.
+  - Nếu người dùng nhập mật khẩu quá ngắn, quá dài hoặc chỉ toàn số/toàn chữ, hệ thống báo lỗi tương ứng và yêu cầu nhập lại.
+- **Function 4: Sinh mã Captcha ngẫu nhiên (Generate a random captcha code):**
+  - Tạo ra mã bảo mật ngẫu nhiên nhằm phân biệt người dùng thật với các phần mềm tự động (bot) dò mật khẩu.
+  - Tự động bốc ngẫu nhiên 5 ký tự từ tập hợp chữ hoa, chữ thường và chữ số để ghép thành một mã Captcha và hiển thị lên màn hình.
+- **Function 5: Kiểm tra mã Captcha (Check the captcha code):**
+  - Xác nhận thao tác đăng nhập được thực hiện bởi con người.
+  - Sử dụng cơ chế kiểm tra sự tồn tại (`contains()`): người dùng chỉ cần nhập một ký tự hoặc chuỗi ký tự con có xuất hiện trong mã Captcha gốc là hợp lệ. Nếu nhập ký tự không có trong Captcha hoặc bỏ trống, hệ thống báo lỗi và bắt nhập lại.
+- **Function 6: Điều phối đăng nhập (Login):**
+  - Đóng vai trò là luồng xử lý chính, kết nối các bước đăng nhập tuần tự theo thứ tự logic:
+    1. Nhập và kiểm tra Số tài khoản (hợp lệ mới cho đi tiếp).
+    2. Nhập và kiểm tra Mật khẩu (hợp lệ mới cho đi tiếp).
+    3. Hiển thị Captcha và yêu cầu người dùng xác nhận.
+    4. Sau khi vượt qua cả 3 lớp kiểm tra, hệ thống mới đối chiếu thông tin với danh sách tài khoản để đưa ra kết quả cuối cùng: đăng nhập thành công hay thất bại.
 
 # III. Test Cases
 
@@ -33,5 +46,5 @@
 - **Chọn 1 (Vietnamese):** Giao diện và toàn bộ thông báo chuyển sang Tiếng Việt, sau đó tiến hành đăng nhập.
 - **Chọn 2 (English):** Giao diện và toàn bộ thông báo chuyển sang Tiếng Anh, sau đó tiến hành đăng nhập.
 - **Chọn 3 (Exit):** Dừng và thoát chương trình an toàn (`System.exit(0)`).
-- **Đăng nhập thành công:** Nhập đúng Account và Password có trong `Data.listAccount`, xác thực đúng Captcha -> In thông báo "Dang nhap thanh cong!".
-- **Đăng nhập thất bại:** Nhập sai Account hoặc Password (đúng định dạng), xác thực đúng Captcha -> In thông báo "Dang nhap that bai!".
+- **Đăng nhập thành công:** Nhập đúng Account và Password có trong dữ liệu, xác thực đúng Captcha -> In thông báo "Dang nhap thanh cong!".
+- **Đăng nhập thất bại:** Nhập sai Account hoặc Password (dù đúng định dạng), xác thực đúng Captcha -> In thông báo "Dang nhap that bai!".
