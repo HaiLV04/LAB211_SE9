@@ -9,7 +9,6 @@ I. Yêu cầu chương trình (Requirement)
 II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
 - Function 1: Đổi ngôn ngữ (Change language):
   + Hiển thị menu cho người dùng chọn Tiếng Việt, Tiếng Anh hoặc Thoát.
-  + Người dùng chọn tiếng nào thì chương trình mở đúng file ngôn ngữ đó để toàn bộ câu nhắc nhập và câu báo lỗi hiển thị theo tiếng đó.
 - Function 2: Kiểm tra số tài khoản (Checking account number):
   + Yêu cầu người dùng nhập số tài khoản và dùng mẫu định dạng (Regex) để kiểm tra.
   + Số tài khoản bắt buộc phải đủ 10 chữ số. Nếu nhập sai (nhập chữ, ký tự lạ, thiếu hoặc thừa số), hệ thống chặn lại, hiển thị câu báo lỗi theo ngôn ngữ đã chọn và yêu cầu nhập lại cho đến khi đúng.
@@ -17,11 +16,9 @@ II. Giải thích các Function theo nghiệp vụ (Functions Explanation)
   + Kiểm tra độ mạnh và tính an toàn của mật khẩu người dùng nhập vào bằng mẫu định dạng (Regex).
   + Mật khẩu hợp lệ phải có độ dài từ 8 đến 31 ký tự, đồng thời phải có cả chữ cái và chữ số. Nếu vi phạm (quá ngắn, quá dài, chỉ toàn số hoặc toàn chữ), hệ thống thông báo lỗi và bắt nhập lại.
 - Function 4: Sinh mã Captcha ngẫu nhiên (Generate a random captcha code):
-  + Tạo ra mã bảo mật ngẫu nhiên để chống lại các phần mềm tự động (bot) dò mật khẩu.
-  + Tự động bốc ngẫu nhiên 5 ký tự từ tập hợp gồm chữ hoa (A-Z), chữ thường (a-z) và chữ số (0-9) rồi ghép lại thành chuỗi mã Captcha hiển thị trên màn hình.
+  + Tự động sinh ngẫu nhiên một mã Captcha gồm 5 ký tự (chữ hoa, chữ thường và số) hiển thị lên màn hình mỗi lần đăng nhập.
 - Function 5: Kiểm tra mã Captcha (Check the captcha code):
-  + Xác nhận thao tác đăng nhập được thực hiện bởi con người thật.
-  + Áp dụng cơ chế kiểm tra chuỗi con (hàm contains()): người dùng chỉ cần nhập một ký tự hoặc cụm ký tự con xuất hiện trong mã Captcha là hợp lệ. Nếu bỏ trống hoặc nhập ký tự không có trong Captcha, hệ thống báo lỗi và bắt nhập lại.
+  + Kiểm tra mã người dùng nhập bằng cơ chế chuỗi con (hàm contains()): chỉ cần nhập đúng một ký tự hoặc cụm ký tự con có trong mã Captcha là hợp lệ. Nếu bỏ trống hoặc nhập ký tự không có trong Captcha, hệ thống báo lỗi và bắt nhập lại.
 - Function 6: Điều phối đăng nhập (Login):
   + Kết nối toàn bộ quy trình đăng nhập thành một chuỗi logic chặt chẽ:
     1. Yêu cầu nhập và kiểm tra Số tài khoản (đúng chuẩn 10 số mới cho đi tiếp).
