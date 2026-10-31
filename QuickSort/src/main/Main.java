@@ -1,6 +1,6 @@
 package main;
 
-import controller.ArrayController;
+import controller.QuickSortController;
 
 /**
  * Chức năng: Điểm khởi chạy của chương trình Quick Sort.
@@ -20,7 +20,7 @@ public class Main {
      * @param args tham số dòng lệnh
      */
     public static void main(String[] args) {
-        ArrayController arrayController = new ArrayController();
+        QuickSortController arrayController = new QuickSortController();
         arrayController.run();
     }
 }

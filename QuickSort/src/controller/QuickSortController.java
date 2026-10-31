@@ -6,7 +6,7 @@ import view.ArrayView;
 /**
  * Chức năng: Điều khiển luồng chương trình sắp xếp nhanh (Quick Sort).
  */
-public class ArrayController {
+public class QuickSortController {
 
     private final QuickSortModel arrayModel;
     private final ArrayView arrayView;
@@ -14,7 +14,7 @@ public class ArrayController {
     /**
      * Khởi tạo controller với model và view.
      */
-    public ArrayController() {
+    public QuickSortController() {
         arrayModel = new QuickSortModel();
         arrayView = new ArrayView();
     }

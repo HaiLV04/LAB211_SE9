@@ -77,7 +77,7 @@ public class Validate {
         while (true) {
             System.out.printf(message);
             captchaInput = SCANNER.nextLine().trim();
-            if (captchaGenerate.equals(captchaInput)) {
+            if (!captchaInput.isEmpty() && captchaGenerate.contains(captchaInput)) {
                 break;
             }
             System.out.println(messageError);
