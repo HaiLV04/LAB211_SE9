@@ -59,8 +59,8 @@ public class QuickSortModel extends ArrayModel {
         int i = left;
         int j = right;
 
-        System.out.printf("Buoc %d [Phan vung: tu chi so %d den %d | Gia tri Pivot tai index %d = %d]:\n",
-                stepCounter++, left, right, pivotIndex, pivot);
+        System.out.printf("Buoc %d [Phan vung: tu chi so %d den %d | Gia tri Pivot = %d tai vi tri index: %d]:\n",
+                stepCounter++, left, right, pivot, pivotIndex);
 
         while (i <= j) {
             while (array[i] < pivot) {
