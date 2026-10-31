@@ -85,12 +85,8 @@ public class QuickSortModel extends ArrayModel {
 
         System.out.println("   => Trang thai mang sau lan phan vung nay: " + Arrays.toString(array));
 
-        String leftPart = (left <= i - 1)
-                ? Arrays.toString(Arrays.copyOfRange(array, left, i))
-                : "[]";
-        String rightPart = (i <= right)
-                ? Arrays.toString(Arrays.copyOfRange(array, i, right + 1))
-                : "[]";
+        String leftPart = (left <= i - 1) ? Arrays.toString(Arrays.copyOfRange(array, left, i)) : "[]";
+        String rightPart = (i <= right) ? Arrays.toString(Arrays.copyOfRange(array, i, right + 1)) : "[]";
 
         System.out.printf("   * Nua ben TRAI [chi so %d den %d]: %s (cac gia tri <= %d)\n", left, i - 1, leftPart, pivot);
         System.out.printf("   * Nua ben PHAI [chi so %d den %d]: %s (cac gia tri >= %d)\n", i, right, rightPart, pivot);
