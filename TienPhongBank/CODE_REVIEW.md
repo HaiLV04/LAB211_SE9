@@ -86,13 +86,14 @@
     ```
     Nếu rỗng hoặc không khớp với chuỗi Captcha đã sinh thì in thông báo lỗi `err` và bắt nhập lại.
 
-### 3.5. `controller.LoginService`
-- **Quy trình đăng nhập 5 bước:**
-  1. Nhập và kiểm tra định dạng Số tài khoản.
-  2. Nhập và kiểm tra định dạng Mật khẩu.
-  3. Sinh và hiển thị mã Captcha qua `Helper.generateCaptcha()`.
-  4. Yêu cầu nhập và xác thực Captcha qua `Validate.verifyCaptcha()`.
-  5. Gọi hàm `authentication(account, password)`: Duyệt `Data.listAccount`, nếu trùng cả tài khoản và mật khẩu thì thông báo `loginSuccess`, ngược lại thông báo `loginFailed`.
+### 3.5. `controller.LoginService` (Cài đặt các hàm cốt lõi theo đề bài Ebank)
+- Lớp `LoginService` đóng vai trò là tầng dịch vụ Ebank, trực tiếp cài đặt và thực thi các phương thức yêu cầu của đề:
+  1. `void setLocate(Locale locale)`: Nạp cấu hình ngôn ngữ và ResourceBundle.
+  2. `String checkAccountNumber(String accountNumber)`: Kiểm tra định dạng 10 số theo Regex, trả về lỗi hoặc chuỗi rỗng.
+  3. `String checkPassword(String password)`: Kiểm tra độ an toàn mật khẩu (8-31 ký tự, đủ chữ và số) theo Regex.
+  4. `String generateCaptcha()`: Tự động sinh ngẫu nhiên mã Captcha 5 ký tự qua `Helper.generateCaptcha(5)`.
+  5. `String checkCaptcha(String captchaInput, String captchaGenerate)`: Xác thực chuỗi con bằng `contains()`.
+  6. `void login()`: Điều phối luồng tuần tự gọi các hàm kiểm tra trên, sau đó gọi `authentication(account, password)` duyệt `Data.listAccount` để thông báo kết quả.
 
 ---
 
@@ -128,3 +129,13 @@
 > 1. Em chỉ cần tạo thêm một file `Language_ja.properties` trong thư mục `resources` chứa các bản dịch tiếng Nhật tương ứng với các key hiện tại.
 > 2. Ở menu `TPBank.start()`, em thêm lựa chọn 3: `Locale.setDefault(new Locale("ja", "JP"))`.
 > Toàn bộ logic kiểm tra tài khoản, mật khẩu, captcha và đăng nhập trong `LoginService` không cần phải sửa đổi bất kỳ một dòng code nào.
+
+### Q5: Đề bài yêu cầu tạo class `Ebank` chứa các hàm `setLocate`, `checkAccountNumber`, `checkPassword`, `generateCaptcha`, `checkCaptcha`. Tại sao mã nguồn của em lại tổ chức thành `TPBank`, `LoginService`, `Validate` và `Helper`?
+> **Trả lời:**
+> - Bản chất cấu trúc đề bài (Startup code template) là thiết kế sơ khai theo hướng nguyên khối (Monolithic - gom chung UI, logic kiểm tra và luồng điều khiển vào một class `Ebank`).
+> - Để đảm bảo nguyên lý thiết kế sạch (**Single Responsibility Principle - SOLID**) và mô hình chuẩn **MVC**:
+>   + Lớp `controller.TPBank`: Đóng vai trò điều phối chính và thiết lập ngôn ngữ hệ thống tương ứng với `void setLocate(Locale locate)`.
+>   + Lớp `view.Validate`: Chịu trách nhiệm kiểm tra định dạng dữ liệu đầu vào theo Regex, đáp ứng trọn vẹn nghiệp vụ của `checkAccountNumber` và `checkPassword`.
+>   + Lớp `view.Helper`: Chuyên biệt hóa việc sinh chuỗi ngẫu nhiên `generateCaptcha`.
+>   + Lớp `controller.LoginService`: Kết nối và điều phối toàn bộ chuỗi đăng nhập tuần tự.
+> - Cách tổ chức này giúp mã nguồn phân tách rõ ràng tầng hiển thị (View), tầng xử lý (Controller) và tầng dữ liệu (Model), dễ bảo trì và mở rộng hơn mà vẫn giữ đúng 100% logic nghiệp vụ và ràng buộc của đề bài.
