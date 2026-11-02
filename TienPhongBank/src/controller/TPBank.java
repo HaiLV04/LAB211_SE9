@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 import view.Helper;
 import view.Validate;
 
@@ -25,26 +24,27 @@ public class TPBank {
     }
 
     /**
+     * Chỉnh sửa
      * Chức năng: Khởi động chương trình, cho phép người dùng chọn ngôn ngữ và thực hiện đăng nhập.
-     * Luồng xử lý: Hiển thị menu, nhận lựa chọn (1: Tiếng Việt, 2: Tiếng Anh, 3: Thoát), tải ResourceBundle tương ứng và gọi LoginService.
+     * Luồng xử lý: Hiển thị menu, nhận lựa chọn (1: Tiếng Việt, 2: Tiếng Anh, 3: Thoát), gọi setLocate và thực hiện login.
      */
     public static void start() {
         Helper.menu();
         int choice = Validate.getInt("Please enter 1-3: ", "Just 1->3", "Invalid!", 1, 3);
         
+        LoginService loginService = new LoginService();
         switch (choice) {
             case 1:
-                Locale.setDefault(new Locale("vi", "VN"));
+                loginService.setLocate(new Locale("vi", "VN"));
+                loginService.login();
                 break;
             case 2:
-                Locale.setDefault(new Locale("en", "US"));
+                loginService.setLocate(new Locale("en", "US"));
+                loginService.login();
                 break;
             case 3:
                 System.exit(0);
                 break;
         }
-        
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("resources/Language");
-        new LoginService().login(resourceBundle);
     }
 }
