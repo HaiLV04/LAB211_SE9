@@ -23,25 +23,35 @@ Chương trình hiển thị menu gồm các chức năng:
 - ID:
   + Kiểu dữ liệu: String.
   + Ràng buộc: Bắt buộc không được để trống, định dạng regex `^[Ss]\d+$` (bắt đầu bằng S hoặc s, theo sau là chữ số, ví dụ: S1, s12).
-  + Nghiệp vụ: Mỗi ID đại diện cho một sinh viên duy nhất trong hệ thống và gắn liền với một Tên sinh viên duy nhất.
+  + Nghiệp vụ: Mỗi ID đại diện cho một sinh viên duy nhất trong hệ thống và gắn liền với một Tên sinh viên duy nhất. Nếu nhập ID đã tồn tại, chương trình tự động sử dụng lại Tên sinh viên đã có của ID đó và không cho phép nhập tên khác.
 - Student Name:
   + Kiểu dữ liệu: String.
   + Ràng buộc: Bắt buộc không được để trống, định dạng regex `^[A-Za-z\s]+$` (chỉ gồm chữ cái và khoảng trắng, không chứa số hoặc ký tự đặc biệt).
+  + Nghiệp vụ: Đại diện cho tên sinh viên, gắn cố định với ID. Nếu cập nhật tên sinh viên ở một bản ghi, tất cả các bản ghi có cùng ID trong hệ thống đều sẽ được tự động cập nhật theo tên mới.
 - Semester:
   + Kiểu dữ liệu: String.
   + Ràng buộc: Bắt buộc không được để trống, định dạng regex `^[A-Za-z\d]+$` (chỉ gồm chữ cái và số, ví dụ: Fall2024, Spring2025, không chứa khoảng trắng hay ký tự đặc biệt).
+  + Nghiệp vụ: Đại diện cho học kỳ học. Một sinh viên có thể học ở nhiều học kỳ khác nhau.
 - Course Name:
   + Kiểu dữ liệu: Enum (Course).
   + Ràng buộc: Chỉ chấp nhận 3 môn học cố định: Java, .Net, C/C++.
   + Nhập liệu: Bắt buộc chọn số nguyên 1, 2 hoặc 3 (1-Java, 2-.Net, 3-C/C++).
+  + Nghiệp vụ:
+    * Một môn học sẽ không được phép lặp lại trong cùng một học kỳ của cùng một sinh viên (nghĩa là bộ ba ID + Semester + Course Name phải là duy nhất, không được tạo bản ghi trùng lặp).
+    * Trong cùng một học kỳ, một sinh viên được phép đăng ký học nhiều môn học khác nhau (ví dụ: kỳ Fall2024 học cả Java và .Net).
+    * Một sinh viên được phép học lại một môn ở nhiều học kỳ khác nhau (ví dụ: học Java ở Fall2024 và học lại Java ở Spring2025).
 - Lựa chọn Menu (Menu Choice):
   + Kiểu dữ liệu: int (số nguyên từ 1 đến 5).
+  + Nghiệp vụ: Điều hướng các chức năng chính của chương trình. Chỉ chấp nhận các số từ 1 đến 5, nếu nhập sai khoảng hoặc nhập ký tự lạ thì bắt buộc nhập lại.
 - Lựa chọn bản ghi (Record Choice):
   + Kiểu dữ liệu: int (số nguyên từ 1 đến max của danh sách tìm thấy).
+  + Nghiệp vụ: Cho phép người dùng chọn chính xác một bản ghi trong danh sách các bản ghi có cùng ID để thực hiện sửa (Update) hoặc xóa (Delete).
 - Lựa chọn tiếp tục (Continue Choice):
   + Kiểu dữ liệu: String / char (chỉ chấp nhận 'Y', 'y', 'N', 'n').
+  + Nghiệp vụ: Hỏi người dùng có muốn tiếp tục nhập thêm sinh viên hay không (chỉ hỏi khi đã nhập đủ từ 5 sinh viên trở lên). Nhập Y/y để tiếp tục, N/n để quay về Menu.
 - Lựa chọn hành động sửa/xóa (Action Choice):
   + Kiểu dữ liệu: String / char (chỉ chấp nhận 'U', 'u', 'D', 'd').
+  + Nghiệp vụ: Xác định hành động với bản ghi đã chọn (U/u: cập nhật dữ liệu, D/d: xóa bản ghi). Khi cập nhật, dữ liệu mới sau khi sửa không được tạo ra bản ghi trùng lặp (cùng ID, Semester, Course Name) với dữ liệu đã tồn tại.
 
 -Chức năng Create:
 +Cho phép người dùng nhập thông tin sinh viên từ bàn phím.
@@ -219,6 +229,45 @@ Expected Output:
 Hệ thống không hiển thị câu hỏi Y/N, tự động yêu cầu nhập tiếp bản ghi tiếp theo cho đủ số lượng.
 ---
 
+• TC05c - ID hoa và thường khi nhập ID đã tồn tại (Case-insensitive)
+Điều kiện: Đã có S1 tên là Nguyen Quan trong danh sách
+Input:
+s1 (chữ thường)
+Summer2025
+Java (chọn 1)
+Expected Output:
+Name: Nguyen Quan
+(Hệ thống dùng equalsIgnoreCase nên tự động nhận diện ID s1 chính là S1 và tự động gán tên cũ).
+---
+
+• TC05d - Trùng học kỳ khác kiểu chữ hoa/thường (Duplicate Semester Case-insensitive)
+Điều kiện: Đã có S1 | Nguyen Quan | Fall2024 | Java
+Input:
+S1
+fall2024 (chữ thường)
+Java (chọn 1)
+Expected Output:
+Ném Exception: "This record is existed!" (do so sánh kỳ học bằng equalsIgnoreCase).
+---
+
+• TC05e - Đang nhập chưa đủ 5 sinh viên mà bị trùng bản ghi
+Điều kiện: Danh sách đang có 3 sinh viên, đang nhập sinh viên thứ 4
+Input: Nhập thông tin trùng lặp với bản ghi đã có
+Expected Output:
+Ném Exception: "This record is existed!" và kết thúc hàm tạo văng về Menu chính, danh sách vẫn giữ nguyên 3 sinh viên.
+---
+
+• TC05f - Một sinh viên học cùng một môn ở nhiều học kỳ khác nhau (Học lại môn - Hợp lệ)
+Điều kiện: Đã có S1 | Nguyen Quan | Fall2024 | Java
+Input:
+S1
+Spring2025
+Java (chọn 1)
+Expected Output:
+Name: Nguyen Quan (Tự động sử dụng tên cũ)
+Add successfully!! (Hợp lệ vì khác học kỳ, sinh viên được phép học lại môn ở kỳ tiếp theo).
+---
+
 III. TEST CASE CHỨC NĂNG FIND AND SORT
 • TC06 - Tìm kiếm thành công
 Input:
@@ -269,7 +318,24 @@ Expected Output:
 Điều kiện: Hệ thống chưa có dữ liệu sinh viên nào
 Input: Chọn chức năng 2 (Find and Sort)
 Expected Output:
-Ném Exception: "List is empty!"
+Ném Exception: "List is empty!" hoặc "Can not found name!"
+---
+
+• TC10b - Nhập từ khóa tìm kiếm chứa số hoặc ký tự đặc biệt
+Input:
+Quan123 hoặc @Quan
+Expected Output:
+Validator báo lỗi: "Invalid!" và yêu cầu nhập lại từ khóa hợp lệ.
+---
+
+• TC10c - Tìm kiếm từ khóa xuất hiện ở nhiều vị trí khác nhau trong tên
+Input:
+Quan
+Expected Output:
+Trả về cả 3 sinh viên có chứa "quan" và sắp xếp theo bảng chữ cái A-Z:
+1. Nguyen Quan (3 bản ghi)
+2. Quan Vu (1 bản ghi)
+3. Vu Quang (1 bản ghi - chữ Quang chứa "quan")
 ---
 
 IV. TEST CASE CHỨC NĂNG UPDATE / DELETE
@@ -349,17 +415,49 @@ Hệ thống tự động hiển thị "Name: Tran Linh", gán tên Tran Linh ch
 Điều kiện: Hệ thống chưa có bản ghi nào
 Input: Chọn chức năng 3 (Update/Delete)
 Expected Output:
-Ném Exception: "List is empty..."
+Ném Exception: "List is empty..." hoặc "Can not found id"
+---
+
+• TC17c - Update giữ nguyên thông tin cũ (Bẫy trùng lặp với chính mình - Self Duplicate)
+Điều kiện: Chọn sửa bản ghi Record 1 của S1 (Fall2024 | Java)
+Input:
+U
+ID: S1
+Semester: Fall2024
+Course: 1 (Java)
+Expected Output:
+Ném Exception: "New record be duplicate!!" (vì bản ghi cũ vẫn đang có mặt trong danh sách khi kiểm tra isExisted).
+---
+
+• TC17d - Xóa bản ghi duy nhất của một sinh viên
+Điều kiện: Sinh viên S3 (Le Thu Thao) chỉ có 1 bản ghi duy nhất
+Thao tác: Chọn S3, chọn Record 1, chọn D
+Expected Output:
+Bản ghi bị xóa thành công. Khi tìm lại ID S3 ở chức năng 3 sẽ báo "Can not found id".
+---
+
+• TC17e - Update đổi sang ID mới hoàn toàn
+Điều kiện: Chọn sửa một bản ghi của S4 (Nguyen Minh)
+Input:
+U
+New ID: S10 (chưa có trong danh sách)
+Name: Tran Van B
+Semester: Fall2025
+Course: Java
+Expected Output:
+Chương trình cho phép nhập Student Name mới và cập nhật thành công.
 ---
 
 V. TEST CASE CHỨC NĂNG REPORT
-• TC18 - Report thành công
+• TC18 - Report thành công (Kết quả được sắp xếp tăng dần theo tên sinh viên A-Z)
 Expected Output:
 Le Thu Thao | C/C++ | 1
+Nguyen Minh | Java | 1
 Nguyen Quan | Java | 2
 Nguyen Quan | .Net | 1
-Nguyen Minh | Java | 1
+Quan Vu | Java | 1
 Tran Linh | .Net | 1
+Vu Quang | C/C++ | 1
 ---
 
 • TC19 - Một sinh viên học cùng môn nhiều lần
@@ -393,6 +491,20 @@ List is empty!
 Thao tác: Vào chức năng 3 xóa 1 bản ghi học Java của Nguyen Quan, sau đó vào lại chức năng Report.
 Expected Output:
 Dòng thống kê của Nguyen Quan môn Java giảm còn 1: Nguyen Quan | Java | 1
+---
+
+• TC21b - Thống kê sinh viên cùng tên nhưng khác ID
+Điều kiện: Có thêm sinh viên S10 cũng tên là "Nguyen Quan" học môn Java
+Expected Output:
+Hệ thống gom nhóm theo ID + Course nên hiển thị thành 2 dòng riêng biệt cho S1 và S10, không bị gộp số lượng của nhau.
+---
+
+• TC21c - Thống kê hiển thị đầy đủ các cột và gộp học kỳ (Semesters)
+Dữ liệu: Sinh viên S1 học Java ở 2 kỳ Fall2024 và Spring2025
+Expected Output:
+Hiển thị bảng định dạng chuẩn:
+|No.  |Student Name        |Course         |Total     |Semesters           |
+Tại dòng Nguyen Quan môn JAVA: Total = 2, Semesters = "Fall2024, Spring2025".
 ---
 
 VI. TEST CASE VALIDATOR
@@ -474,3 +586,21 @@ Báo lỗi: "Just U or D" và yêu cầu nhập lại.
 Input: 0, hoặc số lớn hơn tổng số bản ghi hiển thị (ví dụ danh sách có 3 bản ghi nhưng nhập 4)
 Expected Output:
 Báo lỗi: "Just be 1-> [max]" và yêu cầu nhập lại.
+---
+
+• TC34 - Tên nhập tiếng Việt có dấu
+Input: Nguyễn Văn An, Trần Linh
+Expected Output:
+Báo lỗi: "Invalid!" và yêu cầu nhập lại (do regex `[A-Za-z\s]+` chỉ cho phép chữ cái Latin không dấu).
+---
+
+• TC35 - Học kỳ chứa khoảng trắng hoặc ký tự đặc biệt
+Input: "Fall 2024", "Fall-2024"
+Expected Output:
+Báo lỗi: "Invalid!" và yêu cầu nhập lại (do regex `[A-Za-z\d]+` không cho phép khoảng trắng hay dấu cách).
+---
+
+• TC36 - ID chỉ có chữ S không có số hoặc chứa khoảng trắng
+Input: "S", "s", "S 1", "S@1"
+Expected Output:
+Báo lỗi: "Invalid!" và yêu cầu nhập lại.

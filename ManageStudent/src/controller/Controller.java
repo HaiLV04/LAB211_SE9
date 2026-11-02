@@ -59,8 +59,9 @@ public class Controller {
     }
 
     /**
+     * Chỉnh sửa
      * Chức năng: Tìm kiếm sinh viên theo tên và sắp xếp kết quả.
-     * Luồng xử lý: Nhập từ khóa tên qua view, lấy danh sách phù hợp từ model, sắp xếp tăng dần và hiển thị qua view.
+     * Luồng xử lý: Nhập từ khóa tên qua view, lấy danh sách phù hợp từ model, sắp xếp theo tên và ưu tiên theo ID qua sortStudentsById() rồi hiển thị qua view.
      *
      * @throws Exception nếu không tìm thấy sinh viên
      */
@@ -75,6 +76,7 @@ public class Controller {
         ManageStudent result = new ManageStudent();
         result.setList(list);
         result.sortStudentsByName();
+        result.sortStudentsById();
         view.displayStudentList(result);
     }
 

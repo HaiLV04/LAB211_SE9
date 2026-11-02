@@ -32,7 +32,7 @@
                     [Controller]
             ┌────────────┴─────────────┐
             ▼                          ▼
-    [StudentInputer]           [ManageStudent] (BO)
+      [StudentView]            [ManageStudent] (BO)
      + [Validator]                     │
             │                          ▼
             └─────────────────> [Student] & [Course (Enum)]
@@ -40,13 +40,13 @@
 
 - **Model Package:**
   - `Course`: Enum định nghĩa danh sách các môn học cố định.
-  - `Student`: Entity class chứa thông tin sinh viên, triển khai `Comparable<Student>` để sắp xếp theo tên.
+  - `Student`: Entity class chứa thông tin sinh viên, triển khai `Comparable<Student>` để sắp xếp ưu tiên theo ID tăng dần, nếu trùng ID thì sắp xếp theo tên.
   - `ManageStudent`: Business Object (BO) chứa `List<Student> list`, thực hiện toàn bộ nghiệp vụ kiểm tra trùng, thêm, sửa, xóa, tìm kiếm, xuất báo cáo tổng hợp.
 - **View Package:**
   - `Validator`: Lớp tiện ích kiểm tra dữ liệu đầu vào bằng Regex và Exception handling.
-  - `StudentInputer`: Giao diện nhập liệu tương tác từng trường thuộc tính của sinh viên.
+  - `StudentView`: Giao diện hiển thị menu, bảng danh sách và tương tác nhập liệu các trường thuộc tính của sinh viên.
 - **Controller Package:**
-  - `Controller`: Điều phối luồng xử lý giữa `ManageStudent`, `StudentInputer` và `Validator`.
+  - `Controller`: Điều phối luồng xử lý giữa `ManageStudent`, `StudentView` và `Validator`.
 
 ---
 
@@ -62,10 +62,14 @@
   ```java
   @Override
   public int compareTo(Student t) {
-      return this.studentName.compareTo(t.studentName);
+      int idCompare = this.id.compareToIgnoreCase(t.id);
+      if (idCompare != 0) {
+          return idCompare;
+      }
+      return this.studentName.compareToIgnoreCase(t.studentName);
   }
   ```
-  Giúp đối tượng `Student` có thể được sắp xếp tự nhiên theo tên thông qua hàm `Collections.sort(list)`.
+  Giúp đối tượng `Student` sắp xếp ưu tiên theo ID tăng dần, nếu trùng ID thì sắp xếp theo tên không phân biệt hoa thường.
 
 ### 3.3. `model.ManageStudent` (Trọng tâm nghiệp vụ)
 - **`isExisted(Student student)`:**
@@ -84,14 +88,14 @@
 - **`getListStudentByName(String name)`:**
   - Dùng `getStudentName().toLowerCase().contains(name.toLowerCase())` $\rightarrow$ hỗ trợ tìm kiếm không phân biệt hoa thường và tìm theo một phần của tên.
 - **`report()` (Thuật toán báo cáo thống kê):**
-  - **Bước 1:** Sắp xếp danh sách theo tên sinh viên:
-    `Collections.sort(list, (s1, s2) -> s1.getStudentName().compareToIgnoreCase(s2.getStudentName()));`
+  - **Bước 1:** Sắp xếp danh sách ưu tiên theo ID tăng dần, trùng ID xét theo tên sinh viên:
+    Sắp xếp so sánh `s1.getId().compareToIgnoreCase(s2.getId())`, nếu bằng 0 mới so sánh tiếp theo `StudentName` và `CourseName`.
   - **Bước 2:** Sử dụng 2 cấu trúc `HashMap`:
     - `countMap`: Key = `ID + "|" + CourseName`, Value = số lần học (dùng `countMap.getOrDefault(key, 0) + 1`).
     - `semesterMap`: Lưu danh sách các kỳ học gộp lại (ví dụ `"Fall2024, Spring2025"`).
-  - **Bước 3:** Duyệt lại danh sách theo thứ tự đã sort, dùng `List<String> printedKeys` để tránh in trùng các dòng đã hiển thị, xuất ra bảng báo cáo dạng cột chuẩn.
+  - **Bước 3:** Duyệt lại danh sách theo thứ tự đã sort, dùng `List<String> printedKeys` để tránh in trùng các dòng đã hiển thị, xuất ra bảng báo cáo dạng cột chuẩn có hiển thị ID.
 
-### 3.4. `view.StudentInputer` & `view.Validator`
+### 3.4. `view.StudentView` & `view.Validator`
 - **`inputID()`:** Kiểm tra Regex `[Ss]\\d+` (bắt đầu bằng S hoặc s, theo sau là các chữ số, ví dụ `S123`).
 - **`inputStudentName()`:** Kiểm tra Regex `[A-Za-z\\s]+` (chỉ gồm chữ cái và khoảng trắng, không chứa số hay ký tự đặc biệt).
 - **`inputSemester()`:** Kiểm tra Regex `[A-Za-z0-9\\s]+`.
@@ -115,7 +119,7 @@
 1. **Encapsulation (Đóng gói):** Ẩn giấu dữ liệu trong `Student` bằng `private`, truy xuất qua các phương thức getter/setter có kiểm soát.
 2. **Abstraction (Trừu tượng):** Triển khai interface chuẩn `Comparable<T>` trong Java Core để định nghĩa quy tắc so sánh hai sinh viên. Sử dụng `enum Course` trừu tượng hóa danh mục môn học.
 3. **Polymorphism (Đa hình):** Ghi đè (Override) phương thức `compareTo()` của interface `Comparable` và phương thức `toString()` của lớp `Object`.
-4. **Single Responsibility Principle (SRP):** Tách bạch rõ rệt giữa giao diện nhập liệu (`StudentInputer`), kiểm tra tính hợp lệ (`Validator`), lưu trữ dữ liệu nghiệp vụ (`ManageStudent`) và điều phối luồng (`Controller`).
+4. **Single Responsibility Principle (SRP):** Tách bạch rõ rệt giữa giao diện nhập liệu (`StudentView`), kiểm tra tính hợp lệ (`Validator`), lưu trữ dữ liệu nghiệp vụ (`ManageStudent`) và điều phối luồng (`Controller`).
 
 ---
 
@@ -128,7 +132,7 @@
 > **Trả lời:**
 > - `Comparable` nằm trong package `java.lang`, định nghĩa thứ tự sắp xếp tự nhiên bên trong chính lớp đối tượng bằng cách override phương thức `compareTo(T o)`.
 > - `Comparator` nằm trong `java.util`, dùng để định nghĩa các tiêu chí sắp xếp linh hoạt bên ngoài lớp bằng phương thức `compare(T o1, T o2)`.
-> - Trong bài này, lớp `Student` implements `Comparable<Student>` để sắp xếp mặc định theo tên. Ngoài ra trong hàm `report()`, em còn kết hợp dùng `Comparator` (dưới dạng Lambda expression) để sắp xếp không phân biệt chữ hoa, chữ thường (`compareToIgnoreCase`).
+> - Trong bài này, lớp `Student` implements `Comparable<Student>` để sắp xếp mặc định ưu tiên theo ID tăng dần, trùng ID xét theo tên. Ngoài ra trong các hàm `sortStudentsById()`, `sortStudentsByName()` và `report()`, em còn kết hợp dùng `Comparator` (dưới dạng Lambda expression) để sắp xếp không phân biệt chữ hoa, chữ thường (`compareToIgnoreCase`).
 
 ### Q3: Nếu một sinh viên đổi tên ở chức năng Update thì các bản ghi khác của cùng sinh viên đó có bị ảnh hưởng không?
 > **Trả lời:** Trong nghiệp vụ bài lab, một sinh viên được định danh duy nhất bởi `ID`. Khi thực hiện Update, nếu cập nhật đổi tên thì logic nên cập nhật đồng bộ tên mới cho tất cả các bản ghi có cùng ID đó trong hệ thống để đảm bảo tính nhất quán dữ liệu (Data Consistency).

@@ -160,16 +160,33 @@ public class ManageStudent {
     }
 
     /**
+     * Chỉnh sửa
      * Chức năng: Sắp xếp danh sách sinh viên theo tên tăng dần.
-     * Luồng xử lý: Sử dụng Collections.sort() dựa theo phương thức compareTo() của lớp Student.
+     * Luồng xử lý: Sử dụng Collections.sort() kết hợp so sánh compareToIgnoreCase theo tên sinh viên.
      */
     public void sortStudentsByName() {
-        Collections.sort(list);
+        Collections.sort(list, (s1, s2) -> s1.getStudentName().compareToIgnoreCase(s2.getStudentName()));
     }
 
     /**
-     * Chức năng: Định dạng danh sách sinh viên thành bảng hiển thị.
-     * Luồng xử lý: Duyệt danh sách và nối các dòng thông tin thành bảng có tiêu đề.
+     * Thêm mới
+     * Chức năng: Sắp xếp danh sách sinh viên ưu tiên theo ID tăng dần, nếu trùng ID thì sắp xếp theo tên.
+     * Luồng xử lý: Sử dụng Collections.sort() so sánh mã ID trước; nếu ID trùng nhau thì so sánh tiếp theo họ tên sinh viên.
+     */
+    public void sortStudentsById() {
+        Collections.sort(list, (s1, s2) -> {
+            int idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            if (idCompare != 0) {
+                return idCompare;
+            }
+            return s1.getStudentName().compareToIgnoreCase(s2.getStudentName());
+        });
+    }
+
+    /**
+     * Chỉnh sửa
+     * Chức năng: Định dạng danh sách sinh viên thành bảng hiển thị (có cột ID).
+     * Luồng xử lý: Duyệt danh sách và nối các dòng thông tin thành bảng có tiêu đề kèm cột ID sinh viên.
      *
      * @return chuỗi biểu diễn bảng danh sách sinh viên
      */
@@ -179,10 +196,11 @@ public class ManageStudent {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("|%5s|%15s|%10s|%15s|\n", "No.", "Student Name", "Semester", "Course Name"));
+        sb.append(String.format("|%5s|%10s|%20s|%10s|%15s|\n", "No.", "ID", "Student Name", "Semester", "Course Name"));
         for (int i = 0; i < list.size(); i++) {
-            sb.append(String.format("|%5s|%15s|%10s|%15s|\n",
+            sb.append(String.format("|%5s|%10s|%20s|%10s|%15s|\n",
                     i + 1,
+                    list.get(i).getId(),
                     list.get(i).getStudentName(),
                     list.get(i).getSemester(),
                     list.get(i).getCourseName().getLanguage()));
@@ -191,8 +209,9 @@ public class ManageStudent {
     }
 
     /**
-     * Chức năng: Báo cáo thống kê số lần học từng môn của mỗi sinh viên.
-     * Luồng xử lý: Sắp xếp theo tên, dùng Map đếm số môn và gom các kỳ học, sau đó trả về bảng thống kê.
+     * Chỉnh sửa
+     * Chức năng: Báo cáo thống kê số lần học từng môn của mỗi sinh viên (hiển thị ID, sắp xếp theo ID rồi đến tên).
+     * Luồng xử lý: Sắp xếp theo ID và tên sinh viên, dùng HashMap đếm số môn và gom các kỳ học, sau đó trả về bảng thống kê có cột ID.
      *
      * @return chuỗi nội dung báo cáo thống kê
      */
@@ -201,8 +220,18 @@ public class ManageStudent {
             return "List is empty!";
         }
 
-        // Sắp xếp theo tên trước khi thống kê
-        Collections.sort(list, (s1, s2) -> s1.getStudentName().compareToIgnoreCase(s2.getStudentName()));
+        // Sắp xếp ưu tiên ID tăng dần, nếu trùng ID thì xét đến Student Name
+        Collections.sort(list, (s1, s2) -> {
+            int idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            if (idCompare != 0) {
+                return idCompare;
+            }
+            int nameCompare = s1.getStudentName().compareToIgnoreCase(s2.getStudentName());
+            if (nameCompare != 0) {
+                return nameCompare;
+            }
+            return s1.getCourseName().getLanguage().compareToIgnoreCase(s2.getCourseName().getLanguage());
+        });
 
         HashMap<String, Integer> countMap = new HashMap<>();
         HashMap<String, String> semesterMap = new HashMap<>();
@@ -222,9 +251,9 @@ public class ManageStudent {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("|%-5s|%-20s|%-15s|%-10s|%-20s|\n",
-                "No.", "Student Name", "Course", "Total", "Semesters"));
-        sb.append("--------------------------------------------------------------------------\n");
+        sb.append(String.format("|%-5s|%-10s|%-20s|%-15s|%-10s|%-20s|\n",
+                "No.", "ID", "Student Name", "Course", "Total", "Semesters"));
+        sb.append("--------------------------------------------------------------------------------------\n");
 
         int count = 1;
         List<String> printedKeys = new ArrayList<>();
@@ -232,8 +261,9 @@ public class ManageStudent {
         for (Student s : list) {
             String key = s.getId() + "|" + s.getCourseName().getLanguage();
             if (!printedKeys.contains(key)) {
-                sb.append(String.format("|%-5d|%-20s|%-15s|%-10d|%-20s|\n",
+                sb.append(String.format("|%-5d|%-10s|%-20s|%-15s|%-10d|%-20s|\n",
                         count++,
+                        s.getId(),
                         s.getStudentName(),
                         s.getCourseName().getLanguage(),
                         countMap.get(key),

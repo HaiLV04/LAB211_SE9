@@ -104,19 +104,26 @@ public class Student implements Comparable<Student> {
     }
 
     /**
-     * Chức năng: So sánh hai sinh viên theo tên để sắp xếp tăng dần.
-     * Luồng xử lý: Sử dụng compareTo của String để so sánh thuộc tính studentName.
+     * Chỉnh sửa
+     * Chức năng: So sánh hai sinh viên ưu tiên theo ID tăng dần, nếu trùng ID thì so sánh theo tên (không phân biệt hoa thường).
+     * Luồng xử lý: So sánh mã ID trước bằng compareToIgnoreCase; nếu ID khác nhau trả về kết quả so sánh ID, ngược lại so sánh theo studentName.
      *
      * @param t sinh viên cần so sánh
-     * @return giá trị âm, 0 hoặc dương theo thứ tự từ điển
+     * @return giá trị âm, 0 hoặc dương theo thứ tự sắp xếp
      */
     @Override
     public int compareTo(Student t) {
-        return this.studentName.compareTo(t.studentName);
+        int idCompare = this.id.compareToIgnoreCase(t.id);
+        if (idCompare != 0) {
+            return idCompare;
+        }
+        return this.studentName.compareToIgnoreCase(t.studentName);
     }
 
     /**
+     * Chỉnh sửa
      * Chức năng: Trả về chuỗi thông tin biểu diễn sinh viên.
+     * Luồng xử lý: Ghép các thuộc tính id, studentName, semester, courseName thành chuỗi định dạng.
      *
      * @return chuỗi thông tin sinh viên
      */
