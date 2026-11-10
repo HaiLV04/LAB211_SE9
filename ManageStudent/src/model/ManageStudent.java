@@ -67,7 +67,9 @@ public class ManageStudent {
         if (isExisted(student)) {
             throw new Exception("This record is existed!");
         }
-        return list.add(student);
+        boolean isAdded = list.add(student);
+        sortStudentsById();
+        return isAdded;
     }
 
     /**
@@ -175,10 +177,27 @@ public class ManageStudent {
      */
     public void sortStudentsById() {
         Collections.sort(list, (s1, s2) -> {
-            int idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            // Tách lấy phần số trong ID để so sánh (ví dụ "s10" -> 10, "s2" -> 2)
+            String numStr1 = s1.getId().replaceAll("\\D+", "");
+            String numStr2 = s2.getId().replaceAll("\\D+", "");
+
+            int idCompare;
+            // Nếu cả 2 ID đều có chứa số (như s1, s2, HE123...) thì so sánh theo giá trị số
+            if (!numStr1.isEmpty() && !numStr2.isEmpty()) {
+                try {
+                    idCompare = Integer.compare(Integer.parseInt(numStr1), Integer.parseInt(numStr2));
+                } catch (NumberFormatException e) {
+                    idCompare = numStr1.compareTo(numStr2);
+                }
+            } else {
+                // Dự phòng nếu nhập ID toàn chữ (không có số)
+                idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            }
+
             if (idCompare != 0) {
                 return idCompare;
             }
+            // Nếu trùng ID (ví dụ 1 sinh viên đăng ký 2 môn học) thì xếp theo tên
             return s1.getStudentName().compareToIgnoreCase(s2.getStudentName());
         });
     }
@@ -220,9 +239,22 @@ public class ManageStudent {
             return "List is empty!";
         }
 
-        // Sắp xếp ưu tiên ID tăng dần, nếu trùng ID thì xét đến Student Name
+        // Sắp xếp ưu tiên ID tăng dần theo số, nếu trùng ID thì xét đến Student Name
         Collections.sort(list, (s1, s2) -> {
-            int idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            String numStr1 = s1.getId().replaceAll("\\D+", "");
+            String numStr2 = s2.getId().replaceAll("\\D+", "");
+
+            int idCompare;
+            if (!numStr1.isEmpty() && !numStr2.isEmpty()) {
+                try {
+                    idCompare = Integer.compare(Integer.parseInt(numStr1), Integer.parseInt(numStr2));
+                } catch (NumberFormatException e) {
+                    idCompare = numStr1.compareTo(numStr2);
+                }
+            } else {
+                idCompare = s1.getId().compareToIgnoreCase(s2.getId());
+            }
+
             if (idCompare != 0) {
                 return idCompare;
             }
